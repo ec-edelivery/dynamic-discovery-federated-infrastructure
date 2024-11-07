@@ -1,0 +1,23 @@
+$TTL 86400
+.   IN  SOA     ns1.local admin.local (
+                2024102901 ; Serial
+                3600       ; Refresh
+                1800       ; Retry
+                1209600    ; Expire
+                86400 )    ; Minimum TTL
+      IN  NS  ns1.local.
+@   IN  NS  ns1.local.
+
+; Address records for name servers
+ns1.local.  IN  A   172.20.0.10
+
+; Root zone for .ecosystem.org
+ecosystem.org. IN  NS      ns1.ecosystem.org.
+
+; Glue records for ecosystem.org
+ns1.ecosystem.org. IN  A   172.20.0.2
+
+; root zone for .9914.iso6523.g2b.at
+9914.iso6523.g2b.at. IN  NS   ns1.9914.iso6523.g2b.at.
+; Glue records for 9914.iso6523.g2b.at
+ns1.9914.iso6523.g2b.at. IN  A 172.20.0.102

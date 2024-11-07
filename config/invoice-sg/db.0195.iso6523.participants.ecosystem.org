@@ -1,0 +1,28 @@
+$TTL 86400
+@   IN  SOA ns1.0195.iso6523.participants.ecosystem.org. root.0195.iso6523.participants.ecosystem.org. (
+            2023102801 ; Serial
+            3600       ; Refresh
+            1800       ; Retry
+            1209600    ; Expire
+            86400 )    ; Minimum TTL
+    IN  NS  ns1.0195.iso6523.participants.ecosystem.org.
+
+ns1 IN  A   172.20.0.101
+; --------------------------------
+; Test records
+; --------------------------------
+; simple A type test domain records for "smoke testing"
+test IN  A   127.0.0.1
+
+; the domain record for the subdomain 0195.iso6523.participants.ecosystem.org.
+;Use case 2
+UC2XABCD NAPTR 100 10 "U" "Meta:SMP" "!^.*$!http://127.0.0.1:8080/smp-uc2/!" .
+
+;Use case 2.a
+smp-uc2a.publisher NAPTR 100 10 "U" "Meta:SMP" "!^.*$!http://127.0.0.1:8080/smp-uc2a/!" .
+UC2AXABCD CNAME smp-uc2a.publisher.0195.iso6523.participants.ecosystem.org.
+
+
+
+
+

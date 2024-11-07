@@ -1,0 +1,26 @@
+$TTL 86400
+@   IN  SOA ns1.9914.iso6523.g2b.at. root.9914.iso6523.g2b.at. (
+            2023102801 ; Serial
+            3600       ; Refresh
+            1800       ; Retry
+            1209600    ; Expire
+            86400 )    ; Minimum TTL
+    IN  NS  ns1.9914.iso6523.g2b.at.
+@   IN  NS  ns1.9914.iso6523.g2b.at.
+
+ns1 IN  A   172.20.0.102
+
+; --------------------------------
+; Test records
+; --------------------------------
+; simple A type test domain records for "smoke testing"
+test IN  A   127.0.0.1
+
+;Use case 3
+UC3XABCD NAPTR 100 10 "U" "Meta:SMP" "!^.*$!http://127.0.0.1:8080/smp-uc3/!" .
+
+;Use case 3.a
+smp-uc3a.publisher NAPTR 100 10 "U" "Meta:SMP" "!^.*$!http://127.0.0.1:8080/smp-uc3a/!" .
+UC3AXABCD CNAME smp-uc3a.publisher.9914.iso6523.g2b.at.
+
+

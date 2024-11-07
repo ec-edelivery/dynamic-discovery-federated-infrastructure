@@ -1,0 +1,12 @@
+$TTL 86400
+@   IN  SOA ns1.local. root.local. (
+            2023102801 ; Serial
+            3600       ; Refresh
+            1800       ; Retry
+            1209600    ; Expire
+            86400 )    ; Minimum TTL
+    IN  NS  ns1.local.
+@   IN  NS  ns1.local.
+
+ns1.local. IN  A   172.20.0.10
+

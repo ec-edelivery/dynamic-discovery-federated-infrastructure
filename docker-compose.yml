@@ -1,0 +1,69 @@
+# this is a poc environment consists of serveral DNS servers
+# - ecosystem-top-domain: the ecosystem top DNS domain: ecosystem.org: it coudl be: erds.eu, peppol.org, oots.eu, etc..
+#             the server hosts also the 0088 subzone
+# - local DNS server  invoice-sg with code 0195. The server is glued with the DN
+# - local DNS server vat-num-at with code 9914. The server is "glued" with the DNAME record
+
+services:
+   client-with-rdns:
+      image: internetsystemsconsortium/bind9:9.18
+      container_name: client-with-rdns
+      depends_on:
+      - ecosystem-top-domain
+      volumes:
+      - ./config/client-with-rdns:/etc/bind
+      - ./logs:/var/log/named/
+      networks:
+        test-dns-net:
+          ipv4_address: 172.20.0.10
+      ports:
+      - "54:53/tcp"
+      - "54:53/udp"
+      - "127.0.0.1:953:953/tcp"
+
+   ecosystem-top-domain:
+    image: internetsystemsconsortium/bind9:9.18
+    container_name: ecosystem-top-domain
+    volumes:
+      - ./config/ecosystem-top-domain:/etc/bind
+      - ./logs:/var/log/named/
+    networks:
+      test-dns-net:
+        ipv4_address: 172.20.0.2
+    #ports:
+    #- "55:53/tcp"
+    #- "55:53/udp"
+
+   invoice-sg:
+    image: internetsystemsconsortium/bind9:9.18
+    container_name: invoice-sg
+    volumes:
+      - ./config/invoice-sg:/etc/bind
+      - ./logs:/var/log/named/
+    networks:
+      test-dns-net:
+        ipv4_address: 172.20.0.101
+    #ports:
+    #- "56:53/tcp"
+    #- "56:53/udp"
+
+
+   vat-num-at:
+    image: internetsystemsconsortium/bind9:9.18
+    container_name: vat-num-at
+    volumes:
+      - ./config/vat-num-at:/etc/bind
+      - ./logs:/var/log/named/
+    networks:
+      test-dns-net:
+        ipv4_address: 172.20.0.102
+    #ports:
+    #- "57:53/tcp"
+    #- "57:53/udp"
+
+networks:
+  test-dns-net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16

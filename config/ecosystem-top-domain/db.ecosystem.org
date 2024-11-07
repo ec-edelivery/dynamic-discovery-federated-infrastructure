@@ -1,0 +1,42 @@
+$TTL 60
+@   IN  SOA ns1.ecosystem.org. root.ecosystem.org. (
+            2023102801 ; Serial
+            3600       ; Refresh
+            1800       ; Retry
+            1209600    ; Expire
+            86400 )    ; Minimum TTL
+    IN  NS  ns1.ecosystem.org.
+@   IN  NS  ns1.ecosystem.org.
+; name servers - A records
+ns1 IN  A   172.20.0.2
+
+; --------------------------------
+; delegation of subdomain
+; --------------------------------
+;Use case 2.x; subdomain delegation
+0195.iso6523.participants IN NS ns1.0195.iso6523.participants.ecosystem.org.
+; a glue record for the name server
+ns1.0195.iso6523.participants IN A 172.20.0.101
+
+;Use case 3.x; redirect subdomain using DNAME
+9914.iso6523.participants IN  DNAME 9914.iso6523.g2b.at.
+
+; --------------------------------
+; Test records
+; --------------------------------
+; simple A type test domain records for "smoke testing"
+test IN  A   127.0.0.1
+test.0088.iso6523.participants IN  A   127.0.0.1
+
+;Use case 1
+UC1XABCD.0088.iso6523.participants NAPTR 100 10 "U" "Meta:SMP" "!^.*$!http://127.0.0.1:8080/smp-uc1/!" .
+
+;Use case 1.a
+smp-uc1a.publisher.0088.iso6523.participants NAPTR 100 10 "U" "Meta:SMP" "!^.*$!http://127.0.0.1:8080/smp-uc1a/!" .
+UC1AXABCD.0088.iso6523.participants CNAME smp-uc1a.publisher.0088.iso6523.participants.ecosystem.org.
+
+
+
+
+
+
