@@ -90,7 +90,7 @@ And in the context of the PoC, the DNS domain is partitioned into the following 
 - **9914**.iso6523.participants.ecosystem.org
 - ...
 
-## Usecases
+## Use cases
 
 The PoC environment is designed to showcase various methods of subdomain delegation 
 within DNS infrastructure, as well as different strategies for organizing internal 
@@ -121,7 +121,7 @@ DNS record data, as all changes are made in a single location.
 The setup of the approach involves  adding the dedicated SMP record  with subdomain 'publisher' and registering the participant record using the CNAME record to point to the SMP DNS record.
 
 
-### Use case 2: "Standard subdomain delegation using the NS record
+### Use case 2: Standard subdomain delegation using the NS record
 
 Subdomain delegation involves assigning responsibility for a subdomain to a different DNS server. 
 This process allows the subdomain to be managed independently of the parent domain. The setup 
@@ -164,7 +164,7 @@ are pointing to it using the CNAME record on delegated DNS server.
 
 The setup of the approach involves  adding the dedicated SMP record within the subdomain 'publisher' and registering the participant record using the CNAME record to point to the SMP DNS record.
 
-### Use Case 3: DNAME subdomain delegation
+### Use case 3: DNAME subdomain delegation
 
 DNAME delegation is a method of delegating using the redirect an entire subtree of the DNS namespace to another domain. Unlike the CNAME record, which only aliases a single node, the DNAME record applies to all subdomains under a specified domain. 
 
