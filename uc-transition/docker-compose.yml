@@ -1,0 +1,33 @@
+# this is a poc environment is the extension of basic DNS server environment with the following sample DNS service:
+# - incubator-domain: the "incubator" top domain e.g. edelivery.tech.ec.europa.eu
+
+include:
+  - ../docker-compose.yml
+
+
+services:
+
+  incubator-domain:
+    image: internetsystemsconsortium/bind9:9.18
+    container_name: incubator-domain
+    volumes:
+      - ./config/incubator-domain:/etc/bind
+      - ./logs:/var/log/named/
+    networks:
+      test-dns-net:
+        ipv4_address: 172.20.0.201
+    #ports:
+    #- "55:53/tcp"
+    #- "55:53/udp"
+
+
+# The service is intended to be used with a ../docker-compose.yml file which
+# already contains the following network definition.
+# uncomment the following lines if the compose is used as standalone
+#
+# networks:
+#  test-dns-net:
+#    driver: bridge
+#    ipam:
+#      config:
+#        - subnet: 172.20.0.0/16

@@ -23,9 +23,10 @@ services:
 
    ecosystem-top-domain:
     image: internetsystemsconsortium/bind9:9.18
+    user: "${UID}" # set a specific user id so the container can write in the data directory
     container_name: ecosystem-top-domain
     volumes:
-      - ./config/ecosystem-top-domain:/etc/bind
+      - ./config/ecosystem-top-domain:/etc/bind:rw
       - ./logs:/var/log/named/
     networks:
       test-dns-net:

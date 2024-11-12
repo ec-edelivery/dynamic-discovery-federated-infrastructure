@@ -21,3 +21,10 @@ ns1.ecosystem.org. IN  A   172.20.0.2
 9914.iso6523.g2b.at. IN  NS   ns1.9914.iso6523.g2b.at.
 ; Glue records for 9914.iso6523.g2b.at
 ns1.9914.iso6523.g2b.at. IN  A 172.20.0.102
+
+; ------------------------------------
+; additional DNS servers
+; ------------------------------------
+; Glue records for edelivery.tech.ec.europa.eu
+edelivery.tech.ec.europa.eu. IN  NS   ns1.edelivery.tech.ec.europa.eu.
+ns1.edelivery.tech.ec.europa.eu. IN  A   172.20.0.201

@@ -1,5 +1,6 @@
 # Dynamic discovery infrastructure with "federated DNS service" 
 
+
 ## Introduction
 
 The goal of this project is to create a Dockerized environment for a proof of concept 
@@ -20,7 +21,9 @@ local development environment of the DDI (Dynamic Discovery Infrastructure) comp
 such are Service Metadata Locator component (SML) and Service Metadata Publisher 
 component (SMP), Dynamic discovery client (DDC), and access point (AP).
 
+Here is the list of addition cases that reuses the PoC environment:
 
+- [Transition of the domain](docs/use-case-transition.md)
 
 ## Environment assumptions
 
@@ -60,8 +63,17 @@ The PoC assumes that participant identifiers are composed of the following eleme
 ### DNS Lookup Query
 
 The DNS lookup query is constructed as follows:
+NOTE: For the presentation of the rules the  augmented Backus–Naur  (ABNF) for 
+Syntax is used (See the: [RFC 5234](https://www.ietf.org/rfc/rfc5234.txt).
 
-    <hash-over-(part-of?)identifier>.<scheme-in-catalog>.<catalog-identifier>.<top-level-domain>
+
+
+    <DNS-QUERY> ::= <hash-over-(part-of?)identifier> "." <scheme-in-catalog> "." <catalog-identifier> "." <top-level-domain>
+
+    <hash-over-(part-of?)identifier> ::= 1*63(ALPHA / DIGIT )
+    <scheme-in-catalog> ::= 4DIGIT
+    <catalog-identifier> ::= 1*63(ALPHA / DIGIT / "-")
+    <top-level-domain> ::= 1*63(ALPHA / DIGIT / "-")    
 
 Example
 
@@ -73,6 +85,7 @@ Where in the example above:
 - **scheme-in-catalog**: Scheme in Catalog is ‘0195’
 - **catalog-identifier**: Catalog Identifier is ‘iso6523’
 - **top-level-domain**: Top-Level Domain is ‘participants.ecosystem.org’
+
 
 ### DNS Domain Partitioning
 
@@ -143,7 +156,7 @@ domestically and globally.
 The global platform utilizes the ISO 6523 catalog to identify network participants. 
 Since the discovery of participant message exchange capabilities is based on DNS 
 lookup, the global platform employs the top-level domain DNS server **iso6523.participants.ecosystem.org** 
-to resolve DNS queries in the format: **[hash-over-participant-id].[ICD].iso6523.participants.ecosystem.org**.
+to resolve DNS queries in the format: **<hash-over-participant-id>.<ICD>.iso6523.participants.ecosystem.org**.
 The result of the DNS lookup  provides the location (URL) of the participant message 
 exchange capabilities document.
 
@@ -183,7 +196,7 @@ includes services such as electronic invoicing, procurement, health insurance-re
 services, e-justice mail exchange, and other business message transactions. To identify
 domestic network participants, the Austrian government uses the ISO 6523 catalog 
 schemes 9914 and 9915, with discovery lookups based on DNS queries in the format:
-[hash-over-participant-id].[(9914|9915)].iso6523.b2g.at.
+<hash-over-participant-id>.{(9914 / 9915 ... )}.iso6523.b2g.at.
 
 Now the Austrian government aims to integrate the G2B platform (identifiers from 
 catalog 9914) into the existing international electronic invoice exchange network 
@@ -337,7 +350,7 @@ The following dig command must be used to query the DNS server (please note: Res
 The PoC environment can be started using the following command (linux OS):
 
     # Start the PoC environment
-    docker compose --docker compose up -d
+    docker compose up -d
 
     # Stop the PoC environment
     docker compose down -v
