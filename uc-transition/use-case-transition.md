@@ -146,6 +146,10 @@ The environment has additional components/services:
     # 'clean restart' the PoC environment
     docker compose -f uc-transition/docker-compose.yml down -v && docker compose -f uc-transition/docker-compose.yml up -d
 
+Before running starting the PoC environment, make sure that log files in the `logs` directory have read and write permissions for all users. If not, run the following command:
+
+    chmod a+rw logs/*
+    chmod a+rw uc-transition/logs/*
 
 Simple smoke tests to resolve A records. The purpose of the test is to verify that the DNS server is running and resolving the DNS queries. Result for all queries should be the IP address 127.0.0.1
 
@@ -214,7 +218,6 @@ Response:
 
 In the following step the ecosystem DNS server is configured to redirect the subdomain 9954 to be resolved by the incubator DNS server. The configuration is done with 'nsupdate' command-line tool and the command.
 
-    # Command 1
     docker exec -it ecosystem-top-domain sh -c 'echo -e "server localhost\nzone ecosystem.org.\nupdate add  9954.iso6523.participants.ecosystem.org. 60  DNAME iso6523-actorid-upis.edelivery.tech.ec.europa.eu.\n    add 0151.iso6523.participants.ecosystem.org. 60  DNAME iso6523-actorid-upis.edelivery.tech.ec.europa.eu.\nsend" | nsupdate -4'
 
 Explanation of the command:
@@ -268,7 +271,6 @@ Both queries should return the same result as in the previous step as example:
 
 With the following command the records are added to the ecosystem DNS server and the redirection is removed.
 
-    # Command 1
     docker exec -it ecosystem-top-domain sh -c 'echo -e "server localhost\nzone ecosystem.org.\nupdate delete 9954.iso6523.participants.ecosystem.org. DNAME \n add IDUC1ABCD.9954.iso6523.participants.ecosystem.org 60 IN NAPTR 100 10 \"U\" \"Meta:SMP\" \"!.*!http://127.0.0.1:8080/smp-inc-uc-01/!\" .\n add IDUC2ABCE.9954.iso6523.participants.ecosystem.org 60 IN NAPTR 100 10 \"U\" \"Meta:SMP\" \"!.*!http://127.0.0.1:8080/smp-inc-uc-02/!\" .\nsend" | nsupdate -4' 
 
 

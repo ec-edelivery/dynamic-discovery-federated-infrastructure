@@ -21,9 +21,11 @@ local development environment of the DDI (Dynamic Discovery Infrastructure) comp
 such are Service Metadata Locator component (SML) and Service Metadata Publisher 
 component (SMP), Dynamic discovery client (DDC), and access point (AP).
 
-Here is the list of addition cases that reuses the PoC environment:
+Here is the list of addition use-cases:
 
-- [Transition of the domain](docs/use-case-transition.md)
+- [Transition of the DNS domains](uc-transition/use-case-transition.md). The use cases
+  demonstrates the transition of the DNS domain from 'incubator DNS server to new federated DNS server(s). The extension subproject of the PoC environment is located in folder 'uc-transition'.
+
 
 ## Environment assumptions
 
@@ -358,7 +360,10 @@ The PoC environment can be started using the following command (linux OS):
     # 'clean restart' the PoC environment
     docker compose down -v && docker compose up -d
 
-    
+Before running starting the PoC environment, make sure that log files in the `logs` directory have read and write permissions for all users. If not, run the following command:
+
+    chmod a+rw logs/*
+
 Simple smoke tests to resolve A records. The purpose of the test is to verify that the DNS server is running and resolving the DNS queries. Result for all queries should be the IP address 127.0.0.1
 
     # Test 1
