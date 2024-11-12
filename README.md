@@ -23,7 +23,7 @@ component (SMP), Dynamic discovery client (DDC), and access point (AP).
 
 Here is the list of addition use-cases:
 
-- [Transition of the DNS domains](uc-transition/use-case-transition.md). The use cases
+- [Transition of the DNS domains](uc-transition/README.md). The use cases
   demonstrates the transition of the DNS domain from 'incubator DNS server to new federated DNS server(s). The extension subproject of the PoC environment is located in folder 'uc-transition'.
 
 
