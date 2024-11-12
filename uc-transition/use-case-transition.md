@@ -1,5 +1,8 @@
 # Transition of the incubator domain
 
+
+NOTE: This document is currently a work in progress and subject to changes.
+
 ## Introduction
 
 To promote and facilitate electronic message exchange and reduce the costs of establishing various messaging networks (also known as ecosystems), the European Commission’s eDelivery building blocks and services act as incubators for new message exchange networks. eDelivery strives to balance lowering the costs of establishing new networks with fostering sustainability and market growth for various software and service providers.
