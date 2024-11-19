@@ -21,22 +21,32 @@ ns1.0195.iso6523.participants IN A 172.20.0.101
 ;Use case 3.x; redirect subdomain using DNAME
 9914.iso6523.participants IN  DNAME 9914.iso6523.g2b.at.
 
-; --------------------------------
-; Test records
-; --------------------------------
-; simple A type test domain records for "smoke testing"
+;; --------------------------------
+;; Test records
+;; --------------------------------
+;; simple A type test domain records for "smoke testing"
 test IN  A   127.0.0.1
 test.0088.iso6523.participants IN  A   127.0.0.1
 
-;Use case 1
-UC1XABCD.0088.iso6523.participants NAPTR 100 10 "U" "Meta:SMP" "!^.*$!http://127.0.0.1:8080/smp-uc1/!" .
+;; SMP example records
+smp-uc1a.publisher.0088.iso6523.participants NAPTR 100 10 "U" "Meta:SMP" "!.*!http://127.0.0.1:8080/smp-uc1a/!" .
+github-smp.publisher.0088.iso6523.participants NAPTR 100 10 "U" "Meta:SMP" "!.*!https://raw.githubusercontent.com/ec-edelivery/dynamic-discovery-federated-infrastructure/refs/heads/main/dynamic-discovery-client/smp-resources/!" .
 
-;Use case 1.a
-smp-uc1a.publisher.0088.iso6523.participants NAPTR 100 10 "U" "Meta:SMP" "!^.*$!http://127.0.0.1:8080/smp-uc1a/!" .
+;;Use case 1
+UC1XABCD.0088.iso6523.participants NAPTR 100 10 "U" "Meta:SMP" "!.*!http://127.0.0.1:8080/smp-uc1/!" .
+
+;;Use case 1.a
 UC1AXABCD.0088.iso6523.participants CNAME smp-uc1a.publisher.0088.iso6523.participants.ecosystem.org.
 
+;; --------------------------------------
+;; dynamic-discovery-client test records
+;;urn:oasis:names:tc:ebcore:partyid-type:iso6523:0088:test01
+NTPFMJWLL2HIEYCKLIBVAJLW2SJXZQGFD7P53PN75FYF5GHUWSCQ.0088.iso6523.participants NAPTR 100 10 "U" "Meta:SMP" "!.*!https://raw.githubusercontent.com/ec-edelivery/dynamic-discovery-federated-infrastructure/refs/heads/main/dynamic-discovery-client/smp-resources/!" .
+;;urn:oasis:names:tc:ebcore:partyid-type:iso6523:0088:test02
+AEY47QMI5YC46ORUMD54WGE6NYT42B57TXXSF3H63OP7FL7ANR3A.0088.iso6523.participants CNAME github-smp.publisher.0088.iso6523.participants.ecosystem.org.
 
-
-
-
+;;iso6523-actorid-upis::0088:test01 direct lookup
+LMHBM64R2VOF2IJIOGG2FXVWGYE42GF3CT7UF6EMOEWDS7ID3I2A.iso6523-actorid-upis.0088.iso6523.participants NAPTR 100 10 "U" "Meta:SMP" "!.*!https://raw.githubusercontent.com/ec-edelivery/dynamic-discovery-federated-infrastructure/refs/heads/main/dynamic-discovery-client/smp-resources/!" .
+;;iso6523-actorid-upis::0088:test02
+PUTEUP6A7HSJKCCIAOPTTGURPR5JO253IYZGAMRE2MZNUZMIA7JA.iso6523-actorid-upis.0088.iso6523.participants CNAME github-smp.publisher.0088.iso6523.participants.ecosystem.org.
 

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ServiceGroup xmlns="http://docs.oasis-open.org/bdxr/ns/SMP/2016/05">
+    <ParticipantIdentifier scheme="urn:oasis:names:tc:ebcore:partyid-type:iso6523:9914">test02</ParticipantIdentifier>
+    <ServiceMetadataReferenceCollection/>
+</ServiceGroup>

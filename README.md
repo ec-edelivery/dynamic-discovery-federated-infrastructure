@@ -264,10 +264,10 @@ NOTE: When running the environment on the local machine, make sure that the subn
 The ecosystem-top-domain DNS has the following test participant/SMP DNS records:
 
     ;Use case 1
-    UC1XABCD.0088.iso6523.participants.ecosystem.org NAPTR 100 10 "U" "Meta:SMP" "!^.*$!http://127.0.0.1:8080/smp-uc1/!" .
+    UC1XABCD.0088.iso6523.participants.ecosystem.org NAPTR 100 10 "U" "Meta:SMP" "!.*!http://127.0.0.1:8080/smp-uc1/!" .
 
     ;Use case 1.a
-    smp-uc1a.publisher.0088.iso6523.participants.ecosystem.org NAPTR 100 10 "U" "Meta:SMP" "!^.*$!http://127.0.0.1:8080/smp-uc1a/!" .
+    smp-uc1a.publisher.0088.iso6523.participants.ecosystem.org NAPTR 100 10 "U" "Meta:SMP" "!.*!http://127.0.0.1:8080/smp-uc1a/!" .
     UC1AXABCD.0088.iso6523.participants.ecosystem.org CNAME smp-uc1a.publisher.0088.iso6523.participants.ecosystem.org
  
 and subdomain delegation DNS records are as follows:
@@ -284,19 +284,19 @@ and subdomain delegation DNS records are as follows:
 The invoice-sg DNS has the following test participant/SMP DNS records:
 
     ;Use case 2
-    UC2XABCD.0195.iso6523.participants.ecosystem.org NAPTR 100 10 "U" "Meta:SMP" "!^.*$!http://127.0.0.1:8080/smp-uc2/!" .
+    UC2XABCD.0195.iso6523.participants.ecosystem.org NAPTR 100 10 "U" "Meta:SMP" "!.*!http://127.0.0.1:8080/smp-uc2/!" .
 
     ;Use case 2.a
-    smp-uc2a.publisher.0195.iso6523.participants.ecosystem.org NAPTR 100 10 "U" "Meta:SMP" "!^.*$!http://127.0.0.1:8080/smp-uc2a/!" .
+    smp-uc2a.publisher.0195.iso6523.participants.ecosystem.org NAPTR 100 10 "U" "Meta:SMP" "!.*!http://127.0.0.1:8080/smp-uc2a/!" .
     UC2AXABCD.0195.iso6523.participants.ecosystem.org CNAME smp-uc2a.publisher.0195.iso6523.participants.ecosystem.org
 
 The vat-num-at DNS has the following test participant/SMP DNS records:
 
     ;Use case 3, 3.b
-    UC3XABCD.9914.iso6523.g2b.at NAPTR 100 10 "U" "Meta:SMP" "!^.*$!http://127.0.0.1:8080/smp-at/!" .
+    UC3XABCD.9914.iso6523.g2b.at NAPTR 100 10 "U" "Meta:SMP" "!.*!http://127.0.0.1:8080/smp-at/!" .
 
     ;Use case 3.a, 3.c
-    smp-uc3a.publisher.9914.iso6523.g2b.at NAPTR 100 10 "U" "Meta:SMP" "!^.*$!http://127.0.0.1:8080/smp-uc3a/!" .
+    smp-uc3a.publisher.9914.iso6523.g2b.at NAPTR 100 10 "U" "Meta:SMP" "!.*!http://127.0.0.1:8080/smp-uc3a/!" .
     UC3AXABCD.9914.iso6523.g2b.at CNAME smp-uc3a.publisher.9914.iso6523.g2b.at
 
 Note: with combination of the DNAME record, the DNS server will resolve the following DNS records:
@@ -315,35 +315,35 @@ The following dig command must be used to query the DNS server (please note: Res
     
     # Test: Use case 1
     dig @localhost -p 54 UC1XABCD.0088.iso6523.participants.ecosystem.org NAPTR
-    # Expected result: NAPTR Record with value: "!^.*$!http://127.0.0.1:8080/smp-uc1/!"
+    # Expected result: NAPTR Record with value: "!.*!http://127.0.0.1:8080/smp-uc1/!"
 
     # Test: Use case 1.a
     dig @localhost -p 54 UC1AXABCD.0088.iso6523.participants.ecosystem.org NAPTR
-    # Expected result: NAPTR Record with value: "!^.*$!http://127.0.0.1:8080/smp-uc1a/!"
+    # Expected result: NAPTR Record with value: "!.*!http://127.0.0.1:8080/smp-uc1a/!"
 
     # Test: Use case 2
     dig @localhost -p 54 UC2XABCD.0195.iso6523.participants.ecosystem.org NAPTR
-    # Expected result: NAPTR Record with value: "!^.*$!http://127.0.0.1:8080/smp-uc2/!"
+    # Expected result: NAPTR Record with value: "!.*!http://127.0.0.1:8080/smp-uc2/!"
 
     # Test: Use case 2.a
     dig @localhost -p 54 UC2AXABCD.0195.iso6523.participants.ecosystem.org NAPTR
-    # Expected result: NAPTR Record with value: "!^.*$!http://127.0.0.1:8080/smp-uc2a/!"
+    # Expected result: NAPTR Record with value: "!.*!http://127.0.0.1:8080/smp-uc2a/!"
 
     # Test: Use case 3
     dig @localhost -p 54 UC3XABCD.9914.iso6523.participants.ecosystem.org NAPTR
-    # Expected result: NAPTR Record with value: "!^.*$!http://127.0.0.1:8080/smp-uc3/!"
+    # Expected result: NAPTR Record with value: "!.*!http://127.0.0.1:8080/smp-uc3/!"
 
     # Test: Use case 3.a
     dig @localhost -p 54 UC3AXABCD.9914.iso6523.participants.ecosystem.org NAPTR
-    # Expected result: NAPTR Record with value: "!^.*$!http://127.0.0.1:8080/smp-uc3a/!"
+    # Expected result: NAPTR Record with value: "!.*!http://127.0.0.1:8080/smp-uc3a/!"
 
     # Test: Use case 3.b
     dig @localhost -p 54 UC3XABCD.9914.iso6523.g2b.at NAPTR
-    # Expected result: NAPTR Record with value: "!^.*$!http://127.0.0.1:8080/smp-uc3a/!"
+    # Expected result: NAPTR Record with value: "!.*!http://127.0.0.1:8080/smp-uc3a/!"
 
     # Test: Use case 3.c
     dig @localhost -p 54 UC3AXABCD.9914.iso6523.g2b.at NAPTR
-    # Expected result: NAPTR Record with value: "!^.*$!http://127.0.0.1:8080/smp-uc3a/!"
+    # Expected result: NAPTR Record with value: "!.*!http://127.0.0.1:8080/smp-uc3a/!"
 
     
 
@@ -393,7 +393,7 @@ Command:
 Response:
 
     ;; ANSWER SECTION:
-    UC1XABCD.0088.iso6523.participants.ecosystem.org. 60 IN NAPTR 100 10 "U" "Meta:SMP" "!^.*$!http://127.0.0.1:8080/smp-uc1/!" .
+    UC1XABCD.0088.iso6523.participants.ecosystem.org. 60 IN NAPTR 100 10 "U" "Meta:SMP" "!.*!http://127.0.0.1:8080/smp-uc1/!" .
 
 The result of the query returns the expected NAPTR record value.
 
@@ -408,7 +408,7 @@ Response:
 
     ;; ANSWER SECTION:
     UC1AXABCD.0088.iso6523.participants.ecosystem.org. 60 IN CNAME smp-uc1a.publisher.0088.iso6523.participants.ecosystem.org.
-    smp-uc1a.publisher.0088.iso6523.participants.ecosystem.org. 60 IN NAPTR 100 10 "U" "Meta:SMP" "!^.*$!http://127.0.0.1:8080/smp-uc1a/!" .
+    smp-uc1a.publisher.0088.iso6523.participants.ecosystem.org. 60 IN NAPTR 100 10 "U" "Meta:SMP" "!.*!http://127.0.0.1:8080/smp-uc1a/!" .
 
 
 The result of the query returns the expected NAPTR record value.
@@ -424,7 +424,7 @@ Command:
 Response:
 
     ;; ANSWER SECTION:
-    UC2XABCD.0195.iso6523.participants.ecosystem.org. 86400 IN NAPTR 100 10 "U" "Meta:SMP" "!^.*$!http://127.0.0.1:8080/smp-uc2/!" .
+    UC2XABCD.0195.iso6523.participants.ecosystem.org. 86400 IN NAPTR 100 10 "U" "Meta:SMP" "!.*!http://127.0.0.1:8080/smp-uc2/!" .
 
 The result of the query returns the expected NAPTR record value.
 
@@ -439,7 +439,7 @@ Response:
 
     ;; ANSWER SECTION:
     UC2AXABCD.0195.iso6523.participants.ecosystem.org. 86400 IN CNAME smp-uc2a.publisher.0195.iso6523.participants.ecosystem.org.
-    smp-uc2a.publisher.0195.iso6523.participants.ecosystem.org. 86400 IN NAPTR 100 10 "U" "Meta:SMP" "!^.*$!http://127.0.0.1:8080/smp-uc2a/!" .
+    smp-uc2a.publisher.0195.iso6523.participants.ecosystem.org. 86400 IN NAPTR 100 10 "U" "Meta:SMP" "!.*!http://127.0.0.1:8080/smp-uc2a/!" .
 
 The result of the query returns the expected NAPTR record value.
 
@@ -455,7 +455,7 @@ Response:
     ;; ANSWER SECTION:
     9914.iso6523.participants.ecosystem.org. 60 IN DNAME 9914.iso6523.g2b.at.
     UC3XABCD.9914.iso6523.participants.ecosystem.org. 60 IN CNAME UC3XABCD.9914.iso6523.g2b.at.
-    UC3XABCD.9914.iso6523.g2b.at. 84632 IN  NAPTR   100 10 "U" "Meta:SMP" "!^.*$!http://127.0.0.1:8080/smp-uc3/!" .
+    UC3XABCD.9914.iso6523.g2b.at. 84632 IN  NAPTR   100 10 "U" "Meta:SMP" "!.*!http://127.0.0.1:8080/smp-uc3/!" .
 
 The result of the query returns the expected NAPTR record value.
 
@@ -474,7 +474,7 @@ Response
     9914.iso6523.participants.ecosystem.org. 60 IN DNAME 9914.iso6523.g2b.at.
     UC3AXABCD.9914.iso6523.participants.ecosystem.org. 60 IN CNAME UC3AXABCD.9914.iso6523.g2b.at.
     UC3AXABCD.9914.iso6523.g2b.at. 84601 IN CNAME   smp-uc3a.publisher.9914.iso6523.g2b.at.
-    smp-uc3a.publisher.9914.iso6523.g2b.at. 84601 IN NAPTR 100 10 "U" "Meta:SMP" "!^.*$!http://127.0.0.1:8080/smp-uc3a/!" .
+    smp-uc3a.publisher.9914.iso6523.g2b.at. 84601 IN NAPTR 100 10 "U" "Meta:SMP" "!.*!http://127.0.0.1:8080/smp-uc3a/!" .
 
 The result of the query returns the expected NAPTR record value.
 
@@ -488,7 +488,7 @@ Command:
 Response:
 
     ;; ANSWER SECTION:
-    UC3XABCD.9914.iso6523.g2b.at. 84473 IN  NAPTR   100 10 "U" "Meta:SMP" "!^.*$!http://127.0.0.1:8080/smp-uc3/!" .
+    UC3XABCD.9914.iso6523.g2b.at. 84473 IN  NAPTR   100 10 "U" "Meta:SMP" "!.*!http://127.0.0.1:8080/smp-uc3/!" .
 
 ### Test: Use case 3.c
 
@@ -502,7 +502,7 @@ Response:
 
     ;; ANSWER SECTION:
     UC3AXABCD.9914.iso6523.g2b.at. 84462 IN CNAME   smp-uc3a.publisher.9914.iso6523.g2b.at.
-    smp-uc3a.publisher.9914.iso6523.g2b.at. 84462 IN NAPTR 100 10 "U" "Meta:SMP" "!^.*$!http://127.0.0.1:8080/smp-uc3a/!" .
+    smp-uc3a.publisher.9914.iso6523.g2b.at. 84462 IN NAPTR 100 10 "U" "Meta:SMP" "!.*!http://127.0.0.1:8080/smp-uc3a/!" .
 
 The result of the query returns the expected NAPTR record value.
 

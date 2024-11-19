@@ -18,7 +18,7 @@ test IN  A   127.0.0.1
 
 
 ;Use case records
-IDUC1ABCD.iso6523-actorid-upis NAPTR 100 10 "U" "Meta:SMP" "!^.*$!http://127.0.0.1:8080/smp-inc-uc-01/!" .
-IDUC2ABCE.iso6523-actorid-upis NAPTR 100 10 "U" "Meta:SMP" "!^.*$!http://127.0.0.1:8080/smp-inc-uc-02/!" .
-IDUC3ABCF.iso6523-actorid-upis NAPTR 100 10 "U" "Meta:SMP" "!^.*$!http://127.0.0.1:8080/smp-inc-uc-03/!" .
-IDUC4ABCG.iso6523-actorid-upis NAPTR 100 10 "U" "Meta:SMP" "!^.*$!http://127.0.0.1:8080/smp-inc-uc-04/!" .
+IDUC1ABCD.iso6523-actorid-upis NAPTR 100 10 "U" "Meta:SMP" "!.*!http://127.0.0.1:8080/smp-inc-uc-01/!" .
+IDUC2ABCE.iso6523-actorid-upis NAPTR 100 10 "U" "Meta:SMP" "!.*!http://127.0.0.1:8080/smp-inc-uc-02/!" .
+IDUC3ABCF.iso6523-actorid-upis NAPTR 100 10 "U" "Meta:SMP" "!.*!http://127.0.0.1:8080/smp-inc-uc-03/!" .
+IDUC4ABCG.iso6523-actorid-upis NAPTR 100 10 "U" "Meta:SMP" "!.*!http://127.0.0.1:8080/smp-inc-uc-04/!" .

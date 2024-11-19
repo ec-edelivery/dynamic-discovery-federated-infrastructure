@@ -185,16 +185,16 @@ Responses follows the same order as the queries above:
 
     Response 1
     ;; ANSWER SECTION:
-    IDUC1ABCD.iso6523-actorid-upis.edelivery.tech.ec.europa.eu. 60 IN NAPTR 100 10 "U" "Meta:SMP" "!^.*$!http://127.0.0.1:8080/smp-inc-uc-01/!" .
+    IDUC1ABCD.iso6523-actorid-upis.edelivery.tech.ec.europa.eu. 60 IN NAPTR 100 10 "U" "Meta:SMP" "!.*!http://127.0.0.1:8080/smp-inc-uc-01/!" .
     Response 2
     ;; ANSWER SECTION:
-    IDUC2ABCE.iso6523-actorid-upis.edelivery.tech.ec.europa.eu. 60 IN NAPTR 100 10 "U" "Meta:SMP" "!^.*$!http://127.0.0.1:8080/smp-inc-uc-02/!" .
+    IDUC2ABCE.iso6523-actorid-upis.edelivery.tech.ec.europa.eu. 60 IN NAPTR 100 10 "U" "Meta:SMP" "!.*!http://127.0.0.1:8080/smp-inc-uc-02/!" .
     Response 3
     ;; ANSWER SECTION:
-    IDUC3ABCF.iso6523-actorid-upis.edelivery.tech.ec.europa.eu. 60 IN NAPTR 100 10 "U" "Meta:SMP" "!^.*$!http://127.0.0.1:8080/smp-inc-uc-03/!" .
+    IDUC3ABCF.iso6523-actorid-upis.edelivery.tech.ec.europa.eu. 60 IN NAPTR 100 10 "U" "Meta:SMP" "!.*!http://127.0.0.1:8080/smp-inc-uc-03/!" .
     Response 4
     ;; ANSWER SECTION:
-    IDUC4ABCG.iso6523-actorid-upis.edelivery.tech.ec.europa.eu. 60 IN NAPTR 100 10 "U" "Meta:SMP" "!^.*$!http://127.0.0.1:8080/smp-inc-uc-04/!" .
+    IDUC4ABCG.iso6523-actorid-upis.edelivery.tech.ec.europa.eu. 60 IN NAPTR 100 10 "U" "Meta:SMP" "!.*!http://127.0.0.1:8080/smp-inc-uc-04/!" .
 
 
 ### Test: Use case 2
@@ -217,7 +217,7 @@ Response:
 
     Response 2 (Answer section)
     ;; ANSWER SECTION:
-    IDUC1ABCD.iso6523-actorid-upis.edelivery.tech.ec.europa.eu. 60 IN NAPTR 100 10 "U" "Meta:SMP" "!^.*$!http://127.0.0.1:8080/smp-inc-uc-01/!" .
+    IDUC1ABCD.iso6523-actorid-upis.edelivery.tech.ec.europa.eu. 60 IN NAPTR 100 10 "U" "Meta:SMP" "!.*!http://127.0.0.1:8080/smp-inc-uc-01/!" .
 
 In the following step the ecosystem DNS server is configured to redirect the subdomain 9954 to be resolved by the incubator DNS server. The configuration is done with 'nsupdate' command-line tool and the command.
 
@@ -249,12 +249,12 @@ Responses:
     ;; ANSWER SECTION:
     9954.iso6523.participants.ecosystem.org. 60 IN DNAME iso6523-actorid-upis.edelivery.tech.ec.europa.eu.
     IDUC1ABCD.9954.iso6523.participants.ecosystem.org. 60 IN CNAME IDUC1ABCD.iso6523-actorid-upis.edelivery.tech.ec.europa.eu.
-    IDUC1ABCD.iso6523-actorid-upis.edelivery.tech.ec.europa.eu. 60 IN NAPTR 100 10 "U" "Meta:SMP" "!^.*$!http://127.0.0.1:8080/smp-inc-uc-01/!" .
+    IDUC1ABCD.iso6523-actorid-upis.edelivery.tech.ec.europa.eu. 60 IN NAPTR 100 10 "U" "Meta:SMP" "!.*!http://127.0.0.1:8080/smp-inc-uc-01/!" .
 
     ;; ANSWER SECTION:
     0151.iso6523.participants.ecosystem.org. 60 IN DNAME iso6523-actorid-upis.edelivery.tech.ec.europa.eu.
     IDUC3ABCF.0151.iso6523.participants.ecosystem.org. 60 IN CNAME IDUC3ABCF.iso6523-actorid-upis.edelivery.tech.ec.europa.eu.
-    IDUC3ABCF.iso6523-actorid-upis.edelivery.tech.ec.europa.eu. 60 IN NAPTR 100 10 "U" "Meta:SMP" "!^.*$!http://127.0.0.1:8080/smp-inc-uc-03/!" .
+    IDUC3ABCF.iso6523-actorid-upis.edelivery.tech.ec.europa.eu. 60 IN NAPTR 100 10 "U" "Meta:SMP" "!.*!http://127.0.0.1:8080/smp-inc-uc-03/!" .
 
 
 ### Test: Use case 3
@@ -270,7 +270,7 @@ Both queries should return the same result as in the previous step as example:
     ;; ANSWER SECTION:
     9954.iso6523.participants.ecosystem.org. 60 IN DNAME iso6523-actorid-upis.edelivery.tech.ec.europa.eu.
     IDUC1ABCD.9954.iso6523.participants.ecosystem.org. 60 IN CNAME IDUC1ABCD.iso6523-actorid-upis.edelivery.tech.ec.europa.eu.
-    IDUC1ABCD.iso6523-actorid-upis.edelivery.tech.ec.europa.eu. 60 IN NAPTR 100 10 "U" "Meta:SMP" "!^.*$!http://127.0.0.1:8080/smp-inc-uc-01/!" .
+    IDUC1ABCD.iso6523-actorid-upis.edelivery.tech.ec.europa.eu. 60 IN NAPTR 100 10 "U" "Meta:SMP" "!.*!http://127.0.0.1:8080/smp-inc-uc-01/!" .
 
 With the following command the records are added to the ecosystem DNS server and the redirection is removed.
 

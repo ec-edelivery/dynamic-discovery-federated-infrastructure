@@ -16,11 +16,27 @@ ns1 IN  A   172.20.0.102
 ; simple A type test domain records for "smoke testing"
 test IN  A   127.0.0.1
 
+; SMP example records
+smp-uc3a.publisher NAPTR 100 10 "U" "Meta:SMP" "!.*!http://127.0.0.1:8080/smp-uc3a/!" .
+github-smp.publisher NAPTR 100 10 "U" "Meta:SMP" "!.*!https://raw.githubusercontent.com/ec-edelivery/dynamic-discovery-federated-infrastructure/refs/heads/main/dynamic-discovery-client/smp-resources/!" .
+
+
 ;Use case 3
-UC3XABCD NAPTR 100 10 "U" "Meta:SMP" "!^.*$!http://127.0.0.1:8080/smp-uc3/!" .
+UC3XABCD NAPTR 100 10 "U" "Meta:SMP" "!.*!http://127.0.0.1:8080/smp-uc3/!" .
 
 ;Use case 3.a
-smp-uc3a.publisher NAPTR 100 10 "U" "Meta:SMP" "!^.*$!http://127.0.0.1:8080/smp-uc3a/!" .
 UC3AXABCD CNAME smp-uc3a.publisher.9914.iso6523.g2b.at.
 
+B4FBLI2PMR6YHV4TBK27AB6LFYTG4GQAITDM4O74IUE7CPEINVGQ CNAME smp-uc3a.publisher.9914.iso6523.g2b.at.
 
+
+; urn:oasis:names:tc:ebcore:partyid-type:iso6523:9914:test01
+SXURSAE2VXDDT4KMND6H3CLAIEYULN5JQ6RFNJIG374NJARGSF6Q  NAPTR 100 10 "U" "Meta:SMP" "!.*!https://raw.githubusercontent.com/ec-edelivery/dynamic-discovery-federated-infrastructure/refs/heads/main/dynamic-discovery-client/smp-resources/!" .
+; urn:oasis:names:tc:ebcore:partyid-type:iso6523:9914:test02
+EMAOWJNPC73TKW737YRUFA6X2XFP5N6NBJFGWLFKY74CR55IIF5A CNAME smp-uc3a.publisher.9914.iso6523.g2b.at.
+
+
+;iso6523-actorid-upis::9914:test01
+GBDLL6QCELDM5JLQCWGP5CONIVXDP6BV2NZWWWI6BY5SFMNUYN7A.iso6523-actorid-upis  NAPTR 100 10 "U" "Meta:SMP" "!.*!https://raw.githubusercontent.com/ec-edelivery/dynamic-discovery-federated-infrastructure/refs/heads/main/dynamic-discovery-client/smp-resources/!" .
+;iso6523-actorid-upis::9914:test02
+57PSJISUOE7GR4UXE2M7IBKNLQV5CZS55QOIHAH3G67JVDOKTY3A.iso6523-actorid-upis CNAME github-smp.publisher.9914.iso6523.g2b.at.
