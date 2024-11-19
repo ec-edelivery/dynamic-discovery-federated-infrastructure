@@ -33,7 +33,7 @@ B4FBLI2PMR6YHV4TBK27AB6LFYTG4GQAITDM4O74IUE7CPEINVGQ CNAME smp-uc3a.publisher.99
 ; urn:oasis:names:tc:ebcore:partyid-type:iso6523:9914:test01
 SXURSAE2VXDDT4KMND6H3CLAIEYULN5JQ6RFNJIG374NJARGSF6Q  NAPTR 100 10 "U" "Meta:SMP" "!.*!https://raw.githubusercontent.com/ec-edelivery/dynamic-discovery-federated-infrastructure/refs/heads/main/dynamic-discovery-client/smp-resources/!" .
 ; urn:oasis:names:tc:ebcore:partyid-type:iso6523:9914:test02
-EMAOWJNPC73TKW737YRUFA6X2XFP5N6NBJFGWLFKY74CR55IIF5A CNAME smp-uc3a.publisher.9914.iso6523.g2b.at.
+EMAOWJNPC73TKW737YRUFA6X2XFP5N6NBJFGWLFKY74CR55IIF5A CNAME github-smp.publisher.9914.iso6523.g2b.at.
 
 
 ;iso6523-actorid-upis::9914:test01

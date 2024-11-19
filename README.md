@@ -25,6 +25,7 @@ Here is the list of addition use-cases:
 
 - [Transition of the DNS domains](uc-transition/README.md). The use cases
   demonstrates the transition of the DNS domain from 'incubator DNS server to new federated DNS server(s). The extension subproject of the PoC environment is located in folder 'uc-transition'.
+- [Dynamic disovery clinent](dynamic-discovery-client/README.md). The use cases demonstrates the DNS lookup query for the participant identifiers with the current Dynamic Discovery Client (DDC) implementation. 
 
 
 ## Environment assumptions
@@ -258,7 +259,6 @@ The docker environment is using the "docker bridge network" with the subnet 172.
 
 NOTE: When running the environment on the local machine, make sure that the subnet is not overlapping with any other local network.
 
-
 ### Data/DNS configuration
 
 The ecosystem-top-domain DNS has the following test participant/SMP DNS records:
@@ -304,8 +304,6 @@ Note: with combination of the DNAME record, the DNS server will resolve the foll
     UC3XABCD.9914.iso6523.participants.ecosystem.org
     UC3AXABCD.9914.iso6523.participants.ecosystem.org
 
-
-
 The following dig command must be used to query the DNS server (please note: Resolver DNS Server exposes DNS service in port 54):
 
     dig @localhost -p 54 <DNS-QUERY> NAPTR
@@ -343,9 +341,7 @@ The following dig command must be used to query the DNS server (please note: Res
 
     # Test: Use case 3.c
     dig @localhost -p 54 UC3AXABCD.9914.iso6523.g2b.at NAPTR
-    # Expected result: NAPTR Record with value: "!.*!http://127.0.0.1:8080/smp-uc3a/!"
-
-    
+    # Expected result: NAPTR Record with value: "!.*!http://127.0.0.1:8080/smp-uc3a/!" 
 
 ## Running the PoC
 

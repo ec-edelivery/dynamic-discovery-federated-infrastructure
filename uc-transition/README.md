@@ -102,7 +102,6 @@ After the configuring the ecosystem DNS servers the records should be resolved u
     IDUC3ABCF.0151.iso6523.participants.ecosystem.org
     IDUC4ABCG.0151.iso6523.participants.ecosystem.org
 
-
 ### Use case 3: Migrate records for the domain 9954
 
 In this use case, the ecosystem owner wants to migrate the records for the domain 9954 to the ecosystem DNS servers
@@ -112,8 +111,6 @@ The records should be resolved using the ecosystem top domain as.
 
     IDUC1ABCD.9954.iso6523.participants.ecosystem.org
     IDUC2ABCE.9954.iso6523.participants.ecosystem.org
-
-
 
 ## Environment Setup
 

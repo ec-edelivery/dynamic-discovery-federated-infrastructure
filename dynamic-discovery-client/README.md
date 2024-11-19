@@ -216,7 +216,7 @@ All NAPTR records are directed to the 'SMP URL' where the capability documents a
 
 ### Prerequisites
 
-The DNS infrastructure is set up as described in the [DNS infrastructure documentation](../dns-infrastructure/README.md).
+The DNS infrastructure is set up as described in the [DNS infrastructure documentation](../README.md).
 
 - Java 8 or later (The test were performed with Java 11)
 - Get dynamic discovery client
@@ -241,7 +241,7 @@ The PoC environment can be started using the following command (linux OS):
 
 ### Test: Use case 1
 
-Resolve the DNS records registered in the top-level domain authoritative DNS server
+Resolve the DNS records registered in the **top-level domain authoritative DNS server** using the Peppol participant identifier format
 Test DNS resolution:
 
 Command:
@@ -255,11 +255,295 @@ Response:
     NAPTR query: LMHBM64R2VOF2IJIOGG2FXVWGYE42GF3CT7UF6EMOEWDS7ID3I2A.iso6523-actorid-upis.0088.iso6523.participants.ecosystem.org
     LMHBM64R2VOF2IJIOGG2FXVWGYE42GF3CT7UF6EMOEWDS7ID3I2A.iso6523-actorid-upis.0088.iso6523.participants.ecosystem.org.      60      IN      NAPTR   100 10 "U" "Meta:SMP" "!.*!https://raw.githubusercontent.com/ec-edelivery/dynamic-discovery-federated-infrastructure/refs/heads/main/dynamic-discovery-client/smp-resources/!" .
 
-To fetch the capability document 
-Command (note: the ddc parameter -dns was changed to -get):
+Fetching the capability document:
+Command (note: the ddc parameter -dns was changed to -get and the -o parameter was added to define the output file):
         
     java -Ddns.server=localhost:54 -jar ddc.jar -get -ri 0088:test01 -rs iso6523-actorid-upis -d 0088.iso6523.participants.ecosystem.org -t NAPTR -o test-uc01.xml
     
 Response:
-The file test-uc01.xml was created with appropriate capability document from the 'Github SMP'.
+The file test-uc01.xml was created with corresponding capability document retrieved from the 'Github SMP'.
+
+
+### Test: Use case 1.a
+
+Resolve the DNS records registered in the **top-level domain authoritative DNS server** using the OASIS EBCore party identifier format.
+Test DNS resolution:
+
+Command:
+
+        java -Ddns.server=localhost:54 -jar ddc.jar -dns -ri test01 -rs urn:oasis:names:tc:ebcore:partyid-type:iso6523:0088 -d 0088.iso6523.participants.ecosystem.org -t NAPTR
+
+Response:
+
+    Resolving DNS for participant: [ParticipantIdentifier{identifier='test01', scheme='urn:oasis:names:tc:ebcore:partyid-type:iso6523:0088'}] and domain: [0088.iso6523.participants.ecosystem.org]
+
+    NAPTR query: NTPFMJWLL2HIEYCKLIBVAJLW2SJXZQGFD7P53PN75FYF5GHUWSCQ.0088.iso6523.participants.ecosystem.org
+    NTPFMJWLL2HIEYCKLIBVAJLW2SJXZQGFD7P53PN75FYF5GHUWSCQ.0088.iso6523.participants.ecosystem.org.   60      IN      NAPTR   100 10 "U" "Meta:SMP" "!.*!https://raw.githubusercontent.com/ec-edelivery/dynamic-discovery-federated-infrastructure/refs/heads/main/dynamic-discovery-client/smp-resources/!"
+
+Fetching the capability document:
+Command (note: the ddc parameter -dns was changed to -get and the -o parameter was added to define the output file):
+
+    java -Ddns.server=localhost:54 -jar ddc.jar -get -ri urn:oasis:names:tc:ebcore:partyid-type:iso6523:0088:test01 -d 0088.iso6523.participants.ecosystem.org -t NAPTR -o test-uc01a.xml
+
+Response:
+The file test-uc01a.xml was created with corresponding capability document retrieved from the 'Github SMP'.
+
+### Test: Use case 1.b
+
+Resolve the DNS records registered in the **top-level domain authoritative DNS server** using the Peppol participant identifier format.
+Test DNS resolution:
+
+Command:
+
+    java -Ddns.server=localhost:54 -jar ddc.jar -dns -ri 0088:test02 -rs iso6523-actorid-upis -d 0088.iso6523.participants.ecosystem.org -t NAPTR
+
+Response:
+
+    Resolving DNS for participant: [ParticipantIdentifier{identifier='0088:test02', scheme='iso6523-actorid-upis'}] and domain: [0088.iso6523.participants.ecosystem.org]
+
+    NAPTR query: PUTEUP6A7HSJKCCIAOPTTGURPR5JO253IYZGAMRE2MZNUZMIA7JA.iso6523-actorid-upis.0088.iso6523.participants.ecosystem.org
+    github-smp.publisher.0088.iso6523.participants.ecosystem.org.   60      IN      NAPTR   100 10 "U" "Meta:SMP" "!.*!https://raw.githubusercontent.com/ec-edelivery/dynamic-discovery-federated-infrastructure/refs/heads/main/dynamic-discovery-client/smp-resources/!" .
+
+
+Fetching the capability document:
+Command (note: the ddc parameter -dns was changed to -get and the -o parameter was added to define the output file):
+
+    java -Ddns.server=localhost:54 -jar ddc.jar -get -ri 0088:test02 -rs iso6523-actorid-upis -d 0088.iso6523.participants.ecosystem.org -t NAPTR -o test-uc01b.xml
+
+Response:
+The file test-uc01b.xml was created with corresponding capability document retrieved from the 'Github SMP'.
+
+
+### Test: Use case 1.c
+
+Resolve the DNS records registered in the **top-level domain authoritative DNS server** using the Oasis EBCore party identifier format.
+Test DNS resolution:
+
+Command:
+
+    java -Ddns.server=localhost:54 -jar ddc.jar -dns -ri urn:oasis:names:tc:ebcore:partyid-type:iso6523:0088:test02 -d 0088.iso6523.participants.ecosystem.org -t NAPTR
+
+Response:
+
+    Resolving DNS for participant: [ParticipantIdentifier{identifier='urn:oasis:names:tc:ebcore:partyid-type:iso6523:0088:test02', scheme='null'}] and domain: [0088.iso6523.participants.ecosystem.org]
+
+    NAPTR query: AEY47QMI5YC46ORUMD54WGE6NYT42B57TXXSF3H63OP7FL7ANR3A.0088.iso6523.participants.ecosystem.org
+    github-smp.publisher.0088.iso6523.participants.ecosystem.org.   38      IN      NAPTR   100 10 "U" "Meta:SMP" "!.*!https://raw.githubusercontent.com/ec-edelivery/dynamic-discovery-federated-infrastructure/refs/heads/main/dynamic-discovery-client/smp-resources/!" .
+
+
+Fetching the capability document:
+Command (note: the ddc parameter -dns was changed to -get and the -o parameter was added to define the output file):
+
+    java -Ddns.server=localhost:54 -jar ddc.jar -get -ri urn:oasis:names:tc:ebcore:partyid-type:iso6523:0088:test02 -d 0088.iso6523.participants.ecosystem.org -t NAPTR -o test-uc01c.xml
+
+Response:
+The file test-uc01c.xml was created with corresponding capability document retrieved from the 'Github SMP'.
+
+
+### Test: Use case 2
+
+Resolve the DNS records registered in the **"NS Delegated" DNS server** using the Peppol party identifier format.
+ 
+Test DNS resolution:
+
+Command:
+
+    java -Ddns.server=localhost:54 -jar ddc.jar -dns -ri 0195:test01 -rs iso6523-actorid-upis -d 0195.iso6523.participants.ecosystem.org -t NAPTR
+
+Response:
+
+    Resolving DNS for participant: [ParticipantIdentifier{identifier='0195:test01', scheme='iso6523-actorid-upis'}] and domain: [0195.iso6523.participants.ecosystem.org]
+
+    NAPTR query: RYATFMWWQQHEY4T7VPPCXY7Z36T2FOL6QYXRGYF3V7S5LGJUAH2Q.iso6523-actorid-upis.0195.iso6523.participants.ecosystem.org
+    RYATFMWWQQHEY4T7VPPCXY7Z36T2FOL6QYXRGYF3V7S5LGJUAH2Q.iso6523-actorid-upis.0195.iso6523.participants.ecosystem.org.      86400   IN      NAPTR   100 10 "U" "Meta:SMP" "!.*!https://raw.githubusercontent.com/ec-edelivery/dynamic-discovery-federated-infrastructure/refs/heads/main/dynamic-discovery-client/smp-resources/!" .
+
+
+Fetching the capability document:
+Command (note: the ddc parameter -dns was changed to -get and the -o parameter was added to define the output file):
+
+    java -Ddns.server=localhost:54 -jar ddc.jar -get -ri 0195:test01 -rs iso6523-actorid-upis -d 0195.iso6523.participants.ecosystem.org -t NAPTR -o test-uc02.xml
+
+Response:
+The file test-uc02.xml was created with corresponding capability document retrieved from the 'Github SMP'.
+
+
+### Test: Use case 2.a
+
+Resolve the DNS records registered in the **"NS Delegated" DNS server** using the OASIS EBCore party identifier format.
+Test DNS resolution:
+
+Command:
+
+    java -Ddns.server=localhost:54 -jar ddc.jar -dns -ri urn:oasis:names:tc:ebcore:partyid-type:iso6523:0195:test01 -d 0195.iso6523.participants.ecosystem.org -t NAPTR
+
+Response:
+
+    Resolving DNS for participant: [ParticipantIdentifier{identifier='test01', scheme='urn:oasis:names:tc:ebcore:partyid-type:iso6523:0195'}] and domain: [0195.iso6523.participants.ecosystem.org]
+
+    NAPTR query: SW7FCYYKJI7YP27JILCJRNPIODTJYYO2DH3CAVWPSNPX3GJKGNZA.0195.iso6523.participants.ecosystem.org
+    SW7FCYYKJI7YP27JILCJRNPIODTJYYO2DH3CAVWPSNPX3GJKGNZA.0195.iso6523.participants.ecosystem.org.   86400   IN      NAPTR   100 10 "U" "Meta:SMP" "!.*!https://raw.githubusercontent.com/ec-edelivery/dynamic-discovery-federated-infrastructure/refs/heads/main/dynamic-discovery-client/smp-resources/!" .
+
+
+Fetching the capability document:
+Command (note: the ddc parameter -dns was changed to -get and the -o parameter was added to define the output file):
+
+    java -Ddns.server=localhost:54 -jar ddc.jar -get -ri urn:oasis:names:tc:ebcore:partyid-type:iso6523:0195:test01 -d 0195.iso6523.participants.ecosystem.org -t NAPTR -o test-uc02a.xml
+
+Response:
+The file test-uc02a.xml was created with corresponding capability document retrieved from the 'Github SMP'.
+
+### Test: Use case 2.b
+
+Resolve the DNS records registered in the **"NS Delegated" DNS server** using the Peppol party identifier format.
+Test DNS resolution:
+
+Command:
+
+    java -Ddns.server=localhost:54 -jar ddc.jar -dns -ri 0195:test02 -rs iso6523-actorid-upis -d 0195.iso6523.participants.ecosystem.org -t NAPTR
+
+Response:
+
+    Resolving DNS for participant: [ParticipantIdentifier{identifier='0195:test02', scheme='iso6523-actorid-upis'}] and domain: [0195.iso6523.participants.ecosystem.org]
+
+    NAPTR query: SQOK3QIXO5V26IRVUCVR2GJVZNVR5AFNB57ABHELYAI72ZIQ7ITQ.iso6523-actorid-upis.0195.iso6523.participants.ecosystem.org
+    github-smp.publisher.0195.iso6523.participants.ecosystem.org.   86400   IN      NAPTR   100 10 "U" "Meta:SMP" "!.*!https://raw.githubusercontent.com/ec-edelivery/dynamic-discovery-federated-infrastructure/refs/heads/main/dynamic-discovery-client/smp-resources/!" .
+
+
+
+Fetching the capability document:
+Command (note: the ddc parameter -dns was changed to -get and the -o parameter was added to define the output file):
+
+    java -Ddns.server=localhost:54 -jar ddc.jar -get -ri 0195:test02 -rs iso6523-actorid-upis -d 0195.iso6523.participants.ecosystem.org -t NAPTR -o test-uc02b.xml
+
+Response:
+The file test-uc02b.xml was created with corresponding capability document retrieved from the 'Github SMP'.
+
+
+### Test: Use case 2.c
+
+Resolve the DNS records registered in the **"NS Delegated" DNS server** using the OASIS EBCore party identifier format.
+Test DNS resolution:
+
+Command:
+
+    java -Ddns.server=localhost:54 -jar ddc.jar -dns -ri urn:oasis:names:tc:ebcore:partyid-type:iso6523:0195:test02  -d 0195.iso6523.participants.ecosystem.org -t NAPTR
+
+Response:
+
+    Resolving DNS for participant: [ParticipantIdentifier{identifier='urn:oasis:names:tc:ebcore:partyid-type:iso6523:0195:test02', scheme='null'}] and domain: [0195.iso6523.participants.ecosystem.org]
+
+    NAPTR query: SWDXXVXUUTFABXJAAWCM4EUDZJUMNLUWJ3HZZY7QARWGRKA7Q4HQ.0195.iso6523.participants.ecosystem.org
+    github-smp.publisher.0195.iso6523.participants.ecosystem.org.   85880   IN      NAPTR   100 10 "U" "Meta:SMP" "!.*!https://raw.githubusercontent.com/ec-edelivery/dynamic-discovery-federated-infrastructure/refs/heads/main/dynamic-discovery-client/smp-resources/!" .
+
+Fetching the capability document:
+Command (note: the ddc parameter -dns was changed to -get and the -o parameter was added to define the output file):
+
+    java -Ddns.server=localhost:54 -jar ddc.jar -get -ri urn:oasis:names:tc:ebcore:partyid-type:iso6523:0195:test02 -d 0195.iso6523.participants.ecosystem.org -t NAPTR -o test-uc02c.xml
+
+Response:
+The file test-uc02c.xml was created with corresponding capability document retrieved from the 'Github SMP'.
+
+
+### Test: Use case 3
+
+Resolve the DNS records registered in the **"DNAME Delegated" DNS server** using the Peppol party identifier format.
+
+Test DNS resolution:
+
+Command:
+
+    java -Ddns.server=localhost:54 -jar ddc.jar -dns -ri 9914:test01 -rs iso6523-actorid-upis -d 9914.iso6523.participants.ecosystem.org -t NAPTR
+
+Response:
+
+    Resolving DNS for participant: [ParticipantIdentifier{identifier='9914:test01', scheme='iso6523-actorid-upis'}] and domain: [9914.iso6523.participants.ecosystem.org]
+
+    NAPTR query: GBDLL6QCELDM5JLQCWGP5CONIVXDP6BV2NZWWWI6BY5SFMNUYN7A.iso6523-actorid-upis.9914.iso6523.participants.ecosystem.org
+    GBDLL6QCELDM5JLQCWGP5CONIVXDP6BV2NZWWWI6BY5SFMNUYN7A.iso6523-actorid-upis.9914.iso6523.g2b.at.  86400   IN      NAPTR   100 10 "U" "Meta:SMP" "!.*!https://raw.githubusercontent.com/ec-edelivery/dynamic-discovery-federated-infrastructure/refs/heads/main/dynamic-discovery-client/smp-resources/!" .
+
+Fetching the capability document:
+Command (note: the ddc parameter -dns was changed to -get and the -o parameter was added to define the output file):
+
+    java -Ddns.server=localhost:54 -jar ddc.jar -get -ri 9914:test01 -rs iso6523-actorid-upis -d 9914.iso6523.participants.ecosystem.org -t NAPTR -o test-uc03.xml
+
+Response:
+The file test-uc03.xml was created with corresponding capability document retrieved from the 'Github SMP'.
+
+### Test: Use case 3.a
+
+Resolve the DNS records registered in the **"DNAME Delegated" DNS server** using the OASIS EBCore party identifier format.
+Test DNS resolution:
+
+Command:
+
+    java -Ddns.server=localhost:54 -jar ddc.jar -dns -ri urn:oasis:names:tc:ebcore:partyid-type:iso6523:9914:test01 -d 9914.iso6523.participants.ecosystem.org -t NAPTR
+
+Response:
+
+    Resolving DNS for participant: [ParticipantIdentifier{identifier='urn:oasis:names:tc:ebcore:partyid-type:iso6523:9914:test01', scheme='null'}] and domain: [9914.iso6523.participants.ecosystem.org]
+
+    NAPTR query: SXURSAE2VXDDT4KMND6H3CLAIEYULN5JQ6RFNJIG374NJARGSF6Q.9914.iso6523.participants.ecosystem.org
+    SXURSAE2VXDDT4KMND6H3CLAIEYULN5JQ6RFNJIG374NJARGSF6Q.9914.iso6523.g2b.at.       86400   IN      NAPTR   100 10 "U" "Meta:SMP" "!.*!https://raw.githubusercontent.com/ec-edelivery/dynamic-discovery-federated-infrastructure/refs/heads/main/dynamic-discovery-client/smp-resources/!" .
+
+Fetching the capability document:
+Command (note: the ddc parameter -dns was changed to -get and the -o parameter was added to define the output file):
+
+    java -Ddns.server=localhost:54 -jar ddc.jar -get -ri urn:oasis:names:tc:ebcore:partyid-type:iso6523:9914:test01 -d 9914.iso6523.participants.ecosystem.org -t NAPTR -o test-uc03a.xml
+
+Response:
+The file test-uc03a.xml was created with corresponding capability document retrieved from the 'Github SMP'.
+
+### Test: Use case 3.b
+
+Resolve the DNS records registered in the **"DNAME Delegated" DNS server** using the Peppol party identifier format.
+Test DNS resolution:
+
+Command:
+
+    java -Ddns.server=localhost:54 -jar ddc.jar -dns -ri 9914:test02 -rs iso6523-actorid-upis -d 9914.iso6523.participants.ecosystem.org -t NAPTR
+
+Response:
+
+    Resolving DNS for participant: [ParticipantIdentifier{identifier='9914:test02', scheme='iso6523-actorid-upis'}] and domain: [9914.iso6523.participants.ecosystem.org]
+
+    NAPTR query: 57PSJISUOE7GR4UXE2M7IBKNLQV5CZS55QOIHAH3G67JVDOKTY3A.iso6523-actorid-upis.9914.iso6523.participants.ecosystem.org
+    github-smp.publisher.9914.iso6523.g2b.at.       86400   IN      NAPTR   100 10 "U" "Meta:SMP" "!.*!https://raw.githubusercontent.com/ec-edelivery/dynamic-discovery-federated-infrastructure/refs/heads/main/dynamic-discovery-client/smp-resources/!" .
+
+Fetching the capability document:
+Command (note: the ddc parameter -dns was changed to -get and the -o parameter was added to define the output file):
+
+    java -Ddns.server=localhost:54 -jar ddc.jar -get -ri 9914:test02 -rs iso6523-actorid-upis -d 9914.iso6523.participants.ecosystem.org -t NAPTR -o test-uc03b.xml
+
+Response:
+The file test-uc03b.xml was created with corresponding capability document retrieved from the 'Github SMP'.
+
+### Test: Use case 3.c
+
+Resolve the DNS records registered in the **"DNAME Delegated" DNS server** using the OASIS EBCore party identifier format.
+Test DNS resolution:
+
+Command:
+
+    java -Ddns.server=localhost:54 -jar ddc.jar -dns -ri urn:oasis:names:tc:ebcore:partyid-type:iso6523:9914:test02  -d 9914.iso6523.participants.ecosystem.org -t NAPTR
+
+Response:
+
+    Resolving DNS for participant: [ParticipantIdentifier{identifier='urn:oasis:names:tc:ebcore:partyid-type:iso6523:9914:test02', scheme='null'}] and domain: [9914.iso6523.participants.ecosystem.org]
+
+    NAPTR query: EMAOWJNPC73TKW737YRUFA6X2XFP5N6NBJFGWLFKY74CR55IIF5A.9914.iso6523.participants.ecosystem.org
+    github-smp.publisher.9914.iso6523.g2b.at.       86381   IN      NAPTR   100 10 "U" "Meta:SMP" "!.*!https://raw.githubusercontent.com/ec-edelivery/dynamic-discovery-federated-infrastructure/refs/heads/main/dynamic-discovery-client/smp-resources/!" .
+
+Fetching the capability document:
+Command (note: the ddc parameter -dns was changed to -get and the -o parameter was added to define the output file):
+
+    java -Ddns.server=localhost:54 -jar ddc.jar -get -ri urn:oasis:names:tc:ebcore:partyid-type:iso6523:9914:test02 -d 9914.iso6523.participants.ecosystem.org -t NAPTR -o test-uc03c.xml
+
+Response:
+The file test-uc03c.xml was created with corresponding capability document retrieved from the 'Github SMP'.
+
+## Conclusion
+
+he PoC environment demonstrates the setup of a federated DNS service with the top-level domain ecosystem.org. It showcases various subdomain delegation methods, including standard NS delegation and DNAME redirection.
+
+The PoC tests confirm that already some of the existing Dynamic Discovery Client (DDC) can resolve DNS NAPTR records in proposed federated DNS environment. In the test, we used the Peppol participant identifier and the OASIS EBCore party identifier format.
 
