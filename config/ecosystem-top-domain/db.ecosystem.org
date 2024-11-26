@@ -50,3 +50,28 @@ LMHBM64R2VOF2IJIOGG2FXVWGYE42GF3CT7UF6EMOEWDS7ID3I2A.iso6523-actorid-upis.0088.i
 ;;iso6523-actorid-upis::0088:test02
 PUTEUP6A7HSJKCCIAOPTTGURPR5JO253IYZGAMRE2MZNUZMIA7JA.iso6523-actorid-upis.0088.iso6523.participants CNAME github-smp.publisher.0088.iso6523.participants.ecosystem.org.
 
+;; --------------------------------------
+;; Delegation as per
+;; "Option D - Federated Domain SML with partitioning by Stage and Participant Identification Scheme:
+;; (draft version 2024-11-26)
+;; with the exception that the top-level SML domain is 'participants.ecosystem.org' instead of '[prod|test].participant.peppol.org'
+;; --------------------------------------
+
+;; Some SMP entries, directly in this zone
+smp-test-01.publisher.participant NAPTR 100 10 "U" "Meta:SMP" "!.*!https://172.20.0.201/!" .
+smp-test-02.publisher.participant NAPTR 100 10 "U" "Meta:SMP" "!.*!https://172.20.0.202/!" .
+
+;; 0195 delegated to the instance running at 172.20.0.101
+0195.iso6523-actorid-upis.participant IN NS ns1.0195.iso6523-actorid-upis.participant
+ns1.0195.iso6523-actorid-upis.participant IN A 172.20.0.101
+
+;; 9914 delegated to the instance running at 172.20.0.102
+9914.iso6523-actorid-upis.participant IN NS ns1.9914.iso6523-actorid-upis.participant
+ns1.9914.iso6523-actorid-upis.participant IN A 172.20.0.102
+
+;; 0088 not delegated, served directly from this zone
+
+;; iso6523-actorid-upis::0088:test01 = sha256(lcase('0088:test01'))
+lmhbm64r2vof2ijiogg2fxvwgye42gf3ct7uf6emoewds7id3i2a.0088.iso6523-actorid-upis.participant IN CNAME smp-test-01.publisher.participant
+;; iso6523-actorid-upis::0088:test02
+puteup6a7hsjkcciaopttgurpr5jo253iyzgamre2mznuzmia7ja.0088.iso6523-actorid-upis.participant IN CNAME smp-test-02.publisher.participant
