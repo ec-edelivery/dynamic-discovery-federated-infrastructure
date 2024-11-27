@@ -1,0 +1,27 @@
+;;
+;; Example for the 9914 participant identifier zone as described in
+;; "Option D - Federated Domain SML with partitioning by Stage and Participant Identification Scheme:
+;; (draft version 2024-11-26)
+;;
+
+$TTL 86400
+@   IN  SOA ns1.9914.iso6523-actorid-upis.participant.ecosystem.org. root.9914.iso6523.g2b.at. (
+            2023102801 ; Serial
+            3600       ; Refresh
+            1800       ; Retry
+            1209600    ; Expire
+            86400 )    ; Minimum TTL
+@   IN  NS  ns1.9914.iso6523-actorid-upis.participant.ecosystem.org.
+
+ns1 IN  A   172.20.0.102
+
+; --------------------------------
+; Test records
+; --------------------------------
+; simple A type test domain records for "smoke testing"
+test IN  A   127.0.0.1
+
+;iso6523-actorid-upis::9914:test01
+gbdll6qceldm5jlqcwgp5conivxdp6bv2nzwwwi6by5sfmnuyn7a IN CNAME smp-test-01.publisher.participant.ecosystem.org.
+;iso6523-actorid-upis::9914:test02
+57psjisuoe7gr4uxe2m7ibknlqv5czs55qoihah3g67jvdokty3a IN CNAME smp-test-02.publisher.participant.ecosystem.org.

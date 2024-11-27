@@ -1,0 +1,3 @@
+Placeholder file to put the log directory in github.
+
+Please note that you may need to make the directory writable for the named daemon in the images (UID 100).
