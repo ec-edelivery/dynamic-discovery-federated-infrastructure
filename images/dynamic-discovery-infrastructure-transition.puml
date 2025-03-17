@@ -1,0 +1,14 @@
+@startuml Basic Sample
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+
+System_Boundary(c1, "eDelivery DNS") {
+        SystemDb(eDeliveryDNS, ".edelivery.tech.ec.europa.eu", "*.iso6523-actorid-upis.edelivery.tech.ec.europa.eu\n\n")
+}
+System_Boundary(c2, "Peppol DNS") {
+    SystemDb(PeppolDNS, "is6523.participants.peppol.org", "DNAME\n0088.is6523.participants.peppol.org->eDelivery\n0195.is6523.participants.peppol.org->eDelivery\n9925.is6523.participants.peppol.org->eDelivery\nxxxx.is6523.participants.peppol.org->eDelivery\n...")
+}
+
+
+Rel(PeppolDNS, eDeliveryDNS, "Redirect to\nSubzone xxxx", "DNAME")
+@enduml

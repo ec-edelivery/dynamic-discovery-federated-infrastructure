@@ -1,0 +1,58 @@
+# this is a PoC environment extension of basic DNS server environment with the following sample DNS service:
+# - each dns service has now it own SML management service based  on the DomiSML project
+
+include:
+  - ../docker-compose.yml
+
+
+services:
+  # the top domain SML service for zone 0088.iso6523.participants.participants.ecosystem.org
+  ecosystem-top-domain-sml:
+    image: domisml:4.3.1
+    container_name: ecosystem-top-domain-sml
+    depends_on:
+      - ecosystem-top-domain
+    environment:
+      - DNS_ENABLED=true
+      - DNS_HOSTNAME=ecosystem-top-domain
+      - ECOSYSTEM_NAME=0088.iso6523.participants.ecosystem.org
+      - ECOSYSTEM_DNS_ZONE=ecosystem.org
+    ports:
+      - 10088:8080
+    networks:
+      test-dns-net:
+        ipv4_address: 172.20.0.202
+
+  # the delegated zone 0195.iso6523.participants.ecosystem.org
+  invoice-sg-sml:
+    image: domisml:4.3.1
+    container_name: invoice-sg-sml
+    depends_on:
+      - invoice-sg
+    environment:
+      - DNS_ENABLED=true
+      - DNS_HOSTNAME=invoice-sg
+      - ECOSYSTEM_NAME=0195.iso6523.participants.ecosystem.org
+      - ECOSYSTEM_DNS_ZONE=0195.iso6523.participants.ecosystem.org
+    ports:
+      - 10195:8080
+    networks:
+      test-dns-net:
+        ipv4_address: 172.20.0.203
+
+  # the redirected zone 0195.iso6523.participants.ecosystem.org
+  vat-num-at-sml:
+    image: domisml:4.3.1
+    container_name: vat-num-at-sml
+    depends_on:
+      - vat-num-at
+    environment:
+      - DNS_ENABLED=true
+      - DNS_HOSTNAME=vat-num-at
+      - ECOSYSTEM_NAME=9914.iso6523.g2b.at
+      - ECOSYSTEM_DNS_ZONE=9914.iso6523.g2b.at
+    ports:
+      - 19914:8080
+    networks:
+      test-dns-net:
+        ipv4_address: 172.20.0.204

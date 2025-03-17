@@ -1,0 +1,46 @@
+@startuml Basic Sample
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+Boundary(ecosystemSMLService, "Ecosystem Dynamic discovery infrastructure", "Federated DNS") {
+
+    System_Boundary(c1, "TopDomain DNS") {
+        SystemDb(ecosystemDNS, "TopDomain DNS", "ecosystem.org")
+        SystemDb(ecosystemDNSSubzone, "DNS subzone", "0088.is6523.participants.ecosystem.org")
+        System(sml0088, "SML service (0088)", ManageParticipantIdentifierWS\nManageServiceMetadataService)
+
+    }
+    System_Boundary(c2, "Delegated DNS 0195") {
+        SystemDb(delegatedDNS, "Delegated DNS\n(NS)", "0195.is6523.participants.ecosystem.org\n")
+        System(sml0195, "SML service (0195)", ManageParticipantIdentifierWS\nManageServiceMetadataService)
+    }
+    System_Boundary(c3, "Delegated DNS 9914") {
+        SystemDb(redirectedDNS, "Redirected DNS\n(DNAME)", "9914.is6523.g2b.at,\n9914.is6523.participants.ecosystem.org")
+        System(sml9914, "SML service (9914)", ManageParticipantIdentifierWS\nManageServiceMetadataService)
+    }
+}
+    System(smp1, "SMP service 01", )
+    System(smp2, "SMP service 02", )
+
+    Rel(ecosystemDNS, ecosystemDNSSubzone, "Delegate", "Subzone 0088")
+    Rel(ecosystemDNS, delegatedDNS, "Delegate to Subzone 0195", "NS")
+    Rel(ecosystemDNS, redirectedDNS, "Redirect to\nSubzone 9914", "DNAME")
+    Rel(sml0088, ecosystemDNSSubzone, "Manage\nsubzone 0088", "nsupdate")
+    Rel(sml0195, delegatedDNS, "Manage\nsubzone 0195", "nsupdate")
+    Rel(sml9914, redirectedDNS, "Manage\nsubzone 0195", "nsupdate")
+
+    BiRel(sml0088, smp1, "Manage participants 0088", "Peppol API")
+    BiRel(sml0195, smp1, "Manage participants 0195", "Peppol API")
+    BiRel(sml9914, smp1, "Manage participants 9914", "Peppol API")
+
+    BiRel(sml9914, smp2, "Manage participants 9914", "Peppol API")
+
+
+
+
+    Lay_D(ecosystemDNS, delegatedDNS)
+    Lay_D(ecosystemDNS, redirectedDNS)
+    Lay_D(ecosystemDNSSubzone, sml0088)
+    Lay_D(delegatedDNS, sml0195)
+    Lay_D(redirectedDNS, sml9914)
+
+@enduml

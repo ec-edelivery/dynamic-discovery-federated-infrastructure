@@ -1,77 +1,50 @@
-$TTL 60
-@   IN  SOA ns1.ecosystem.org. root.ecosystem.org. (
-            2023102801 ; Serial
-            3600       ; Refresh
-            1800       ; Retry
-            1209600    ; Expire
-            86400 )    ; Minimum TTL
-    IN  NS  ns1.ecosystem.org.
-@   IN  NS  ns1.ecosystem.org.
-; name servers - A records
-ns1 IN  A   172.20.0.2
-
-; --------------------------------
-; delegation of subdomain
-; --------------------------------
-;Use case 2.x; subdomain delegation
-0195.iso6523.participants IN NS ns1.0195.iso6523.participants.ecosystem.org.
-; a glue record for the name server
-ns1.0195.iso6523.participants IN A 172.20.0.101
-
-;Use case 3.x; redirect subdomain using DNAME
-9914.iso6523.participants IN  DNAME 9914.iso6523.g2b.at.
-
-;; --------------------------------
-;; Test records
-;; --------------------------------
-;; simple A type test domain records for "smoke testing"
-test IN  A   127.0.0.1
-test.0088.iso6523.participants IN  A   127.0.0.1
-
-;; SMP example records
-smp-uc1a.publisher.0088.iso6523.participants NAPTR 100 10 "U" "Meta:SMP" "!.*!http://127.0.0.1:8080/smp-uc1a/!" .
-github-smp.publisher.0088.iso6523.participants NAPTR 100 10 "U" "Meta:SMP" "!.*!https://raw.githubusercontent.com/ec-edelivery/dynamic-discovery-federated-infrastructure/refs/heads/main/dynamic-discovery-client/smp-resources/!" .
-
-;;Use case 1
-UC1XABCD.0088.iso6523.participants NAPTR 100 10 "U" "Meta:SMP" "!.*!http://127.0.0.1:8080/smp-uc1/!" .
-
-;;Use case 1.a
-UC1AXABCD.0088.iso6523.participants CNAME smp-uc1a.publisher.0088.iso6523.participants.ecosystem.org.
-
-;; --------------------------------------
-;; dynamic-discovery-client test records
-;;urn:oasis:names:tc:ebcore:partyid-type:iso6523:0088:test01
-NTPFMJWLL2HIEYCKLIBVAJLW2SJXZQGFD7P53PN75FYF5GHUWSCQ.0088.iso6523.participants NAPTR 100 10 "U" "Meta:SMP" "!.*!https://raw.githubusercontent.com/ec-edelivery/dynamic-discovery-federated-infrastructure/refs/heads/main/dynamic-discovery-client/smp-resources/!" .
-;;urn:oasis:names:tc:ebcore:partyid-type:iso6523:0088:test02
-AEY47QMI5YC46ORUMD54WGE6NYT42B57TXXSF3H63OP7FL7ANR3A.0088.iso6523.participants CNAME github-smp.publisher.0088.iso6523.participants.ecosystem.org.
-
-;;iso6523-actorid-upis::0088:test01 direct lookup
-LMHBM64R2VOF2IJIOGG2FXVWGYE42GF3CT7UF6EMOEWDS7ID3I2A.iso6523-actorid-upis.0088.iso6523.participants NAPTR 100 10 "U" "Meta:SMP" "!.*!https://raw.githubusercontent.com/ec-edelivery/dynamic-discovery-federated-infrastructure/refs/heads/main/dynamic-discovery-client/smp-resources/!" .
-;;iso6523-actorid-upis::0088:test02
-PUTEUP6A7HSJKCCIAOPTTGURPR5JO253IYZGAMRE2MZNUZMIA7JA.iso6523-actorid-upis.0088.iso6523.participants CNAME github-smp.publisher.0088.iso6523.participants.ecosystem.org.
-
-;; --------------------------------------
-;; Delegation as per
-;; "Option D - Federated Domain SML with partitioning by Stage and Participant Identification Scheme:
-;; (draft version 2024-11-26)
-;; with the exception that the top-level SML domain is 'participants.ecosystem.org' instead of '[prod|test].participant.peppol.org'
-;; --------------------------------------
-
-;; Some SMP entries, directly in this zone
-smp-test-01.publisher.participant NAPTR 100 10 "U" "Meta:SMP" "!.*!https://172.20.0.201/!" .
-smp-test-02.publisher.participant NAPTR 100 10 "U" "Meta:SMP" "!.*!https://172.20.0.202/!" .
-
-;; 0195 delegated to the instance running at 172.20.0.101
-0195.iso6523-actorid-upis.participant IN NS ns1.0195.iso6523-actorid-upis.participant
-ns1.0195.iso6523-actorid-upis.participant IN A 172.20.0.101
-
-;; 9914 delegated to the instance running at 172.20.0.102
-9914.iso6523-actorid-upis.participant IN NS ns1.9914.iso6523-actorid-upis.participant
-ns1.9914.iso6523-actorid-upis.participant IN A 172.20.0.102
-
-;; 0088 not delegated, served directly from this zone
-
-;; iso6523-actorid-upis::0088:test01 = sha256(lcase('0088:test01'))
-lmhbm64r2vof2ijiogg2fxvwgye42gf3ct7uf6emoewds7id3i2a.0088.iso6523-actorid-upis.participant IN CNAME smp-test-01.publisher.participant
-;; iso6523-actorid-upis::0088:test02
-puteup6a7hsjkcciaopttgurpr5jo253iyzgamre2mznuzmia7ja.0088.iso6523-actorid-upis.participant IN CNAME smp-test-02.publisher.participant
+$ORIGIN .
+$TTL 60	; 1 minute
+ecosystem.org		IN SOA	ns1.ecosystem.org. root.ecosystem.org. (
+				2023102804 ; serial
+				3600       ; refresh (1 hour)
+				1800       ; retry (30 minutes)
+				1209600    ; expire (2 weeks)
+				86400      ; minimum (1 day)
+				)
+			NS	ns1.ecosystem.org.
+$ORIGIN ecosystem.org.
+ns1			A	172.20.0.2
+$ORIGIN 0088.iso6523-actorid-upis.participant.ecosystem.org.
+lmhbm64r2vof2ijiogg2fxvwgye42gf3ct7uf6emoewds7id3i2a CNAME smp-test-01.publisher.participant.ecosystem.org.
+puteup6a7hsjkcciaopttgurpr5jo253iyzgamre2mznuzmia7ja CNAME smp-test-02.publisher.participant.ecosystem.org.
+$ORIGIN iso6523-actorid-upis.participant.ecosystem.org.
+0195			NS	ns1.0195
+$ORIGIN 0195.iso6523-actorid-upis.participant.ecosystem.org.
+ns1			A	172.20.0.101
+$ORIGIN publisher.participant.ecosystem.org.
+smp-test-01		NAPTR	100 10 "U" "Meta:SMP" "!.*!https://172.20.0.201/!" .
+smp-test-02		NAPTR	100 10 "U" "Meta:SMP" "!.*!https://172.20.0.202/!" .
+$ORIGIN 0088.iso6523.participants.ecosystem.org.
+AEY47QMI5YC46ORUMD54WGE6NYT42B57TXXSF3H63OP7FL7ANR3A CNAME github-smp.publisher
+$ORIGIN iso6523-actorid-upis.0088.iso6523.participants.ecosystem.org.
+B-1267d742fd028c1a7839d309ce1bcfbd CNAME SMP-0088-01.publisher.0088.iso6523.participants.ecosystem.org.
+BE3K6OEYGJD5H62T535X6UYEIW5BWUQO4JHSRFSFHECG7IRIXEAQ NAPTR 100 10 "U" "Meta:SMP" "!.*!http://localhost/smp!" .
+LMHBM64R2VOF2IJIOGG2FXVWGYE42GF3CT7UF6EMOEWDS7ID3I2A NAPTR 100 10 "U" "Meta:SMP" "!.*!https://raw.githubusercontent.com/ec-edelivery/dynamic-discovery-federated-infrastructure/refs/heads/main/dynamic-discovery-client/smp-resources/!" .
+PUTEUP6A7HSJKCCIAOPTTGURPR5JO253IYZGAMRE2MZNUZMIA7JA CNAME github-smp.publisher.0088.iso6523.participants.ecosystem.org.
+$ORIGIN 0088.iso6523.participants.ecosystem.org.
+NTPFMJWLL2HIEYCKLIBVAJLW2SJXZQGFD7P53PN75FYF5GHUWSCQ NAPTR 100 10 "U" "Meta:SMP" "!.*!https://raw.githubusercontent.com/ec-edelivery/dynamic-discovery-federated-infrastructure/refs/heads/main/dynamic-discovery-client/smp-resources/!" .
+$ORIGIN publisher.0088.iso6523.participants.ecosystem.org.
+exampleSMP01		CNAME	localhost.
+github-smp		NAPTR	100 10 "U" "Meta:SMP" "!.*!https://raw.githubusercontent.com/ec-edelivery/dynamic-discovery-federated-infrastructure/refs/heads/main/dynamic-discovery-client/smp-resources/!" .
+SMP-0088-01		CNAME	localhost.
+smp-uc1a		NAPTR	100 10 "U" "Meta:SMP" "!.*!http://127.0.0.1:8080/smp-uc1a/!" .
+$ORIGIN 0088.iso6523.participants.ecosystem.org.
+test			A	127.0.0.1
+UC1AXABCD		CNAME	smp-uc1a.publisher
+UC1XABCD		NAPTR	100 10 "U" "Meta:SMP" "!.*!http://127.0.0.1:8080/smp-uc1/!" .
+$ORIGIN iso6523.participants.ecosystem.org.
+0195			NS	ns1.0195
+$ORIGIN 0195.iso6523.participants.ecosystem.org.
+ns1			A	172.20.0.101
+$ORIGIN iso6523.participants.ecosystem.org.
+9914			DNAME	9914.iso6523.g2b.at.
+$ORIGIN participants.ecosystem.org.
+9914.iso6523-actorid-upis DNAME	9914.iso6523-actorid-upis.g2b.at.
+$ORIGIN ecosystem.org.
+test			A	127.0.0.1

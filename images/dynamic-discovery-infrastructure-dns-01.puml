@@ -1,0 +1,19 @@
+@startuml Basic Sample
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+Boundary(ecosystemSMLService, "Ecosystem Dynamic discovery infrastructure", "Federated DNS") {
+
+ System_Boundary(c1, "TopDomain DNS") {
+        SystemDb(ecosystemDNS, "TopDomain DNS", "ecosystem.org")
+        SystemDb(ecosystemDNSSubzone, "DNS subzone", "0088.is6523.participants.ecosystem.org\n0088.iso6523-actorid-upis.participants.ecosystem.org\n")
+    }
+    SystemDb(delegatedDNS, "Delegated DNS\n(NS)", "0195.is6523.participants.ecosystem.org\n0195.iso6523-actorid-upis.participants.ecosystem.org\n")
+    SystemDb(redirectedDNS, "Redirected DNS\n(DNAME)", "9914.is6523.g2b.at,\n9914.iso6523-actorid-upis.g2b.at")
+
+    Rel(ecosystemDNS, ecosystemDNSSubzone, "Delegate", "Subzone 0088")
+    Rel(ecosystemDNS, delegatedDNS, "Delegate", "Subzone 0195")
+    Rel(ecosystemDNS, redirectedDNS, "Redirect", "Subzone 9914")
+    Lay_D(ecosystemDNS, delegatedDNS)
+    Lay_D(ecosystemDNS, redirectedDNS)
+}
+@enduml

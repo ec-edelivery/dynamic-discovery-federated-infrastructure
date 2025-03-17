@@ -1,0 +1,30 @@
+@startuml Basic Sample
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+
+System_Boundary(c1, "eDelivery DNS") {
+        SystemDb(eDeliveryDNS, ".edelivery.tech.ec.europa.eu", "*.iso6523-actorid-upis.edelivery.tech.ec.europa.eu\n\n")
+}
+
+
+Boundary(ecosystemSMLService, "Peppol Dynamic discovery infrastructure", "Federated DNS") {
+
+ System_Boundary(c2, "TopDomain DNS") {
+        SystemDb(PeppolDNS, "is6523.participants.peppol.org", "DNAME\n0088.is6523.participants.peppol.org->subzone\n0195.is6523.participants.peppol.org->delegate-SG\n9925.is6523.participants.peppol.org->redirect-AT\nxxxx.is6523.participants.peppol.org->eDelivery\n...")
+        SystemDb(ecosystemDNSSubzone, "DNS subzone", "0088.is6523.participants.ecosystem.org\n0088.iso6523-actorid-upis.participants.ecosystem.org\n")
+    }
+    SystemDb(delegatedDNS, "Delegated DNS\n(NS)", "0195.is6523.participants.ecosystem.org\n0195.iso6523-actorid-upis.participants.ecosystem.org\n")
+    SystemDb(redirectedDNS, "Redirected DNS\n(DNAME)", "9914.is6523.g2b.at,\n9914.iso6523-actorid-upis.g2b.at")
+
+    Rel(PeppolDNS, ecosystemDNSSubzone, "Subzone", "Subzone 0088")
+    Rel(PeppolDNS, delegatedDNS, "Delegate", "Subzone 0195")
+    Rel(PeppolDNS, redirectedDNS, "Redirect", "Subzone 9914")
+    Lay_D(PeppolDNS, delegatedDNS)
+    Lay_D(PeppolDNS, redirectedDNS)
+}
+
+
+
+
+Rel(PeppolDNS, eDeliveryDNS, "Redirect to\nSubzone xxxx", "DNAME")
+@enduml

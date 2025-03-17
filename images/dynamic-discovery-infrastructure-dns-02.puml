@@ -1,0 +1,32 @@
+@startuml Basic Sample
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+/' Lines '/
+AddRelTag("lookup", $textColor=$ARROW_FONT_COLOR, $lineColor=blue, $legendText="async call")
+
+System(ddc, "Dynamic discovery client", "Resolve DNS")
+System_Boundary(c0, "Internet") {
+System(resolverDNS, "Resolver DNS", "Query DNS")
+
+
+
+Boundary(ecosystemSMLService, "Dynamic discovery infrastructure", "Federated DNS") {
+
+System_Boundary(c1, "TopDomain DNS") {
+        SystemDb(ecosystemDNS, "TopDomain DNS", "ecosystem.org")
+        SystemDb(ecosystemDNSSubzone, "DNS subzone", "0088.is6523.participants.ecosystem.org\n0088.iso6523-actorid-upis.participants.ecosystem.org\n")
+    }
+    SystemDb(delegatedDNS, "Delegated DNS\n(NS)", "0195.is6523.participants.ecosystem.org\n0195.iso6523-actorid-upis.participants.ecosystem.org\n")
+    SystemDb(redirectedDNS, "Redirected DNS\n(DNAME)", "9914.is6523.g2b.at,\n9914.iso6523-actorid-upis.g2b.at")
+}
+}
+
+Rel_R(ddc, resolverDNS, "DNS Lookup", "DNS Query")
+Rel_D(resolverDNS, ecosystemDNS, "DNS resolution", "Iteration 1", $tags="lookup")
+Rel_D(resolverDNS, delegatedDNS, "DNS resolution", "Iteration 2" , $tags="lookup")
+
+Rel_D(ecosystemDNS, ecosystemDNSSubzone, "Subzone", "Subzone 0088")
+Rel_D(ecosystemDNS, delegatedDNS, "Delegate", "Subzone 0195")
+Rel_D(ecosystemDNS, redirectedDNS, "Redirect", "Subzone 9914")
+
+
+@enduml

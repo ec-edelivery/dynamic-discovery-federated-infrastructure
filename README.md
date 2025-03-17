@@ -8,7 +8,7 @@ The goal of this project is to create a Dockerized environment for a proof of co
 PoC environment aims to simulate a federated DNS integration, incorporating the variants 
 discussed by the OpenPeppol Working Group on Federated DNS services.
 
-One of the objective of federated DNS services is to empower various independent DNS 
+One of the objectives of federated DNS services is to empower various independent DNS 
 servers to handle DNS query resolution within the **business domain network**, also called 
 as **digital ecosystems** (e.g. Peppol). This approach ensures scalability, robustness 
 of the ecosystem, and data sovereignty, allowing different authorities—such as countries, 
@@ -25,7 +25,8 @@ Here is the list of addition use-cases:
 
 - [Transition of the DNS domains](uc-transition/README.md). The use cases
   demonstrates the transition of the DNS domain from 'incubator DNS server to new federated DNS server(s). The extension subproject of the PoC environment is located in folder 'uc-transition'.
-- [Dynamic disovery clinent](dynamic-discovery-client/README.md). The use cases demonstrates the DNS lookup query for the participant identifiers with the current Dynamic Discovery Client (DDC) implementation. 
+- [Dynamic discovery client](dynamic-discovery-client/README.md). The use cases demonstrates the DNS lookup query for the participant identifiers with the current Dynamic Discovery Client (DDC) implementation. 
+- 
 
 
 ## Environment assumptions
@@ -40,8 +41,8 @@ in the messaging network for european eHealth record exchange it could be **ehea
 Because of the generic nature of the environment the example top-level domain, uses the 
 top-level domain **ecosystem.org**  as example.
 
-
 ### Dynamic Discovery Client
+
 In the DDI, the Dynamic Discovery Client (DDC) is tasked with resolving network 
 participant exchange capability data, such as the participant’s AP URL address and 
 the AP encryption/signing certificates. The DDC performs this discovery in two steps:
@@ -68,8 +69,6 @@ The PoC assumes that participant identifiers are composed of the following eleme
 The DNS lookup query is constructed as follows:
 NOTE: For the presentation of the rules the  augmented Backus–Naur  (ABNF) for 
 Syntax is used (See the: [RFC 5234](https://www.ietf.org/rfc/rfc5234.txt).
-
-
 
     <DNS-QUERY> ::= <hash-over-(part-of?)identifier> "." <scheme-in-catalog> "." <catalog-identifier> "." <top-level-domain>
 
