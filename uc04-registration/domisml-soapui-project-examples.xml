@@ -1,0 +1,899 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project activeEnvironment="Default" name="FederatedDNS PoC" resourceRoot="" soapui-version="5.8.0" abortOnError="false" runType="SEQUENTIAL" id="6ca5db2f-aede-46c3-9322-a0baffd77199" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="ManageParticipantIdentifierWSImplServiceSoapBinding" type="wsdl" bindingName="{http://busdox.org/serviceMetadata/ManageBusinessIdentifierService/1.0/}ManageParticipantIdentifierWSImplServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="${#Project#url}/manageparticipantidentifier?WSDL" id="8d3b8654-4dd1-4757-9eb9-c505692e7e24" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://158.166.148.28:7001/edelivery-sml/manageparticipantidentifier?WSDL"><con:part><con:url>http://158.166.148.28:7001/edelivery-sml/manageparticipantidentifier?WSDL</con:url><con:content><![CDATA[<wsdl:definitions name="ManageParticipantIdentifierWSImplService" targetNamespace="http://busdox.org/serviceMetadata/ManageBusinessIdentifierService/1.0/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://busdox.org/serviceMetadata/ManageBusinessIdentifierService/1.0/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns2="http://schemas.xmlsoap.org/soap/http" xmlns:ns1="http://busdox.org/serviceMetadata/locator/1.0/">
+  <wsdl:types>
+    <xs:schema targetNamespace="http://busdox.org/transport/identifiers/1.0/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://busdox.org/transport/identifiers/1.0/">
+      <xs:element name="ChannelIdentifier" type="xs:string"/>
+      <xs:element name="DocumentIdentifier" type="tns:DocumentIdentifierType"/>
+      <xs:element name="MessageIdentifier" type="xs:string"/>
+      <xs:element name="ParticipantIdentifier" type="tns:ParticipantIdentifierType"/>
+      <xs:element name="ProcessIdentifier" type="tns:ProcessIdentifierType"/>
+      <xs:element name="RecipientIdentifier" type="tns:ParticipantIdentifierType"/>
+      <xs:element name="SenderIdentifier" type="tns:ParticipantIdentifierType"/>
+      <xs:complexType name="ParticipantIdentifierType">
+        <xs:simpleContent>
+          <xs:extension base="xs:string">
+            <xs:attribute name="scheme" type="xs:string"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+      <xs:complexType name="DocumentIdentifierType">
+        <xs:simpleContent>
+          <xs:extension base="xs:string">
+            <xs:attribute name="scheme" type="xs:string"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+      <xs:complexType name="ProcessIdentifierType">
+        <xs:simpleContent>
+          <xs:extension base="xs:string">
+            <xs:attribute name="scheme" type="xs:string"/>
+          </xs:extension>
+        </xs:simpleContent>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema elementFormDefault="qualified" targetNamespace="http://busdox.org/serviceMetadata/locator/1.0/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://busdox.org/serviceMetadata/locator/1.0/" xmlns:ns1="http://busdox.org/transport/identifiers/1.0/">
+      <xs:import namespace="http://busdox.org/transport/identifiers/1.0/"/>
+      <xs:element name="BadRequestFault" type="tns:FaultType"/>
+      <xs:element name="CompleteMigrationRecord" type="tns:MigrationRecordType"/>
+      <xs:element name="CreateList" type="tns:ParticipantIdentifierPageType"/>
+      <xs:element name="CreateParticipantIdentifier" type="tns:ServiceMetadataPublisherServiceForParticipantType"/>
+      <xs:element name="CreateServiceMetadataPublisherService" type="tns:ServiceMetadataPublisherServiceType"/>
+      <xs:element name="DeleteList" type="tns:ParticipantIdentifierPageType"/>
+      <xs:element name="DeleteParticipantIdentifier" type="tns:ServiceMetadataPublisherServiceForParticipantType"/>
+      <xs:element name="FaultType" type="tns:FaultType"/>
+      <xs:element name="InternalErrorFault" type="tns:FaultType"/>
+      <xs:element name="NotFoundFault" type="tns:FaultType"/>
+      <xs:element name="PageRequest" type="tns:PageRequestType"/>
+      <xs:element name="ParticipantIdentifierPage" type="tns:ParticipantIdentifierPageType"/>
+      <xs:element name="PrepareMigrationRecord" type="tns:MigrationRecordType"/>
+      <xs:element name="ReadServiceMetadataPublisherService" type="tns:ServiceMetadataPublisherServiceType"/>
+      <xs:element name="ServiceMetadataPublisherID" type="xs:string"/>
+      <xs:element name="ServiceMetadataPublisherService" type="tns:ServiceMetadataPublisherServiceType"/>
+      <xs:element name="UnauthorizedFault" type="tns:FaultType"/>
+      <xs:element name="UpdateServiceMetadataPublisherService" type="tns:ServiceMetadataPublisherServiceType"/>
+      <xs:complexType name="PageRequestType">
+        <xs:sequence>
+          <xs:element name="ServiceMetadataPublisherID" type="xs:string"/>
+          <xs:element minOccurs="0" name="NextPageIdentifier" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ParticipantIdentifierPageType">
+        <xs:sequence>
+          <xs:element maxOccurs="unbounded" minOccurs="0" ref="ns1:ParticipantIdentifier"/>
+          <xs:element minOccurs="0" name="ServiceMetadataPublisherID" type="xs:string"/>
+          <xs:element minOccurs="0" name="NextPageIdentifier" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="FaultType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="FaultMessage" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ServiceMetadataPublisherServiceForParticipantType">
+        <xs:sequence>
+          <xs:element name="ServiceMetadataPublisherID" type="xs:string"/>
+          <xs:element ref="ns1:ParticipantIdentifier"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="MigrationRecordType">
+        <xs:sequence>
+          <xs:element name="ServiceMetadataPublisherID" type="xs:string"/>
+          <xs:element ref="ns1:ParticipantIdentifier"/>
+          <xs:element name="MigrationKey" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="PublisherEndpointType">
+        <xs:sequence>
+          <xs:element name="LogicalAddress" type="xs:anyURI"/>
+          <xs:element name="PhysicalAddress" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ServiceMetadataPublisherServiceType">
+        <xs:sequence>
+          <xs:element name="PublisherEndpoint" type="tns:PublisherEndpointType"/>
+          <xs:element name="ServiceMetadataPublisherID" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="PrepareToMigrate">
+    <wsdl:part element="ns1:PrepareMigrationRecord" name="prepareMigrateIn"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="CreateListResponse"></wsdl:message>
+  <wsdl:message name="Migrate">
+    <wsdl:part element="ns1:CompleteMigrationRecord" name="migrateIn"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="MigrateResponse"></wsdl:message>
+  <wsdl:message name="DeleteList">
+    <wsdl:part element="ns1:DeleteList" name="deleteListIn"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="BadRequestFault">
+    <wsdl:part element="ns1:BadRequestFault" name="BadRequestFault"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="DeleteListResponse"></wsdl:message>
+  <wsdl:message name="UnauthorizedFault">
+    <wsdl:part element="ns1:UnauthorizedFault" name="UnauthorizedFault"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ListResponse">
+    <wsdl:part element="ns1:ParticipantIdentifierPage" name="messagePart"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="InternalErrorFault">
+    <wsdl:part element="ns1:InternalErrorFault" name="InternalErrorFault"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="Delete">
+    <wsdl:part element="ns1:DeleteParticipantIdentifier" name="messagePart"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="CreateResponse"></wsdl:message>
+  <wsdl:message name="DeleteResponse"></wsdl:message>
+  <wsdl:message name="NotFoundFault">
+    <wsdl:part element="ns1:NotFoundFault" name="NotFoundFault"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="CreateList">
+    <wsdl:part element="ns1:CreateList" name="createListIn"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="List">
+    <wsdl:part element="ns1:PageRequest" name="messagePart"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="Create">
+    <wsdl:part element="ns1:CreateParticipantIdentifier" name="messagePart"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="PrepareToMigrateResponse"></wsdl:message>
+  <wsdl:portType name="ManageBusinessIdentifierServiceSoap">
+    <wsdl:operation name="List">
+      <wsdl:input message="tns:List" name="List"></wsdl:input>
+      <wsdl:output message="tns:ListResponse" name="ListResponse"></wsdl:output>
+      <wsdl:fault message="tns:UnauthorizedFault" name="UnauthorizedFault"></wsdl:fault>
+      <wsdl:fault message="tns:InternalErrorFault" name="InternalErrorFault"></wsdl:fault>
+      <wsdl:fault message="tns:NotFoundFault" name="NotFoundFault"></wsdl:fault>
+      <wsdl:fault message="tns:BadRequestFault" name="BadRequestFault"></wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="Create">
+      <wsdl:input message="tns:Create" name="Create"></wsdl:input>
+      <wsdl:output message="tns:CreateResponse" name="CreateResponse"></wsdl:output>
+      <wsdl:fault message="tns:UnauthorizedFault" name="UnauthorizedFault"></wsdl:fault>
+      <wsdl:fault message="tns:InternalErrorFault" name="InternalErrorFault"></wsdl:fault>
+      <wsdl:fault message="tns:NotFoundFault" name="NotFoundFault"></wsdl:fault>
+      <wsdl:fault message="tns:BadRequestFault" name="BadRequestFault"></wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="PrepareToMigrate">
+      <wsdl:input message="tns:PrepareToMigrate" name="PrepareToMigrate"></wsdl:input>
+      <wsdl:output message="tns:PrepareToMigrateResponse" name="PrepareToMigrateResponse"></wsdl:output>
+      <wsdl:fault message="tns:UnauthorizedFault" name="UnauthorizedFault"></wsdl:fault>
+      <wsdl:fault message="tns:InternalErrorFault" name="InternalErrorFault"></wsdl:fault>
+      <wsdl:fault message="tns:NotFoundFault" name="NotFoundFault"></wsdl:fault>
+      <wsdl:fault message="tns:BadRequestFault" name="BadRequestFault"></wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="Migrate">
+      <wsdl:input message="tns:Migrate" name="Migrate"></wsdl:input>
+      <wsdl:output message="tns:MigrateResponse" name="MigrateResponse"></wsdl:output>
+      <wsdl:fault message="tns:UnauthorizedFault" name="UnauthorizedFault"></wsdl:fault>
+      <wsdl:fault message="tns:InternalErrorFault" name="InternalErrorFault"></wsdl:fault>
+      <wsdl:fault message="tns:NotFoundFault" name="NotFoundFault"></wsdl:fault>
+      <wsdl:fault message="tns:BadRequestFault" name="BadRequestFault"></wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteList">
+      <wsdl:input message="tns:DeleteList" name="DeleteList"></wsdl:input>
+      <wsdl:output message="tns:DeleteListResponse" name="DeleteListResponse"></wsdl:output>
+      <wsdl:fault message="tns:UnauthorizedFault" name="UnauthorizedFault"></wsdl:fault>
+      <wsdl:fault message="tns:InternalErrorFault" name="InternalErrorFault"></wsdl:fault>
+      <wsdl:fault message="tns:NotFoundFault" name="NotFoundFault"></wsdl:fault>
+      <wsdl:fault message="tns:BadRequestFault" name="BadRequestFault"></wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="CreateList">
+      <wsdl:input message="tns:CreateList" name="CreateList"></wsdl:input>
+      <wsdl:output message="tns:CreateListResponse" name="CreateListResponse"></wsdl:output>
+      <wsdl:fault message="tns:UnauthorizedFault" name="UnauthorizedFault"></wsdl:fault>
+      <wsdl:fault message="tns:InternalErrorFault" name="InternalErrorFault"></wsdl:fault>
+      <wsdl:fault message="tns:NotFoundFault" name="NotFoundFault"></wsdl:fault>
+      <wsdl:fault message="tns:BadRequestFault" name="BadRequestFault"></wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <wsdl:input message="tns:Delete" name="Delete"></wsdl:input>
+      <wsdl:output message="tns:DeleteResponse" name="DeleteResponse"></wsdl:output>
+      <wsdl:fault message="tns:UnauthorizedFault" name="UnauthorizedFault"></wsdl:fault>
+      <wsdl:fault message="tns:InternalErrorFault" name="InternalErrorFault"></wsdl:fault>
+      <wsdl:fault message="tns:NotFoundFault" name="NotFoundFault"></wsdl:fault>
+      <wsdl:fault message="tns:BadRequestFault" name="BadRequestFault"></wsdl:fault>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ManageParticipantIdentifierWSImplServiceSoapBinding" type="tns:ManageBusinessIdentifierServiceSoap">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="Create">
+      <soap:operation soapAction="http://busdox.org/serviceMetadata/ManageBusinessIdentifierService/1.0/         :createIn" style="document"/>
+      <wsdl:input name="Create">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="CreateResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnauthorizedFault">
+        <soap:fault name="UnauthorizedFault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InternalErrorFault">
+        <soap:fault name="InternalErrorFault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="NotFoundFault">
+        <soap:fault name="NotFoundFault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="BadRequestFault">
+        <soap:fault name="BadRequestFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="List">
+      <soap:operation soapAction="http://busdox.org/serviceMetadata/ManageBusinessIdentifierService/1.0/         :listIn" style="document"/>
+      <wsdl:input name="List">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="ListResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnauthorizedFault">
+        <soap:fault name="UnauthorizedFault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InternalErrorFault">
+        <soap:fault name="InternalErrorFault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="NotFoundFault">
+        <soap:fault name="NotFoundFault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="BadRequestFault">
+        <soap:fault name="BadRequestFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="PrepareToMigrate">
+      <soap:operation soapAction="http://busdox.org/serviceMetadata/ManageBusinessIdentifierService/1.0/         :prepareMigrateIn" style="document"/>
+      <wsdl:input name="PrepareToMigrate">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="PrepareToMigrateResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnauthorizedFault">
+        <soap:fault name="UnauthorizedFault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InternalErrorFault">
+        <soap:fault name="InternalErrorFault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="NotFoundFault">
+        <soap:fault name="NotFoundFault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="BadRequestFault">
+        <soap:fault name="BadRequestFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="Migrate">
+      <soap:operation soapAction="http://busdox.org/serviceMetadata/ManageBusinessIdentifierService/1.0/         :migrateIn" style="document"/>
+      <wsdl:input name="Migrate">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="MigrateResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnauthorizedFault">
+        <soap:fault name="UnauthorizedFault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InternalErrorFault">
+        <soap:fault name="InternalErrorFault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="NotFoundFault">
+        <soap:fault name="NotFoundFault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="BadRequestFault">
+        <soap:fault name="BadRequestFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteList">
+      <soap:operation soapAction="http://busdox.org/serviceMetadata/ManageBusinessIdentifierService/1.0/         :deleteListIn" style="document"/>
+      <wsdl:input name="DeleteList">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="DeleteListResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnauthorizedFault">
+        <soap:fault name="UnauthorizedFault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InternalErrorFault">
+        <soap:fault name="InternalErrorFault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="NotFoundFault">
+        <soap:fault name="NotFoundFault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="BadRequestFault">
+        <soap:fault name="BadRequestFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="CreateList">
+      <soap:operation soapAction="http://busdox.org/serviceMetadata/ManageBusinessIdentifierService/1.0/         :createListIn" style="document"/>
+      <wsdl:input name="CreateList">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="CreateListResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnauthorizedFault">
+        <soap:fault name="UnauthorizedFault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InternalErrorFault">
+        <soap:fault name="InternalErrorFault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="NotFoundFault">
+        <soap:fault name="NotFoundFault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="BadRequestFault">
+        <soap:fault name="BadRequestFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <soap:operation soapAction="http://busdox.org/serviceMetadata/ManageBusinessIdentifierService/1.0/         :deleteIn" style="document"/>
+      <wsdl:input name="Delete">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="DeleteResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnauthorizedFault">
+        <soap:fault name="UnauthorizedFault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InternalErrorFault">
+        <soap:fault name="InternalErrorFault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="NotFoundFault">
+        <soap:fault name="NotFoundFault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="BadRequestFault">
+        <soap:fault name="BadRequestFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ManageParticipantIdentifierWSImplService">
+    <wsdl:port binding="tns:ManageParticipantIdentifierWSImplServiceSoapBinding" name="ManageBusinessIdentifierServiceSoapPort">
+      <soap:address location="http://158.166.148.28:7001/edelivery-sml/manageparticipantidentifier"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>${#Project#url}/manageparticipantidentifier</con:endpoint><con:endpoint>http://localhost:10088/edelivery-sml/manageparticipantidentifier</con:endpoint><con:endpoint>http://localhost:10195/edelivery-sml/manageparticipantidentifier</con:endpoint></con:endpoints><con:operation isOneWay="false" action="http://busdox.org/serviceMetadata/ManageBusinessIdentifierService/1.0/         :createIn" name="Create" bindingOperationName="Create" type="Request-Response" inputName="Create" receivesAttachments="false" sendsAttachments="false" anonymous="optional" id="65d46d56-ad46-4c7a-be5b-efa925c12679" outputName="CreateResponse"><con:settings/><con:call id="7748e0e1-19e2-4873-9e47-11474cf681b7" name="Request-PEPPOL"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Client-Cert" value="${#Project#ClientCertSMP_PEPPOL}" xmlns="http://eviware.com/soapui/config"/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:10088/edelivery-sml/manageparticipantidentifier</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="http://busdox.org/serviceMetadata/locator/1.0/" xmlns:ns1="http://busdox.org/transport/identifiers/1.0/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ns:CreateParticipantIdentifier>
+         <ns:ServiceMetadataPublisherID>exampleSMP01</ns:ServiceMetadataPublisherID>
+         <ns1:ParticipantIdentifier scheme="iso6523-actorid-upis">9956:DE:BMIEVG</ns1:ParticipantIdentifier>
+      </ns:CreateParticipantIdentifier>
+   </soapenv:Body>
+</soapenv:Envelope>
+]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://busdox.org/serviceMetadata/ManageBusinessIdentifierService/1.0/         :createIn"/><con:wsrmConfig version="1.2"/></con:call><con:call id="10b106cd-2606-47ac-91a4-827d58acf93c" name="Request-ISA-ebCoreId-iso5236-v1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Client-Cert" value="${#Project#ClientCertSMP_ISA}" xmlns="http://eviware.com/soapui/config"/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:10088/edelivery-sml/manageparticipantidentifier</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="http://busdox.org/serviceMetadata/locator/1.0/" xmlns:ns1="http://busdox.org/transport/identifiers/1.0/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ns:CreateParticipantIdentifier>
+         <ns:ServiceMetadataPublisherID>example-isa-SMP01</ns:ServiceMetadataPublisherID>
+         <ns1:ParticipantIdentifier scheme="urn:oasis:names:tc:ebcore:partyid-type:iso6523:0088">123456</ns1:ParticipantIdentifier>
+      </ns:CreateParticipantIdentifier>
+   </soapenv:Body>
+</soapenv:Envelope>
+]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://busdox.org/serviceMetadata/ManageBusinessIdentifierService/1.0/         :createIn"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="http://busdox.org/serviceMetadata/ManageBusinessIdentifierService/1.0/         :createListIn" name="CreateList" bindingOperationName="CreateList" type="Request-Response" inputName="CreateList" receivesAttachments="false" sendsAttachments="false" anonymous="optional" id="e68aea0b-4b95-45da-8783-81eb2fa3e31b" outputName="CreateListResponse"><con:settings/></con:operation><con:operation isOneWay="false" action="http://busdox.org/serviceMetadata/ManageBusinessIdentifierService/1.0/         :deleteIn" name="Delete" bindingOperationName="Delete" type="Request-Response" inputName="Delete" receivesAttachments="false" sendsAttachments="false" anonymous="optional" id="ea8eb061-fbb0-45f4-966a-f53211741e6f" outputName="DeleteResponse"><con:settings/></con:operation><con:operation isOneWay="false" action="http://busdox.org/serviceMetadata/ManageBusinessIdentifierService/1.0/         :deleteListIn" name="DeleteList" bindingOperationName="DeleteList" type="Request-Response" inputName="DeleteList" receivesAttachments="false" sendsAttachments="false" anonymous="optional" id="c9ca998c-f180-4e02-b760-f2135ac90f6a" outputName="DeleteListResponse"><con:settings/></con:operation><con:operation isOneWay="false" action="http://busdox.org/serviceMetadata/ManageBusinessIdentifierService/1.0/         :listIn" name="List" bindingOperationName="List" type="Request-Response" inputName="List" receivesAttachments="false" sendsAttachments="false" anonymous="optional" id="a79178bd-7726-4ab5-ae80-a19759b84e52" outputName="ListResponse"><con:settings/></con:operation><con:operation isOneWay="false" action="http://busdox.org/serviceMetadata/ManageBusinessIdentifierService/1.0/         :migrateIn" name="Migrate" bindingOperationName="Migrate" type="Request-Response" inputName="Migrate" receivesAttachments="false" sendsAttachments="false" anonymous="optional" id="2bdd16df-6946-4365-828e-695d2edfad8c" outputName="MigrateResponse"><con:settings/></con:operation><con:operation isOneWay="false" action="http://busdox.org/serviceMetadata/ManageBusinessIdentifierService/1.0/         :prepareMigrateIn" name="PrepareToMigrate" bindingOperationName="PrepareToMigrate" type="Request-Response" inputName="PrepareToMigrate" receivesAttachments="false" sendsAttachments="false" anonymous="optional" id="55a0a462-ca50-41b5-bf3d-59790e7437a2" outputName="PrepareToMigrateResponse"><con:settings/></con:operation></con:interface><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="ManageServiceMetadataServiceSoap" type="wsdl" bindingName="{http://busdox.org/serviceMetadata/ManageServiceMetadataService/1.0/}ManageServiceMetadataServiceSoap" soapVersion="1_1" anonymous="optional" definition="${#Project#url}/manageservicemetadata?wsdl" id="1b79f51c-b668-4dd2-a257-37da0310a856" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://wltdgt02.cc.cec.eu.int:2061/bdmsl-sml-webapp/manageservicemetadata?wsdl"><con:part><con:url>http://wltdgt02.cc.cec.eu.int:2061/bdmsl-sml-webapp/manageservicemetadata?wsdl</con:url><con:content><![CDATA[<!--Published by JAX-WS RI at http://jax-ws.dev.java.net. RI's version is JAX-WS RI 2.2.8-b13937 svn-revision#13942.-->
+<!--Version: MPL 1.1/EUPL 1.1
+
+    The contents of this file are subject to the Mozilla Public License Version
+    1.1 (the "License"); you may not use this file except in compliance with
+    the License. You may obtain a copy of the License at:
+    http://www.mozilla.org/MPL/
+
+    Software distributed under the License is distributed on an "AS IS" basis,
+    WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+    for the specific language governing rights and limitations under the
+    License.
+
+    The Original Code is Copyright The PEPPOL project (http://www.peppol.eu)
+
+    Alternatively, the contents of this file may be used under the
+    terms of the EUPL, Version 1.1 or - as soon they will be approved
+    by the European Commission - subsequent versions of the EUPL
+    (the "Licence"); You may not use this work except in compliance
+    with the Licence.
+    You may obtain a copy of the Licence at:
+    http://joinup.ec.europa.eu/software/page/eupl/licence-eupl
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the Licence is distributed on an "AS IS" basis,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the Licence for the specific language governing permissions and
+    limitations under the Licence.
+
+    If you wish to allow use of your version of this file only
+    under the terms of the EUPL License and not to allow others to use
+    your version of this file under the MPL, indicate your decision by
+    deleting the provisions above and replace them with the notice and
+    other provisions required by the EUPL License. If you do not delete
+    the provisions above, a recipient may use your version of this file
+    under either the MPL or the EUPL License.-->
+<wsdl:definitions name="ManageServiceMetadataService" targetNamespace="http://busdox.org/serviceMetadata/ManageServiceMetadataService/1.0/" xmlns:tns="http://busdox.org/serviceMetadata/ManageServiceMetadataService/1.0/" xmlns:soap11="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:lrs="http://busdox.org/serviceMetadata/locator/1.0/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation/>
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://busdox.org/serviceMetadata/ManageServiceMetadataService/1.0/Schema/">
+      <s:import namespace="http://busdox.org/serviceMetadata/locator/1.0/" schemaLocation="http://wltdgt02.cc.cec.eu.int:2061/bdmsl-sml-webapp/manageservicemetadata?xsd=2"/>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="createIn">
+    <wsdl:documentation/>
+    <wsdl:part name="messagePart" element="lrs:CreateServiceMetadataPublisherService"/>
+  </wsdl:message>
+  <wsdl:message name="createOut">
+    <wsdl:documentation/>
+  </wsdl:message>
+  <wsdl:message name="readIn">
+    <wsdl:documentation/>
+    <wsdl:part name="messagePart" element="lrs:ReadServiceMetadataPublisherService"/>
+  </wsdl:message>
+  <wsdl:message name="readOut">
+    <wsdl:documentation/>
+    <wsdl:part name="messagePart" element="lrs:ServiceMetadataPublisherService"/>
+  </wsdl:message>
+  <wsdl:message name="updateIn">
+    <wsdl:documentation/>
+    <wsdl:part name="messagePart" element="lrs:UpdateServiceMetadataPublisherService"/>
+  </wsdl:message>
+  <wsdl:message name="updateOut">
+    <wsdl:documentation/>
+  </wsdl:message>
+  <wsdl:message name="deleteIn">
+    <wsdl:documentation/>
+    <wsdl:part name="messagePart" element="lrs:ServiceMetadataPublisherID"/>
+  </wsdl:message>
+  <wsdl:message name="deleteOut">
+    <wsdl:documentation/>
+  </wsdl:message>
+  <wsdl:message name="badRequestFault">
+    <wsdl:part name="fault" element="lrs:BadRequestFault"/>
+  </wsdl:message>
+  <wsdl:message name="internalErrorFault">
+    <wsdl:part name="fault" element="lrs:InternalErrorFault"/>
+  </wsdl:message>
+  <wsdl:message name="notFoundFault">
+    <wsdl:part name="fault" element="lrs:NotFoundFault"/>
+  </wsdl:message>
+  <wsdl:message name="unauthorizedFault">
+    <wsdl:part name="fault" element="lrs:UnauthorizedFault"/>
+  </wsdl:message>
+  <wsdl:portType name="ManageServiceMetadataServiceSoap">
+    <wsdl:documentation/>
+    <wsdl:operation name="Create">
+      <wsdl:documentation/>
+      <wsdl:input message="tns:createIn"/>
+      <wsdl:output message="tns:createOut"/>
+      <wsdl:fault message="tns:unauthorizedFault" name="UnauthorizedFault"/>
+      <wsdl:fault message="tns:internalErrorFault" name="InternalErrorFault"/>
+      <wsdl:fault message="tns:badRequestFault" name="BadRequestFault"/>
+    </wsdl:operation>
+    <wsdl:operation name="Read">
+      <wsdl:documentation/>
+      <wsdl:input message="tns:readIn"/>
+      <wsdl:output message="tns:readOut"/>
+      <wsdl:fault message="tns:notFoundFault" name="NotFoundFault"/>
+      <wsdl:fault message="tns:unauthorizedFault" name="UnauthorizedFault"/>
+      <wsdl:fault message="tns:internalErrorFault" name="InternalErrorFault"/>
+      <wsdl:fault message="tns:badRequestFault" name="BadRequestFault"/>
+    </wsdl:operation>
+    <wsdl:operation name="Update">
+      <wsdl:documentation/>
+      <wsdl:input message="tns:updateIn"/>
+      <wsdl:output message="tns:updateOut"/>
+      <wsdl:fault message="tns:notFoundFault" name="NotFoundFault"/>
+      <wsdl:fault message="tns:unauthorizedFault" name="UnauthorizedFault"/>
+      <wsdl:fault message="tns:internalErrorFault" name="InternalErrorFault"/>
+      <wsdl:fault message="tns:badRequestFault" name="BadRequestFault"/>
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <wsdl:documentation/>
+      <wsdl:input message="tns:deleteIn"/>
+      <wsdl:output message="tns:deleteOut"/>
+      <wsdl:fault message="tns:notFoundFault" name="NotFoundFault"/>
+      <wsdl:fault message="tns:unauthorizedFault" name="UnauthorizedFault"/>
+      <wsdl:fault message="tns:internalErrorFault" name="InternalErrorFault"/>
+      <wsdl:fault message="tns:badRequestFault" name="BadRequestFault"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ManageServiceMetadataServiceSoap" type="tns:ManageServiceMetadataServiceSoap">
+    <soap11:binding transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="Create">
+      <soap11:operation soapAction="http://busdox.org/serviceMetadata/ManageServiceMetadataService/1.0/:createIn" style="document"/>
+      <wsdl:input>
+        <soap11:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="UnauthorizedFault">
+        <soap:fault name="UnauthorizedFault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InternalErrorFault">
+        <soap:fault name="InternalErrorFault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="BadRequestFault">
+        <soap:fault name="BadRequestFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="Read">
+      <soap11:operation soapAction="http://busdox.org/serviceMetadata/ManageServiceMetadataService/1.0/:readIn" style="document"/>
+      <wsdl:input>
+        <soap11:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NotFoundFault">
+        <soap:fault name="NotFoundFault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="UnauthorizedFault">
+        <soap:fault name="UnauthorizedFault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InternalErrorFault">
+        <soap:fault name="InternalErrorFault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="BadRequestFault">
+        <soap:fault name="BadRequestFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="Update">
+      <soap11:operation soapAction="http://busdox.org/serviceMetadata/ManageServiceMetadataService/1.0/:updateIn" style="document"/>
+      <wsdl:input>
+        <soap11:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NotFoundFault">
+        <soap:fault name="NotFoundFault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="UnauthorizedFault">
+        <soap:fault name="UnauthorizedFault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InternalErrorFault">
+        <soap:fault name="InternalErrorFault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="BadRequestFault">
+        <soap:fault name="BadRequestFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="Delete">
+      <soap11:operation soapAction="http://busdox.org/serviceMetadata/ManageServiceMetadataService/1.0/:deleteIn" style="document"/>
+      <wsdl:input>
+        <soap11:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="NotFoundFault">
+        <soap:fault name="NotFoundFault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="UnauthorizedFault">
+        <soap:fault name="UnauthorizedFault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="InternalErrorFault">
+        <soap:fault name="InternalErrorFault" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="BadRequestFault">
+        <soap:fault name="BadRequestFault" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ManageServiceMetadataService">
+    <wsdl:port name="ManageServiceMetadataServicePort" binding="tns:ManageServiceMetadataServiceSoap">
+      <soap:address location="http://wltdgt02.cc.cec.eu.int:2061/bdmsl-sml-webapp/manageservicemetadata"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part><con:part><con:url>http://wltdgt02.cc.cec.eu.int:2061/bdmsl-sml-webapp/manageservicemetadata?xsd=2</con:url><con:content><![CDATA[<!--Published by JAX-WS RI at http://jax-ws.dev.java.net. RI's version is JAX-WS RI 2.2.8-b13937 svn-revision#13942.-->
+<!--Version: MPL 1.1/EUPL 1.1
+
+    The contents of this file are subject to the Mozilla Public License Version
+    1.1 (the "License"); you may not use this file except in compliance with
+    the License. You may obtain a copy of the License at:
+    http://www.mozilla.org/MPL/
+
+    Software distributed under the License is distributed on an "AS IS" basis,
+    WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+    for the specific language governing rights and limitations under the
+    License.
+
+    The Original Code is Copyright The PEPPOL project (http://www.peppol.eu)
+
+    Alternatively, the contents of this file may be used under the
+    terms of the EUPL, Version 1.1 or - as soon they will be approved
+    by the European Commission - subsequent versions of the EUPL
+    (the "Licence"); You may not use this work except in compliance
+    with the Licence.
+    You may obtain a copy of the Licence at:
+    http://joinup.ec.europa.eu/software/page/eupl/licence-eupl
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the Licence is distributed on an "AS IS" basis,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the Licence for the specific language governing permissions and
+    limitations under the Licence.
+
+    If you wish to allow use of your version of this file only
+    under the terms of the EUPL License and not to allow others to use
+    your version of this file under the MPL, indicate your decision by
+    deleting the provisions above and replace them with the notice and
+    other provisions required by the EUPL License. If you do not delete
+    the provisions above, a recipient may use your version of this file
+    under either the MPL or the EUPL License.-->
+<xs:schema id="ServiceMetadataPublisherService" targetNamespace="http://busdox.org/serviceMetadata/locator/1.0/" elementFormDefault="qualified" xmlns="http://busdox.org/serviceMetadata/locator/1.0/" xmlns:ids="http://busdox.org/transport/identifiers/1.0/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://wltdgt02.cc.cec.eu.int:2061/bdmsl-sml-webapp/manageservicemetadata?xsd=1" namespace="http://busdox.org/transport/identifiers/1.0/"/>
+  <xs:element name="ServiceMetadataPublisherID" type="xs:string"/>
+  <xs:element name="CreateServiceMetadataPublisherService" type="ServiceMetadataPublisherServiceType"/>
+  <xs:element name="ReadServiceMetadataPublisherService" type="ServiceMetadataPublisherServiceType"/>
+  <xs:element name="UpdateServiceMetadataPublisherService" type="ServiceMetadataPublisherServiceType"/>
+  <xs:element name="ServiceMetadataPublisherService" type="ServiceMetadataPublisherServiceType"/>
+  <xs:complexType name="ServiceMetadataPublisherServiceType">
+    <xs:sequence>
+      <xs:element name="PublisherEndpoint" type="PublisherEndpointType"/>
+      <xs:element ref="ServiceMetadataPublisherID"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PublisherEndpointType">
+    <xs:sequence>
+      <xs:element name="LogicalAddress" type="xs:anyURI"/>
+      <xs:element name="PhysicalAddress" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ServiceMetadataPublisherServiceForParticipantType">
+    <xs:sequence>
+      <xs:element ref="ServiceMetadataPublisherID"/>
+      <xs:element ref="ids:ParticipantIdentifier"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CreateParticipantIdentifier" type="ServiceMetadataPublisherServiceForParticipantType"/>
+  <xs:element name="DeleteParticipantIdentifier" type="ServiceMetadataPublisherServiceForParticipantType"/>
+  <xs:element name="ParticipantIdentifierPage" type="ParticipantIdentifierPageType"/>
+  <xs:element name="CreateList" type="ParticipantIdentifierPageType"/>
+  <xs:element name="DeleteList" type="ParticipantIdentifierPageType"/>
+  <xs:complexType name="ParticipantIdentifierPageType">
+    <xs:sequence>
+      <xs:element ref="ids:ParticipantIdentifier" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element ref="ServiceMetadataPublisherID" minOccurs="0"/>
+      <xs:element name="NextPageIdentifier" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PageRequest" type="PageRequestType"/>
+  <xs:complexType name="PageRequestType">
+    <xs:sequence>
+      <xs:element ref="ServiceMetadataPublisherID"/>
+      <xs:element name="NextPageIdentifier" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PrepareMigrationRecord" type="MigrationRecordType"/>
+  <xs:element name="CompleteMigrationRecord" type="MigrationRecordType"/>
+  <xs:complexType name="MigrationRecordType">
+    <xs:sequence>
+      <xs:element ref="ServiceMetadataPublisherID"/>
+      <xs:element ref="ids:ParticipantIdentifier"/>
+      <xs:element name="MigrationKey" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="BadRequestFault" type="FaultType"/>
+  <xs:element name="InternalErrorFault" type="FaultType"/>
+  <xs:element name="NotFoundFault" type="FaultType"/>
+  <xs:element name="UnauthorizedFault" type="FaultType"/>
+  <xs:complexType name="FaultType">
+    <xs:sequence>
+      <xs:element name="FaultMessage" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part><con:part><con:url>http://wltdgt02.cc.cec.eu.int:2061/bdmsl-sml-webapp/manageservicemetadata?xsd=1</con:url><con:content><![CDATA[<!--Published by JAX-WS RI at http://jax-ws.dev.java.net. RI's version is JAX-WS RI 2.2.8-b13937 svn-revision#13942.-->
+<!--Version: MPL 1.1/EUPL 1.1
+
+    The contents of this file are subject to the Mozilla Public License Version
+    1.1 (the "License"); you may not use this file except in compliance with
+    the License. You may obtain a copy of the License at:
+    http://www.mozilla.org/MPL/
+
+    Software distributed under the License is distributed on an "AS IS" basis,
+    WITHOUT WARRANTY OF ANY KIND, either express or implied. See the License
+    for the specific language governing rights and limitations under the
+    License.
+
+    The Original Code is Copyright The PEPPOL project (http://www.peppol.eu)
+
+    Alternatively, the contents of this file may be used under the
+    terms of the EUPL, Version 1.1 or - as soon they will be approved
+    by the European Commission - subsequent versions of the EUPL
+    (the "Licence"); You may not use this work except in compliance
+    with the Licence.
+    You may obtain a copy of the Licence at:
+    http://joinup.ec.europa.eu/software/page/eupl/licence-eupl
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the Licence is distributed on an "AS IS" basis,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the Licence for the specific language governing permissions and
+    limitations under the Licence.
+
+    If you wish to allow use of your version of this file only
+    under the terms of the EUPL License and not to allow others to use
+    your version of this file under the MPL, indicate your decision by
+    deleting the provisions above and replace them with the notice and
+    other provisions required by the EUPL License. If you do not delete
+    the provisions above, a recipient may use your version of this file
+    under either the MPL or the EUPL License.-->
+<xs:schema id="Identifiers" targetNamespace="http://busdox.org/transport/identifiers/1.0/" elementFormDefault="qualified" xmlns="http://busdox.org/transport/identifiers/1.0/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:annotation>
+    <xs:documentation>Common identifiers for WSDLs and Schemas</xs:documentation>
+  </xs:annotation>
+  <xs:element name="ParticipantIdentifier" type="ParticipantIdentifierType"/>
+  <xs:element name="DocumentIdentifier" type="DocumentIdentifierType"/>
+  <xs:element name="ProcessIdentifier" type="ProcessIdentifierType"/>
+  <xs:element name="RecipientIdentifier" type="ParticipantIdentifierType"/>
+  <xs:element name="SenderIdentifier" type="ParticipantIdentifierType"/>
+  <xs:element name="MessageIdentifier" type="MessageIdentifierType"/>
+  <xs:element name="ChannelIdentifier" type="ChannelIdentifierType"/>
+  <xs:complexType name="ParticipantIdentifierType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="scheme" type="xs:string"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="DocumentIdentifierType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="scheme" type="xs:string"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="ProcessIdentifierType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="scheme" type="xs:string"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:simpleType name="MessageIdentifierType">
+    <xs:restriction base="xs:string"/>
+  </xs:simpleType>
+  <xs:simpleType name="ChannelIdentifierType">
+    <xs:restriction base="xs:string"/>
+  </xs:simpleType>
+</xs:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:10088/edelivery-sml/manageservicemetadata</con:endpoint><con:endpoint>http://localhost:10195/edelivery-sml/manageservicemetadata</con:endpoint></con:endpoints><con:operation isOneWay="false" action="http://busdox.org/serviceMetadata/ManageServiceMetadataService/1.0/:createIn" name="Create" bindingOperationName="Create" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional" id="fe33fb78-822a-40ed-900a-f96170603c16"><con:settings/><con:call id="94c94091-37c9-4915-aadc-ce52f7d20047" name="Request-PEPPOL"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Client-Cert" value="${#Project#ClientCertSMP_PEPPOL}" xmlns="http://eviware.com/soapui/config"/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:10088/edelivery-sml/manageservicemetadata</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="http://busdox.org/serviceMetadata/locator/1.0/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ns:CreateServiceMetadataPublisherService>
+         <ns:PublisherEndpoint>
+            <ns:LogicalAddress>http://localhost/smp</ns:LogicalAddress>
+            <ns:PhysicalAddress>0.0.0.0</ns:PhysicalAddress>
+         </ns:PublisherEndpoint>
+         <ns:ServiceMetadataPublisherID>exampleSMP01</ns:ServiceMetadataPublisherID>
+      </ns:CreateServiceMetadataPublisherService>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://busdox.org/serviceMetadata/ManageServiceMetadataService/1.0/:createIn"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="http://busdox.org/serviceMetadata/ManageServiceMetadataService/1.0/:deleteIn" name="Delete" bindingOperationName="Delete" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional" id="713cfd4b-9bab-43e3-ba2a-8a8b4a8a715d"><con:settings/><con:call id="d935664a-0924-4aac-a316-95fc3deca2ef" name="Request"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Client-Cert" value="${#Project#ClientCertSMP_PEPPOL}" xmlns="http://eviware.com/soapui/config"/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:10088/edelivery-sml/manageservicemetadata</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="http://busdox.org/serviceMetadata/locator/1.0/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ns:ServiceMetadataPublisherID>exampleSMP01</ns:ServiceMetadataPublisherID>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://busdox.org/serviceMetadata/ManageServiceMetadataService/1.0/:deleteIn"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="http://busdox.org/serviceMetadata/ManageServiceMetadataService/1.0/:readIn" name="Read" bindingOperationName="Read" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional" id="6cdf8c21-76f2-4a83-ac8e-dec80bdadcb4"><con:settings/><con:call id="98891173-1c49-486d-b3ab-891991bfc7a0" name="Request"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Client-Cert" value="${#Project#ClientCertSMP_PEPPOL}" xmlns="http://eviware.com/soapui/config"/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:10088/edelivery-sml/manageservicemetadata</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="http://busdox.org/serviceMetadata/locator/1.0/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ns:ReadServiceMetadataPublisherService>
+         <ns:PublisherEndpoint>
+            <ns:LogicalAddress></ns:LogicalAddress>
+            <ns:PhysicalAddress></ns:PhysicalAddress>
+         </ns:PublisherEndpoint>
+         <ns:ServiceMetadataPublisherID>exampleSMP01</ns:ServiceMetadataPublisherID>
+      </ns:ReadServiceMetadataPublisherService>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://busdox.org/serviceMetadata/ManageServiceMetadataService/1.0/:readIn"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="http://busdox.org/serviceMetadata/ManageServiceMetadataService/1.0/:updateIn" name="Update" bindingOperationName="Update" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional" id="fc4a86c9-d8c3-4bcf-b09e-e3da83bf3fd9"><con:settings/><con:call id="badb0616-0426-4aac-aaf9-054a143b5ec4" name="Request"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:10088/edelivery-sml/manageservicemetadata</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="http://busdox.org/serviceMetadata/locator/1.0/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ns:UpdateServiceMetadataPublisherService>
+         <ns:PublisherEndpoint>
+            <ns:LogicalAddress>http://localhost</ns:LogicalAddress>
+            <ns:PhysicalAddress>0.0.0.0</ns:PhysicalAddress>
+         </ns:PublisherEndpoint>
+         <ns:ServiceMetadataPublisherID>exampleSMP01</ns:ServiceMetadataPublisherID>
+      </ns:UpdateServiceMetadataPublisherService>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://busdox.org/serviceMetadata/ManageServiceMetadataService/1.0/:updateIn"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:testSuite id="9c3c857d-5f98-4c18-b1a9-e2ded73d0219" name="FederatedDnsModelPoC"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="99a74b9e-efde-4b54-a72c-91d866f4682b" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TestCases 2.x" searchProperties="true"><con:settings/><con:testStep type="request" name="RegisterSMP SMP-POC-01" id="c65ccdc9-ba59-4fdb-8655-3c50ff1a1a4c"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>ManageServiceMetadataServiceSoap</con:interface><con:operation>Create</con:operation><con:request name="RegisterSMP SMP-POC-01" id="006c6879-f22e-498e-9cfa-73c1bcfb27d0"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Client-Cert" value="${#Project#ClientCertSMP_PEPPOL}" xmlns="http://eviware.com/soapui/config"/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:10088/edelivery-sml/manageservicemetadata</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="http://busdox.org/serviceMetadata/locator/1.0/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ns:CreateServiceMetadataPublisherService>
+         <ns:PublisherEndpoint>
+            <ns:LogicalAddress>https://smp-service-01.local/smp/</ns:LogicalAddress>
+            <ns:PhysicalAddress>127.10.0.1</ns:PhysicalAddress>
+         </ns:PublisherEndpoint>
+         <ns:ServiceMetadataPublisherID>SMP-POC-01</ns:ServiceMetadataPublisherID>
+      </ns:CreateServiceMetadataPublisherService>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="d6747e81-41c3-4f77-9cb2-f09a91622be4"/><con:assertion type="SOAP Fault Assertion" id="ba0b308f-6f44-4e48-8786-8821be068efe"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" name="RegisterParticipant 0088:1234567890" id="c7e40717-bb19-469b-bcd7-e203c3559591"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>ManageParticipantIdentifierWSImplServiceSoapBinding</con:interface><con:operation>Create</con:operation><con:request name="RegisterParticipant 0088:1234567890" id="9c0d451a-f66b-424f-93ef-597800a89fc2"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Client-Cert" value="${#Project#ClientCertSMP_PEPPOL}" xmlns="http://eviware.com/soapui/config"/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:10088/edelivery-sml/manageparticipantidentifier</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="http://busdox.org/serviceMetadata/locator/1.0/" xmlns:ns1="http://busdox.org/transport/identifiers/1.0/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ns:CreateParticipantIdentifier>
+         <ns:ServiceMetadataPublisherID>SMP-POC-01</ns:ServiceMetadataPublisherID>
+         <ns1:ParticipantIdentifier scheme="iso6523-actorid-upis">0088:1234567890</ns1:ParticipantIdentifier>
+      </ns:CreateParticipantIdentifier>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="98ec9eaa-2ec8-4a05-aae1-60ca02dce346"/><con:assertion type="SOAP Fault Assertion" id="9fcf9a66-d354-465d-a140-30e88e1b7a6c"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" name="RegisterInvalidParticipant 9914:1234567890" id="f06dcd87-49a3-497b-8c91-84da24104078"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>ManageParticipantIdentifierWSImplServiceSoapBinding</con:interface><con:operation>Create</con:operation><con:request name="RegisterInvalidParticipant 9914:1234567890" id="9c0d451a-f66b-424f-93ef-597800a89fc2"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Client-Cert" value="${#Project#ClientCertSMP_PEPPOL}" xmlns="http://eviware.com/soapui/config"/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:10088/edelivery-sml/manageparticipantidentifier</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="http://busdox.org/serviceMetadata/locator/1.0/" xmlns:ns1="http://busdox.org/transport/identifiers/1.0/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ns:CreateParticipantIdentifier>
+         <ns:ServiceMetadataPublisherID>SMP-POC-01</ns:ServiceMetadataPublisherID>
+         <ns1:ParticipantIdentifier 
+         scheme="iso6523-actorid-upis">9914:1234567890</ns1:ParticipantIdentifier>
+      </ns:CreateParticipantIdentifier>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="98ec9eaa-2ec8-4a05-aae1-60ca02dce346"/><con:assertion type="Not SOAP Fault Assertion" id="999eca46-c464-4dbe-b31b-f00cb1beaf8d" name="SOAP Fault"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" name="UpdateSMP" id="a8107209-d05b-45f5-80be-fa8ce59aff5f"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>ManageServiceMetadataServiceSoap</con:interface><con:operation>Update</con:operation><con:request name="UpdateSMP" id="d56c40b1-fa53-4a89-8b38-eb80c127ccef"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Client-Cert" value="${#Project#ClientCertSMP_PEPPOL}" xmlns="http://eviware.com/soapui/config"/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:10088/edelivery-sml/manageservicemetadata</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="http://busdox.org/serviceMetadata/locator/1.0/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ns:UpdateServiceMetadataPublisherService>
+         <ns:PublisherEndpoint>
+            <ns:LogicalAddress>https://smp-service-01-updated.local/smp/</ns:LogicalAddress>
+            <ns:PhysicalAddress>127.10.0.2</ns:PhysicalAddress>
+         </ns:PublisherEndpoint>
+         <ns:ServiceMetadataPublisherID>SMP-POC-01</ns:ServiceMetadataPublisherID>
+      </ns:UpdateServiceMetadataPublisherService>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="13a4580a-e4a5-49fc-977b-856c0d30cfa1"/><con:assertion type="SOAP Fault Assertion" id="2da89df9-5423-4fad-9db2-ac339c25e036"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" name="DeleteParticipant 0088:1234567890" id="bf3d5927-1177-4017-a61c-58b3e5703a79"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>ManageParticipantIdentifierWSImplServiceSoapBinding</con:interface><con:operation>Delete</con:operation><con:request name="DeleteParticipant 0088:1234567890" id="305e808c-63df-4803-8a64-8198d71e817e"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Client-Cert" value="${#Project#ClientCertSMP_PEPPOL}" xmlns="http://eviware.com/soapui/config"/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:10088/edelivery-sml/manageparticipantidentifier</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="http://busdox.org/serviceMetadata/locator/1.0/" xmlns:ns1="http://busdox.org/transport/identifiers/1.0/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ns:DeleteParticipantIdentifier>
+         <ns:ServiceMetadataPublisherID>SMP-POC-01</ns:ServiceMetadataPublisherID>
+         <ns1:ParticipantIdentifier 
+         scheme="iso6523-actorid-upis">0088:1234567890</ns1:ParticipantIdentifier>
+      </ns:DeleteParticipantIdentifier>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="a16b87af-b868-49d7-89b3-cddf4b669bc6"/><con:assertion type="SOAP Fault Assertion" id="eba25fa4-902e-40e5-b51e-3a0936a6101a"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" name="DeleteSMP SMP-POC-01" id="e756f69c-94a9-4123-b58b-760df88e06b4"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>ManageServiceMetadataServiceSoap</con:interface><con:operation>Delete</con:operation><con:request name="DeleteSMP SMP-POC-01" id="f66cbb08-9091-4b93-a399-12b113b8b932"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Client-Cert" value="${#Project#ClientCertSMP_PEPPOL}" xmlns="http://eviware.com/soapui/config"/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:10088/edelivery-sml/manageservicemetadata</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="http://busdox.org/serviceMetadata/locator/1.0/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ns:ServiceMetadataPublisherID>SMP-POC-01</ns:ServiceMetadataPublisherID>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="3cbf4f42-16fa-4b5d-966b-c78b4f873e1c"/><con:assertion type="SOAP Fault Assertion" id="32dcaed7-862b-4578-816f-39d001289bac"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:testCase id="57039c72-8d1d-4b62-a160-ccab0ee0f0eb" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="TestCases 3.x" searchProperties="true"><con:settings/><con:testStep type="request" name="RegisterSMP SMP-POC-02" id="1a05083a-e929-4f07-b504-f49a84ebe316"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>ManageServiceMetadataServiceSoap</con:interface><con:operation>Create</con:operation><con:request name="RegisterSMP SMP-POC-02" id="006c6879-f22e-498e-9cfa-73c1bcfb27d0"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Client-Cert" value="${#Project#ClientCertSMP_PEPPOL}" xmlns="http://eviware.com/soapui/config"/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:10195/edelivery-sml/manageservicemetadata</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="http://busdox.org/serviceMetadata/locator/1.0/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ns:CreateServiceMetadataPublisherService>
+         <ns:PublisherEndpoint>
+            <ns:LogicalAddress>https://smp-service-02.local/smp/</ns:LogicalAddress>
+            <ns:PhysicalAddress>127.20.0.2</ns:PhysicalAddress>
+         </ns:PublisherEndpoint>
+         <ns:ServiceMetadataPublisherID>SMP-POC-02</ns:ServiceMetadataPublisherID>
+      </ns:CreateServiceMetadataPublisherService>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="d6747e81-41c3-4f77-9cb2-f09a91622be4"/><con:assertion type="SOAP Fault Assertion" id="ba0b308f-6f44-4e48-8786-8821be068efe"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" name="RegisterParticipant 0195:1234567890" id="e85a98ee-adb6-44ea-bc39-6ba919621a3c"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>ManageParticipantIdentifierWSImplServiceSoapBinding</con:interface><con:operation>Create</con:operation><con:request name="RegisterParticipant 0195:1234567890" id="9c0d451a-f66b-424f-93ef-597800a89fc2"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Client-Cert" value="${#Project#ClientCertSMP_PEPPOL}" xmlns="http://eviware.com/soapui/config"/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:10195/edelivery-sml/manageparticipantidentifier</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="http://busdox.org/serviceMetadata/locator/1.0/" xmlns:ns1="http://busdox.org/transport/identifiers/1.0/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ns:CreateParticipantIdentifier>
+         <ns:ServiceMetadataPublisherID>SMP-POC-02</ns:ServiceMetadataPublisherID>
+         <ns1:ParticipantIdentifier scheme="iso6523-actorid-upis">0195:1234567890</ns1:ParticipantIdentifier>
+      </ns:CreateParticipantIdentifier>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="98ec9eaa-2ec8-4a05-aae1-60ca02dce346"/><con:assertion type="SOAP Fault Assertion" id="9fcf9a66-d354-465d-a140-30e88e1b7a6c"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" name="RegisterInvalidParticipant 9914:1234567890" id="7992357e-af57-4908-9138-03d93b546d29"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>ManageParticipantIdentifierWSImplServiceSoapBinding</con:interface><con:operation>Create</con:operation><con:request name="RegisterInvalidParticipant 9914:1234567890" id="9c0d451a-f66b-424f-93ef-597800a89fc2"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Client-Cert" value="${#Project#ClientCertSMP_PEPPOL}" xmlns="http://eviware.com/soapui/config"/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:10195/edelivery-sml/manageparticipantidentifier</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="http://busdox.org/serviceMetadata/locator/1.0/" xmlns:ns1="http://busdox.org/transport/identifiers/1.0/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ns:CreateParticipantIdentifier>
+         <ns:ServiceMetadataPublisherID>SMP-POC-02</ns:ServiceMetadataPublisherID>
+         <ns1:ParticipantIdentifier 
+         scheme="iso6523-actorid-upis">9914:1234567890</ns1:ParticipantIdentifier>
+      </ns:CreateParticipantIdentifier>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="98ec9eaa-2ec8-4a05-aae1-60ca02dce346"/><con:assertion type="Not SOAP Fault Assertion" id="999eca46-c464-4dbe-b31b-f00cb1beaf8d" name="SOAP Fault"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" name="UpdateSMP" id="71d1715f-fa3d-47cd-b1a6-5c8c20c82a3e"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>ManageServiceMetadataServiceSoap</con:interface><con:operation>Update</con:operation><con:request name="UpdateSMP" id="d56c40b1-fa53-4a89-8b38-eb80c127ccef"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Client-Cert" value="${#Project#ClientCertSMP_PEPPOL}" xmlns="http://eviware.com/soapui/config"/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:10195/edelivery-sml/manageservicemetadata</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="http://busdox.org/serviceMetadata/locator/1.0/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ns:UpdateServiceMetadataPublisherService>
+         <ns:PublisherEndpoint>
+            <ns:LogicalAddress>https://smp-service-02-updated.local/smp/</ns:LogicalAddress>
+            <ns:PhysicalAddress>127.20.0.2</ns:PhysicalAddress>
+         </ns:PublisherEndpoint>
+         <ns:ServiceMetadataPublisherID>SMP-POC-021</ns:ServiceMetadataPublisherID>
+      </ns:UpdateServiceMetadataPublisherService>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="13a4580a-e4a5-49fc-977b-856c0d30cfa1"/><con:assertion type="SOAP Fault Assertion" id="2da89df9-5423-4fad-9db2-ac339c25e036"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" name="DeleteParticipant 0195:1234567890" id="632ab6c2-c00a-4c87-8226-a46e1a91d268"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>ManageParticipantIdentifierWSImplServiceSoapBinding</con:interface><con:operation>Delete</con:operation><con:request name="DeleteParticipant 0195:1234567890" id="305e808c-63df-4803-8a64-8198d71e817e"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Client-Cert" value="${#Project#ClientCertSMP_PEPPOL}" xmlns="http://eviware.com/soapui/config"/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:10195/edelivery-sml/manageparticipantidentifier</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="http://busdox.org/serviceMetadata/locator/1.0/" xmlns:ns1="http://busdox.org/transport/identifiers/1.0/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ns:DeleteParticipantIdentifier>
+         <ns:ServiceMetadataPublisherID>SMP-POC-02</ns:ServiceMetadataPublisherID>
+         <ns1:ParticipantIdentifier 
+         scheme="iso6523-actorid-upis">0195:1234567890</ns1:ParticipantIdentifier>
+      </ns:DeleteParticipantIdentifier>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="a16b87af-b868-49d7-89b3-cddf4b669bc6"/><con:assertion type="SOAP Fault Assertion" id="eba25fa4-902e-40e5-b51e-3a0936a6101a"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" name="DeleteSMP SMP-POC-02" id="45eafb51-a91d-4107-a11d-36038f0edf93"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>ManageServiceMetadataServiceSoap</con:interface><con:operation>Delete</con:operation><con:request name="DeleteSMP SMP-POC-02" id="f66cbb08-9091-4b93-a399-12b113b8b932"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;entry key="Client-Cert" value="${#Project#ClientCertSMP_PEPPOL}" xmlns="http://eviware.com/soapui/config"/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:10195/edelivery-sml/manageservicemetadata</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ns="http://busdox.org/serviceMetadata/locator/1.0/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ns:ServiceMetadataPublisherID>SMP-POC-02</ns:ServiceMetadataPublisherID>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" id="3cbf4f42-16fa-4b5d-966b-c78b4f873e1c"/><con:assertion type="SOAP Fault Assertion" id="32dcaed7-862b-4578-816f-39d001289bac"/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:requirements/><con:properties><con:property><con:name>url</con:name><con:value>http://localhost:10088/edelivery-sml/</con:value></con:property><con:property><con:name>ClientCertSMP_PEPPOL</con:name><con:value>sno=0004&amp;subject=EMAILADDRESS=test.smp@te11st.be, CN=SMP_TEST,OU=B4,O=DIGIT,C=BE&amp;validfrom=Jun 1 10:37:53 2024 CEST&amp;validto=Jun 1 10:37:53 2035 CEST&amp;issuer=EMAILADDRESS=root@test.be,CN=Test intermediate Issuer 01,OU=eDelivery,O=DIGIT,C=BE</con:value></con:property></con:properties><con:wssContainer/><con:databaseConnectionContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/><con:reporting><con:xmlTemplates/><con:parameters/></con:reporting><con:sensitiveInformation/><con:authRepository/></con:soapui-project>

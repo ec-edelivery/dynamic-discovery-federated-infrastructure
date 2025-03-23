@@ -22,7 +22,7 @@ insert into bdmsl_configuration(property, value, description, created_on, last_u
 
 
 insert into bdmsl_subdomain(subdomain_id, subdomain_name,dns_zone, description, participant_id_regexp, dns_record_types, smp_url_schemas, created_on, last_updated_on) values
-(1, '${ECOSYSTEM_NAME}', '${ECOSYSTEM_DNS_ZONE}','Domain for ${ECOSYSTEM_NAME}', '^((([0-9]{4}|990[1-9]|99[1-5][0-9]|0184|019[1-2]):).*)$','all','all', NOW(), NOW());
+(1, '${DNS_DOMAIN}', '${DNS_ZONE}','Domain for ${DNS_DOMAIN}', '${PARTICIPANT_ID_REGEXP}','naptr','all', NOW(), NOW());
 
 
 INSERT INTO bdmsl_certificate_domain(certificate, crl_url,  is_root_ca, fk_subdomain_id, created_on, last_updated_on, is_admin) VALUES

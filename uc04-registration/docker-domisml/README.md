@@ -20,8 +20,7 @@ or with the filepath to the Dockerfile if is build from any other directory:
     # build with docker compose
     docker compose -f uc04-registration/docker-domisml/docker-compose.yml build
     # the docker build variant
-    docker build -t domisml:4.3.1 -f uc04-registration/docker-domisml/Dockerfile uc04-registration/docker-domisml/  
-
+    docker build -t domisml:4.3.1 -f uc04-registration/docker-domisml/Dockerfile uc04-registration/docker-domisml/
 
 
 # How to run
@@ -38,8 +37,9 @@ Purpose of this docker image is to provide a quick way to start the DomiSML appl
  
 - `DNS_ENABLED` - Enable DNS integration. Default value is `false`.
 - `DNS_HOSTNAME` - The hostname of the DomiSML application. Default value is `localhost`.
-- `ECOSYSTEM_NAME` - The name of the ecosystem. Default value is `ecosystem`.
-- `ECOSYSTEM_DNS_ZONE` - The version of the ecosystem. Default value is `1.0`.
+- `DNS_DOMAIN` - The name of the ecosystem. Default value is `ecosystem`.
+- `DNS_ZONE` - The version of the ecosystem. Default value is `1.0`.
+- `PARTICIPANT_ID_REGEXP` - The regular expression for validation of participant identifier. Default value is any identifier: `^.*$`.
 - `MYSQL_ROOT_PASSWORD` - The password for the root user of the MySQL database. Default value is `changeme`.
 - `DB_USER` - The DomiSML database user. Default value is `sml`.
 - `DB_USER_PASSWORD` - The DomiSML database user password. Default value is `changeme`.

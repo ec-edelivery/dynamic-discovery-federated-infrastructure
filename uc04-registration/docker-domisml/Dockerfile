@@ -31,44 +31,37 @@ RUN apt-get update && \
         curl \
         vim \
         haveged && \
-   rm -rf /var/lib/apt/lists/*
-# create bdmsl user
-RUN mkdir -p "${DOMISML_HOME}"
-RUN mkdir -p "${DOMISML_HOME}/config"
-RUN mkdir -p "${DOMISML_HOME}/logs"
-RUN mkdir -p "${DOMISML_HOME}/init"
-RUN groupadd -g 1001 sml
-RUN useradd -s /bin/bash -u 1001 -g sml -d ${DOMISML_HOME} sml
-RUN usermod -a -G mysql sml
-# install
-RUN wget -O ${DOMISML_HOME}/domisml-springboot-exec.jar "https://ec.europa.eu/digital-building-blocks/artifact/repository/eDelivery/eu/europa/ec/bdmsl/bdmsl-springboot/${DOMISML_VERSION}/bdmsl-springboot-${DOMISML_VERSION}-exec.jar"
-RUN sha512sum ${DOMISML_HOME}/domisml-springboot-exec.jar | grep $DOMISML_SHA512
-# get database ddl scripts
-RUN wget -O /tmp/domisml-setup.zip "https://ec.europa.eu/digital-building-blocks/artifact/repository/eDelivery/eu/europa/ec/bdmsl/bdmsl-webapp/${DOMISML_VERSION}/bdmsl-webapp-${DOMISML_VERSION}-setup.zip"
-RUN sha512sum /tmp/domisml-setup.zip | grep $DOMISML_SETUP_SHA512
-
-RUN cd /tmp
-RUN jar -xf /tmp/domisml-setup.zip
-RUN mv  bdmsl-webapp-*/*.* ${DOMISML_HOME}/init/
-RUN mv  bdmsl-webapp-*/database-scripts ${DOMISML_HOME}/init
-RUN rm -rf bdmsl-webapp-*/
-
-
-# configure  mysql
-RUN echo "[mysqld]" >> /etc/mysql/my.cnf  && \
-   echo "lower_case_table_names=1" >> /etc/mysql/my.cnf  && \
-   echo "collation-server=utf8_unicode_ci" >> /etc/mysql/my.cnf  && \
-   echo "init-connect='SET NAMES utf8'" >> /etc/mysql/my.cnf  && \
-   echo "character-set-server=utf8" >> /etc/mysql/my.cnf && \
-   echo "default_authentication_plugin=mysql_native_password" >> /etc/mysql/my.cnf  && \
-   sed -i -e "s/127.0.0.1/0.0.0.0/g" /etc/mysql/mysql.conf.d/mysqld.cnf
-
-
-
-RUN mkdir -p "${DATA_DIR}"
-RUN chown -R sml:sml ${DOMISML_HOME}
-RUN chown -R sml:sml ${DATA_DIR}
-
+   rm -rf /var/lib/apt/lists/* && \
+    # create bdmsl user
+    mkdir -p "${DOMISML_HOME}" && \
+    mkdir -p "${DOMISML_HOME}/config" && \
+    mkdir -p "${DOMISML_HOME}/logs" && \
+    mkdir -p "${DOMISML_HOME}/init" && \
+    mkdir -p "${DATA_DIR}" && \
+    groupadd -g 1001 sml && \
+    useradd -s /bin/bash -u 1001 -g sml -d ${DOMISML_HOME} sml && \
+    usermod -a -G mysql sml && \
+    chown -R sml:sml ${DOMISML_HOME} && \
+    chown -R sml:sml ${DATA_DIR} && \
+    # install
+    wget -O ${DOMISML_HOME}/domisml-springboot-exec.jar "https://ec.europa.eu/digital-building-blocks/artifact/repository/eDelivery/eu/europa/ec/bdmsl/bdmsl-springboot/${DOMISML_VERSION}/bdmsl-springboot-${DOMISML_VERSION}-exec.jar" && \
+    sha512sum ${DOMISML_HOME}/domisml-springboot-exec.jar | grep $DOMISML_SHA512 && \
+    # get database ddl scripts
+    wget -O /tmp/domisml-setup.zip "https://ec.europa.eu/digital-building-blocks/artifact/repository/eDelivery/eu/europa/ec/bdmsl/bdmsl-webapp/${DOMISML_VERSION}/bdmsl-webapp-${DOMISML_VERSION}-setup.zip" && \
+    sha512sum /tmp/domisml-setup.zip | grep $DOMISML_SETUP_SHA512 && \
+    cd /tmp && \
+    jar -xf /tmp/domisml-setup.zip && \
+    mv  bdmsl-webapp-*/*.* ${DOMISML_HOME}/init/ && \
+    mv  bdmsl-webapp-*/database-scripts ${DOMISML_HOME}/init && \
+    rm -rf bdmsl-webapp-*/ && \
+    # configure  mysql
+    echo "[mysqld]" >> /etc/mysql/my.cnf  && \
+    echo "lower_case_table_names=1" >> /etc/mysql/my.cnf  && \
+    echo "collation-server=utf8_unicode_ci" >> /etc/mysql/my.cnf  && \
+    echo "init-connect='SET NAMES utf8'" >> /etc/mysql/my.cnf  && \
+    echo "character-set-server=utf8" >> /etc/mysql/my.cnf && \
+    echo "default_authentication_plugin=mysql_native_password" >> /etc/mysql/my.cnf  && \
+    sed -i -e "s/127.0.0.1/0.0.0.0/g" /etc/mysql/mysql.conf.d/mysqld.cnf
 
 # deploy application
 COPY resources/entrypoint.sh /sbin/entrypoint.sh

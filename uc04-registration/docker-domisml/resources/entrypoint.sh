@@ -45,8 +45,9 @@ prepareIniDatabaseData() {
   CONFIGURATION_FOLDER=${CONFIGURATION_FOLDER:-"${DOMISML_DATA_DIR}/config"}
   DNS_HOSTNAME=${DNS_HOSTNAME:-"localhost"}
   DNS_ENABLED=${DNS_ENABLED:-"false"}
-  ECOSYSTEM_NAME=${ECOSYSTEM_NAME:-"ecosystem"}
-  ECOSYSTEM_DNS_ZONE=${ECOSYSTEM_DNS_ZONE:-"ecosystem.local"}
+  DNS_DOMAIN=${DNS_DOMAIN:-"ecosystem"}
+  DNS_ZONE=${DNS_ZONE:-"ecosystem.local"}
+  PARTICIPANT_ID_REGEXP=${PARTICIPANT_ID_REGEXP:-"^.*$"}
   mkdir -p ${DOMISML_INIT_DB_DIR}
   echo "[INFO] Create data script from template"
   eval "echo \"$(cat ${DOMISML_HOME}/init/database-scripts/template-data.sql)\"" > ${DOMISML_INIT_DB_DIR}/02-init-data.sql

@@ -15,8 +15,9 @@ services:
     environment:
       - DNS_ENABLED=true
       - DNS_HOSTNAME=ecosystem-top-domain
-      - ECOSYSTEM_NAME=0088.iso6523.participants.ecosystem.org
-      - ECOSYSTEM_DNS_ZONE=ecosystem.org
+      - DNS_DOMAIN=0088.iso6523.participants.ecosystem.org
+      - DNS_ZONE=ecosystem.org
+      - PARTICIPANT_ID_REGEXP=^(?!0195:|9914:)[0-9]{4}:.*$
     ports:
       - 10088:8080
     networks:
@@ -32,8 +33,9 @@ services:
     environment:
       - DNS_ENABLED=true
       - DNS_HOSTNAME=invoice-sg
-      - ECOSYSTEM_NAME=0195.iso6523.participants.ecosystem.org
-      - ECOSYSTEM_DNS_ZONE=0195.iso6523.participants.ecosystem.org
+      - DNS_DOMAIN=0195.iso6523.participants.ecosystem.org
+      - DNS_ZONE=0195.iso6523.participants.ecosystem.org
+      - PARTICIPANT_ID_REGEXP=^0195:.*$
     ports:
       - 10195:8080
     networks:
@@ -49,8 +51,9 @@ services:
     environment:
       - DNS_ENABLED=true
       - DNS_HOSTNAME=vat-num-at
-      - ECOSYSTEM_NAME=9914.iso6523.g2b.at
-      - ECOSYSTEM_DNS_ZONE=9914.iso6523.g2b.at
+      - DNS_DOMAIN=9914.iso6523.g2b.at
+      - DNS_ZONE=9914.iso6523.g2b.at
+      - PARTICIPANT_ID_REGEXP=^9914:.*$
     ports:
       - 19914:8080
     networks:
