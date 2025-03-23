@@ -15,6 +15,15 @@ Then build image with command:
 
     docker build -t domisml:4.3.1 .
 
+or with the filepath to the Dockerfile if is build from any other directory:
+
+    # build with docker compose
+    docker compose -f uc04-registration/docker-domisml/docker-compose.yml build
+    # the docker build variant
+    docker build -t domisml:4.3.1 -f uc04-registration/docker-domisml/Dockerfile uc04-registration/docker-domisml/  
+
+
+
 # How to run
 
 Tu run image execute command:

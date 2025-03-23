@@ -23,10 +23,10 @@ component (SMP), Dynamic discovery client (DDC), and access point (AP).
 
 Here is the list of addition use-cases:
 
-- [Transition of the DNS domains](uc-transition/README.md). The use cases
-  demonstrates the transition of the DNS domain from 'incubator DNS server to new federated DNS server(s). The extension subproject of the PoC environment is located in folder 'uc-transition'.
-- [Dynamic discovery client](dynamic-discovery-client/README.md). The use cases demonstrates the DNS lookup query for the participant identifiers with the current Dynamic Discovery Client (DDC) implementation. 
-- 
+- [Dynamic discovery client](uc02-dynamic-discovery-client/README.md). The use cases demonstrates the DNS lookup query for the participant identifiers with the current Dynamic Discovery Client (DDC) implementation.
+- [Transition of the DNS domains](uc03-transition/README.md). The use cases
+  demonstrates the transition of the DNS domain from 'incubator DNS server to new federated DNS server(s). The extension subproject of the PoC environment is located in folder 'uc4-transition'.
+- [Registration SMPs with participants](uc04-registration/README.md). The use cases demonstrates the registration of the participants in the federated environment. The extension subproject of the PoC environment is located in folder 'uc4-registration'.
 
 
 ## Environment assumptions
@@ -38,8 +38,19 @@ The top-level domain represents the message exchange network within the **digita
 For example, in the PEPPOL network for e-invoice exchange it could  be **peppol.org** or
 in the messaging network for european eHealth record exchange it could be **ehealth.eu**, etc. 
 
-Because of the generic nature of the environment the example top-level domain, uses the 
-top-level domain **ecosystem.org**  as example.
+Because of the generic nature of the environment the provided examples, uses the 
+top-level domain: **ecosystem.org**  as example.
+
+In the test environment, the identifier are based on  [ISO6523](https://en.wikipedia.org/wiki/ISO/IEC_6523), leading to the DNS infrastructure being divided into multiple subdomains based on ISO6523 ICD codes. 
+
+It is important to note that ISO6523 ICD codes are merely used as an example in the PoC environment, which can also be structured according to other cataloging schemes.
+
+This setup facilitates the testing of various subdomain delegation methods.
+  - subdomain **0088** is served from the top-level domain DNS server
+  - subdomain **0195** is delegated (using NS records) to the external DNS server
+  - subdomain **9914** is redirected (using DNAME records) to the external DNS server
+
+![PoC DNS Environment](./images/generated-images/dynamic-discovery-infrastructure-dns-01.svg "PoC DNS Environment")
 
 ### Dynamic Discovery Client
 
@@ -70,22 +81,24 @@ The DNS lookup query is constructed as follows:
 NOTE: For the presentation of the rules the  augmented Backus–Naur  (ABNF) for 
 Syntax is used (See the: [RFC 5234](https://www.ietf.org/rfc/rfc5234.txt).
 
-    <DNS-QUERY> ::= <hash-over-(part-of?)identifier> "." <scheme-in-catalog> "." <catalog-identifier> "." <top-level-domain>
+    <DNS-QUERY> ::= <hash-over-(part-of?)identifier> ["." <scheme-part-of-identifier>] "." <scheme-in-catalog> "." <catalog-identifier> "." <top-level-domain>
 
     <hash-over-(part-of?)identifier> ::= 1*63(ALPHA / DIGIT )
+    <scheme-part-of-identifier> ::= 1*63(ALPHA / DIGIT / "-")
     <scheme-in-catalog> ::= 4DIGIT
     <catalog-identifier> ::= 1*63(ALPHA / DIGIT / "-")
     <top-level-domain> ::= 1*63(ALPHA / DIGIT / "-")    
 
 Example
 
-    ABCDE.0195.iso6523.participants.ecosystem.org
+    ABCDE.iso6523-actorid-upis.0195.iso6523.participants.ecosystem.org
 
 Where in the example above:
 
 - **hash-over-(part-of?)identifier**: is ‘ABCDE’ (how the hash is calculated is out of scope in the initial  PoC stage, but it will be important part of the future steps)
+- **scheme-part-of-identifier**: is ‘iso6523-actorid-upis’. This part is optional and other formats of the participant identifier can mandate scheme is included in the hash value (e.g. Oasis ebCore PartyId type)
 - **scheme-in-catalog**: Scheme in Catalog is ‘0195’
-- **catalog-identifier**: Catalog Identifier is ‘iso6523’
+- **catalog-identifier**: Catalog Identifier is ‘iso6523’ (One variation of the tests will use the scheme part of identifier: e.g. ‘iso6523-actorid-upis’)
 - **top-level-domain**: Top-Level Domain is ‘participants.ecosystem.org’
 
 

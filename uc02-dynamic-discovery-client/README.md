@@ -11,7 +11,7 @@ The purpose of the following use cases is to validate whether existing DDC sampl
 
 After adopting the federated DNS model, the top DNS domain will be a single domain, such as `participants.ecosystem.org`. The partitioning/DNS subdomains will be managed automatically by the DDC based on the participant identifier and ecosystem DNS query rules. However, this is not yet the case in the following use cases.
 
-In the following use cases, we will use the existing [eDelivery DDC example implementation](https://ec.europa.eu/digital-building-blocks/code/projects/EDELIVERY/repos/dynamic-discovery-client/browse) to find the participant's capability document location via the new DNS infrastructure. The eDelivery DDC employs the [dnsjava library](https://github.com/dnsjava/dnsjava) for DNS resolution. Consequently, all other DDC implementations based on the dnsjava library should yield the same results.
+In the following use cases, we will use the existing [eDelivery DDC example implementation](https://ec.europa.eu/digital-building-blocks/code/projects/EDELIVERY/repos/uc02-dynamic-discovery-client/browse) to find the participant's capability document location via the new DNS infrastructure. The eDelivery DDC employs the [dnsjava library](https://github.com/dnsjava/dnsjava) for DNS resolution. Consequently, all other DDC implementations based on the dnsjava library should yield the same results.
 
 ### Participant identifiers
 
@@ -211,7 +211,7 @@ The **'DNAME Delegated' DNS Server** DNS the following test participant/SMP DNS 
 - For the participant identifiers: **urn:oasis:names:tc:ebcore:partyid-type:iso6523:9914:test02** and **iso6523-actorid-upis::9914:test02** the following CNAME records pointing to SMP's NAPTR record domain:  `GBDLL6QCELDM5JLQCWGP5CONIVXDP6BV2NZWWWI6BY5SFMNUYN7A.9914.iso6523.g2b.at.` and
   `57PSJISUOE7GR4UXE2M7IBKNLQV5CZS55QOIHAH3G67JVDOKTY3A.iso6523-actorid-upis.9914.iso6523.g2b.at.`
 
-All NAPTR records are directed to the 'SMP URL' where the capability documents are hosted. In this use case, GitHub serves as the SMP. This demonstrates that the SMP approach is also adaptable to the configuration-as-code paradigm commonly used in microservice environments. The "GitHub SMP" address is: `https://raw.githubusercontent.com/ec-edelivery/dynamic-discovery-federated-infrastructure/refs/heads/main/dynamic-discovery-client/smp-resources/`
+All NAPTR records are directed to the 'SMP URL' where the capability documents are hosted. In this use case, GitHub serves as the SMP. This demonstrates that the SMP approach is also adaptable to the configuration-as-code paradigm commonly used in microservice environments. The "GitHub SMP" address is: `https://raw.githubusercontent.com/ec-edelivery/dynamic-discovery-federated-infrastructure/refs/heads/main/uc02-dynamic-discovery-client/smp-resources/`
 
 
 ### Prerequisites
@@ -253,7 +253,7 @@ Response:
     Resolving DNS for participant: [ParticipantIdentifier{identifier='0088:test01', scheme='iso6523-actorid-upis'}] and domain: [0088.iso6523.participants.ecosystem.org]
 
     NAPTR query: LMHBM64R2VOF2IJIOGG2FXVWGYE42GF3CT7UF6EMOEWDS7ID3I2A.iso6523-actorid-upis.0088.iso6523.participants.ecosystem.org
-    LMHBM64R2VOF2IJIOGG2FXVWGYE42GF3CT7UF6EMOEWDS7ID3I2A.iso6523-actorid-upis.0088.iso6523.participants.ecosystem.org.      60      IN      NAPTR   100 10 "U" "Meta:SMP" "!.*!https://raw.githubusercontent.com/ec-edelivery/dynamic-discovery-federated-infrastructure/refs/heads/main/dynamic-discovery-client/smp-resources/!" .
+    LMHBM64R2VOF2IJIOGG2FXVWGYE42GF3CT7UF6EMOEWDS7ID3I2A.iso6523-actorid-upis.0088.iso6523.participants.ecosystem.org.      60      IN      NAPTR   100 10 "U" "Meta:SMP" "!.*!https://raw.githubusercontent.com/ec-edelivery/dynamic-discovery-federated-infrastructure/refs/heads/main/uc02-dynamic-discovery-client/smp-resources/!" .
 
 Fetching the capability document:
 Command (note: the ddc parameter -dns was changed to -get and the -o parameter was added to define the output file):
@@ -278,7 +278,7 @@ Response:
     Resolving DNS for participant: [ParticipantIdentifier{identifier='test01', scheme='urn:oasis:names:tc:ebcore:partyid-type:iso6523:0088'}] and domain: [0088.iso6523.participants.ecosystem.org]
 
     NAPTR query: NTPFMJWLL2HIEYCKLIBVAJLW2SJXZQGFD7P53PN75FYF5GHUWSCQ.0088.iso6523.participants.ecosystem.org
-    NTPFMJWLL2HIEYCKLIBVAJLW2SJXZQGFD7P53PN75FYF5GHUWSCQ.0088.iso6523.participants.ecosystem.org.   60      IN      NAPTR   100 10 "U" "Meta:SMP" "!.*!https://raw.githubusercontent.com/ec-edelivery/dynamic-discovery-federated-infrastructure/refs/heads/main/dynamic-discovery-client/smp-resources/!"
+    NTPFMJWLL2HIEYCKLIBVAJLW2SJXZQGFD7P53PN75FYF5GHUWSCQ.0088.iso6523.participants.ecosystem.org.   60      IN      NAPTR   100 10 "U" "Meta:SMP" "!.*!https://raw.githubusercontent.com/ec-edelivery/dynamic-discovery-federated-infrastructure/refs/heads/main/uc02-dynamic-discovery-client/smp-resources/!"
 
 Fetching the capability document:
 Command (note: the ddc parameter -dns was changed to -get and the -o parameter was added to define the output file):
@@ -302,7 +302,7 @@ Response:
     Resolving DNS for participant: [ParticipantIdentifier{identifier='0088:test02', scheme='iso6523-actorid-upis'}] and domain: [0088.iso6523.participants.ecosystem.org]
 
     NAPTR query: PUTEUP6A7HSJKCCIAOPTTGURPR5JO253IYZGAMRE2MZNUZMIA7JA.iso6523-actorid-upis.0088.iso6523.participants.ecosystem.org
-    github-smp.publisher.0088.iso6523.participants.ecosystem.org.   60      IN      NAPTR   100 10 "U" "Meta:SMP" "!.*!https://raw.githubusercontent.com/ec-edelivery/dynamic-discovery-federated-infrastructure/refs/heads/main/dynamic-discovery-client/smp-resources/!" .
+    github-smp.publisher.0088.iso6523.participants.ecosystem.org.   60      IN      NAPTR   100 10 "U" "Meta:SMP" "!.*!https://raw.githubusercontent.com/ec-edelivery/dynamic-discovery-federated-infrastructure/refs/heads/main/uc02-dynamic-discovery-client/smp-resources/!" .
 
 
 Fetching the capability document:
@@ -328,7 +328,7 @@ Response:
     Resolving DNS for participant: [ParticipantIdentifier{identifier='urn:oasis:names:tc:ebcore:partyid-type:iso6523:0088:test02', scheme='null'}] and domain: [0088.iso6523.participants.ecosystem.org]
 
     NAPTR query: AEY47QMI5YC46ORUMD54WGE6NYT42B57TXXSF3H63OP7FL7ANR3A.0088.iso6523.participants.ecosystem.org
-    github-smp.publisher.0088.iso6523.participants.ecosystem.org.   38      IN      NAPTR   100 10 "U" "Meta:SMP" "!.*!https://raw.githubusercontent.com/ec-edelivery/dynamic-discovery-federated-infrastructure/refs/heads/main/dynamic-discovery-client/smp-resources/!" .
+    github-smp.publisher.0088.iso6523.participants.ecosystem.org.   38      IN      NAPTR   100 10 "U" "Meta:SMP" "!.*!https://raw.githubusercontent.com/ec-edelivery/dynamic-discovery-federated-infrastructure/refs/heads/main/uc02-dynamic-discovery-client/smp-resources/!" .
 
 
 Fetching the capability document:
@@ -355,7 +355,7 @@ Response:
     Resolving DNS for participant: [ParticipantIdentifier{identifier='0195:test01', scheme='iso6523-actorid-upis'}] and domain: [0195.iso6523.participants.ecosystem.org]
 
     NAPTR query: RYATFMWWQQHEY4T7VPPCXY7Z36T2FOL6QYXRGYF3V7S5LGJUAH2Q.iso6523-actorid-upis.0195.iso6523.participants.ecosystem.org
-    RYATFMWWQQHEY4T7VPPCXY7Z36T2FOL6QYXRGYF3V7S5LGJUAH2Q.iso6523-actorid-upis.0195.iso6523.participants.ecosystem.org.      86400   IN      NAPTR   100 10 "U" "Meta:SMP" "!.*!https://raw.githubusercontent.com/ec-edelivery/dynamic-discovery-federated-infrastructure/refs/heads/main/dynamic-discovery-client/smp-resources/!" .
+    RYATFMWWQQHEY4T7VPPCXY7Z36T2FOL6QYXRGYF3V7S5LGJUAH2Q.iso6523-actorid-upis.0195.iso6523.participants.ecosystem.org.      86400   IN      NAPTR   100 10 "U" "Meta:SMP" "!.*!https://raw.githubusercontent.com/ec-edelivery/dynamic-discovery-federated-infrastructure/refs/heads/main/uc02-dynamic-discovery-client/smp-resources/!" .
 
 
 Fetching the capability document:
@@ -381,7 +381,7 @@ Response:
     Resolving DNS for participant: [ParticipantIdentifier{identifier='test01', scheme='urn:oasis:names:tc:ebcore:partyid-type:iso6523:0195'}] and domain: [0195.iso6523.participants.ecosystem.org]
 
     NAPTR query: SW7FCYYKJI7YP27JILCJRNPIODTJYYO2DH3CAVWPSNPX3GJKGNZA.0195.iso6523.participants.ecosystem.org
-    SW7FCYYKJI7YP27JILCJRNPIODTJYYO2DH3CAVWPSNPX3GJKGNZA.0195.iso6523.participants.ecosystem.org.   86400   IN      NAPTR   100 10 "U" "Meta:SMP" "!.*!https://raw.githubusercontent.com/ec-edelivery/dynamic-discovery-federated-infrastructure/refs/heads/main/dynamic-discovery-client/smp-resources/!" .
+    SW7FCYYKJI7YP27JILCJRNPIODTJYYO2DH3CAVWPSNPX3GJKGNZA.0195.iso6523.participants.ecosystem.org.   86400   IN      NAPTR   100 10 "U" "Meta:SMP" "!.*!https://raw.githubusercontent.com/ec-edelivery/dynamic-discovery-federated-infrastructure/refs/heads/main/uc02-dynamic-discovery-client/smp-resources/!" .
 
 
 Fetching the capability document:
@@ -406,7 +406,7 @@ Response:
     Resolving DNS for participant: [ParticipantIdentifier{identifier='0195:test02', scheme='iso6523-actorid-upis'}] and domain: [0195.iso6523.participants.ecosystem.org]
 
     NAPTR query: SQOK3QIXO5V26IRVUCVR2GJVZNVR5AFNB57ABHELYAI72ZIQ7ITQ.iso6523-actorid-upis.0195.iso6523.participants.ecosystem.org
-    github-smp.publisher.0195.iso6523.participants.ecosystem.org.   86400   IN      NAPTR   100 10 "U" "Meta:SMP" "!.*!https://raw.githubusercontent.com/ec-edelivery/dynamic-discovery-federated-infrastructure/refs/heads/main/dynamic-discovery-client/smp-resources/!" .
+    github-smp.publisher.0195.iso6523.participants.ecosystem.org.   86400   IN      NAPTR   100 10 "U" "Meta:SMP" "!.*!https://raw.githubusercontent.com/ec-edelivery/dynamic-discovery-federated-infrastructure/refs/heads/main/uc02-dynamic-discovery-client/smp-resources/!" .
 
 
 
@@ -433,7 +433,7 @@ Response:
     Resolving DNS for participant: [ParticipantIdentifier{identifier='urn:oasis:names:tc:ebcore:partyid-type:iso6523:0195:test02', scheme='null'}] and domain: [0195.iso6523.participants.ecosystem.org]
 
     NAPTR query: SWDXXVXUUTFABXJAAWCM4EUDZJUMNLUWJ3HZZY7QARWGRKA7Q4HQ.0195.iso6523.participants.ecosystem.org
-    github-smp.publisher.0195.iso6523.participants.ecosystem.org.   85880   IN      NAPTR   100 10 "U" "Meta:SMP" "!.*!https://raw.githubusercontent.com/ec-edelivery/dynamic-discovery-federated-infrastructure/refs/heads/main/dynamic-discovery-client/smp-resources/!" .
+    github-smp.publisher.0195.iso6523.participants.ecosystem.org.   85880   IN      NAPTR   100 10 "U" "Meta:SMP" "!.*!https://raw.githubusercontent.com/ec-edelivery/dynamic-discovery-federated-infrastructure/refs/heads/main/uc02-dynamic-discovery-client/smp-resources/!" .
 
 Fetching the capability document:
 Command (note: the ddc parameter -dns was changed to -get and the -o parameter was added to define the output file):
@@ -459,7 +459,7 @@ Response:
     Resolving DNS for participant: [ParticipantIdentifier{identifier='9914:test01', scheme='iso6523-actorid-upis'}] and domain: [9914.iso6523.participants.ecosystem.org]
 
     NAPTR query: GBDLL6QCELDM5JLQCWGP5CONIVXDP6BV2NZWWWI6BY5SFMNUYN7A.iso6523-actorid-upis.9914.iso6523.participants.ecosystem.org
-    GBDLL6QCELDM5JLQCWGP5CONIVXDP6BV2NZWWWI6BY5SFMNUYN7A.iso6523-actorid-upis.9914.iso6523.g2b.at.  86400   IN      NAPTR   100 10 "U" "Meta:SMP" "!.*!https://raw.githubusercontent.com/ec-edelivery/dynamic-discovery-federated-infrastructure/refs/heads/main/dynamic-discovery-client/smp-resources/!" .
+    GBDLL6QCELDM5JLQCWGP5CONIVXDP6BV2NZWWWI6BY5SFMNUYN7A.iso6523-actorid-upis.9914.iso6523.g2b.at.  86400   IN      NAPTR   100 10 "U" "Meta:SMP" "!.*!https://raw.githubusercontent.com/ec-edelivery/dynamic-discovery-federated-infrastructure/refs/heads/main/uc02-dynamic-discovery-client/smp-resources/!" .
 
 Fetching the capability document:
 Command (note: the ddc parameter -dns was changed to -get and the -o parameter was added to define the output file):
@@ -483,7 +483,7 @@ Response:
     Resolving DNS for participant: [ParticipantIdentifier{identifier='urn:oasis:names:tc:ebcore:partyid-type:iso6523:9914:test01', scheme='null'}] and domain: [9914.iso6523.participants.ecosystem.org]
 
     NAPTR query: SXURSAE2VXDDT4KMND6H3CLAIEYULN5JQ6RFNJIG374NJARGSF6Q.9914.iso6523.participants.ecosystem.org
-    SXURSAE2VXDDT4KMND6H3CLAIEYULN5JQ6RFNJIG374NJARGSF6Q.9914.iso6523.g2b.at.       86400   IN      NAPTR   100 10 "U" "Meta:SMP" "!.*!https://raw.githubusercontent.com/ec-edelivery/dynamic-discovery-federated-infrastructure/refs/heads/main/dynamic-discovery-client/smp-resources/!" .
+    SXURSAE2VXDDT4KMND6H3CLAIEYULN5JQ6RFNJIG374NJARGSF6Q.9914.iso6523.g2b.at.       86400   IN      NAPTR   100 10 "U" "Meta:SMP" "!.*!https://raw.githubusercontent.com/ec-edelivery/dynamic-discovery-federated-infrastructure/refs/heads/main/uc02-dynamic-discovery-client/smp-resources/!" .
 
 Fetching the capability document:
 Command (note: the ddc parameter -dns was changed to -get and the -o parameter was added to define the output file):
@@ -507,7 +507,7 @@ Response:
     Resolving DNS for participant: [ParticipantIdentifier{identifier='9914:test02', scheme='iso6523-actorid-upis'}] and domain: [9914.iso6523.participants.ecosystem.org]
 
     NAPTR query: 57PSJISUOE7GR4UXE2M7IBKNLQV5CZS55QOIHAH3G67JVDOKTY3A.iso6523-actorid-upis.9914.iso6523.participants.ecosystem.org
-    github-smp.publisher.9914.iso6523.g2b.at.       86400   IN      NAPTR   100 10 "U" "Meta:SMP" "!.*!https://raw.githubusercontent.com/ec-edelivery/dynamic-discovery-federated-infrastructure/refs/heads/main/dynamic-discovery-client/smp-resources/!" .
+    github-smp.publisher.9914.iso6523.g2b.at.       86400   IN      NAPTR   100 10 "U" "Meta:SMP" "!.*!https://raw.githubusercontent.com/ec-edelivery/dynamic-discovery-federated-infrastructure/refs/heads/main/uc02-dynamic-discovery-client/smp-resources/!" .
 
 Fetching the capability document:
 Command (note: the ddc parameter -dns was changed to -get and the -o parameter was added to define the output file):
@@ -531,7 +531,7 @@ Response:
     Resolving DNS for participant: [ParticipantIdentifier{identifier='urn:oasis:names:tc:ebcore:partyid-type:iso6523:9914:test02', scheme='null'}] and domain: [9914.iso6523.participants.ecosystem.org]
 
     NAPTR query: EMAOWJNPC73TKW737YRUFA6X2XFP5N6NBJFGWLFKY74CR55IIF5A.9914.iso6523.participants.ecosystem.org
-    github-smp.publisher.9914.iso6523.g2b.at.       86381   IN      NAPTR   100 10 "U" "Meta:SMP" "!.*!https://raw.githubusercontent.com/ec-edelivery/dynamic-discovery-federated-infrastructure/refs/heads/main/dynamic-discovery-client/smp-resources/!" .
+    github-smp.publisher.9914.iso6523.g2b.at.       86381   IN      NAPTR   100 10 "U" "Meta:SMP" "!.*!https://raw.githubusercontent.com/ec-edelivery/dynamic-discovery-federated-infrastructure/refs/heads/main/uc02-dynamic-discovery-client/smp-resources/!" .
 
 Fetching the capability document:
 Command (note: the ddc parameter -dns was changed to -get and the -o parameter was added to define the output file):

@@ -16,7 +16,7 @@ test IN  A   127.0.0.1
 
 ; SMP example records
 smp-uc2a.publisher NAPTR 100 10 "U" "Meta:SMP" "!.*!http://127.0.0.1:8080/smp-uc2a/!" .
-github-smp.publisher NAPTR 100 10 "U" "Meta:SMP" "!.*!https://raw.githubusercontent.com/ec-edelivery/dynamic-discovery-federated-infrastructure/refs/heads/main/dynamic-discovery-client/smp-resources/!" .
+github-smp.publisher NAPTR 100 10 "U" "Meta:SMP" "!.*!https://raw.githubusercontent.com/ec-edelivery/dynamic-discovery-federated-infrastructure/refs/heads/main/uc02-dynamic-discovery-client/smp-resources/!" .
 
 ; the domain record for the subdomain 0195.iso6523.participants.ecosystem.org.
 ;Use case 2
@@ -26,12 +26,12 @@ UC2XABCD NAPTR 100 10 "U" "Meta:SMP" "!.*!http://127.0.0.1:8080/smp-uc2/!" .
 UC2AXABCD CNAME smp-uc2a.publisher.0195.iso6523.participants.ecosystem.org.
 
 ;urn:oasis:names:tc:ebcore:partyid-type:iso6523:0195:test01
-SW7FCYYKJI7YP27JILCJRNPIODTJYYO2DH3CAVWPSNPX3GJKGNZA NAPTR 100 10 "U" "Meta:SMP" "!.*!https://raw.githubusercontent.com/ec-edelivery/dynamic-discovery-federated-infrastructure/refs/heads/main/dynamic-discovery-client/smp-resources/!" .
+SW7FCYYKJI7YP27JILCJRNPIODTJYYO2DH3CAVWPSNPX3GJKGNZA NAPTR 100 10 "U" "Meta:SMP" "!.*!https://raw.githubusercontent.com/ec-edelivery/dynamic-discovery-federated-infrastructure/refs/heads/main/uc02-dynamic-discovery-client/smp-resources/!" .
 ;urn:oasis:names:tc:ebcore:partyid-type:iso6523:0195:test02
 SWDXXVXUUTFABXJAAWCM4EUDZJUMNLUWJ3HZZY7QARWGRKA7Q4HQ CNAME github-smp.publisher.0195.iso6523.participants.ecosystem.org.
 
 ;iso6523-actorid-upis::0195:test01
-RYATFMWWQQHEY4T7VPPCXY7Z36T2FOL6QYXRGYF3V7S5LGJUAH2Q.iso6523-actorid-upis NAPTR 100 10 "U" "Meta:SMP" "!.*!https://raw.githubusercontent.com/ec-edelivery/dynamic-discovery-federated-infrastructure/refs/heads/main/dynamic-discovery-client/smp-resources/!" .
+RYATFMWWQQHEY4T7VPPCXY7Z36T2FOL6QYXRGYF3V7S5LGJUAH2Q.iso6523-actorid-upis NAPTR 100 10 "U" "Meta:SMP" "!.*!https://raw.githubusercontent.com/ec-edelivery/dynamic-discovery-federated-infrastructure/refs/heads/main/uc02-dynamic-discovery-client/smp-resources/!" .
 ;iso6523-actorid-upis::0195:test02
 SQOK3QIXO5V26IRVUCVR2GJVZNVR5AFNB57ABHELYAI72ZIQ7ITQ.iso6523-actorid-upis CNAME github-smp.publisher.0195.iso6523.participants.ecosystem.org.
 

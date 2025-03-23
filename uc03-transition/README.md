@@ -137,19 +137,19 @@ The environment has additional components/services:
 ## Running the PoC
 
 
-    # Start the PoC environment
-    docker compose -f uc-transition/docker-compose.yml  up -d
+    # Start the PoC environment  (ommite the folder uc03-transition if you are already in uc03-transition folder )
+    docker compose -f uc03-transition/docker-compose.yml  up -d
 
     # Stop the PoC environment
-    docker compose -f uc-transition/docker-compose.yml down -v
+    docker compose -f uc03-transition/docker-compose.yml down -v
 
     # 'clean restart' the PoC environment
-    docker compose -f uc-transition/docker-compose.yml down -v && docker compose -f uc-transition/docker-compose.yml up -d
+    docker compose -f uc03-transition/docker-compose.yml down -v && docker compose -f uc03-transition/docker-compose.yml up -d
 
-Before running starting the PoC environment, make sure that log files in the `logs` directory have read and write permissions for all users. If not, run the following command:
+Before  starting the PoC environment, make sure that log files in the `logs` directory have read and write permissions for all users. If not, run the following command:
 
     chmod a+rw logs/*
-    chmod a+rw uc-transition/logs/*
+    chmod a+rw uc03-transition/logs/*
 
 Simple smoke tests to resolve A records. The purpose of the test is to verify that the DNS server is running and resolving the DNS queries. Result for all queries should be the IP address 127.0.0.1
 
