@@ -18,7 +18,6 @@ Additionally, the use cases below illustrates how the existing Docker environmen
 described in the [README.md](../README.md) can be extended to support various test scenarios.
 
 
-
 ### The incubator domain
 
 The current eDelivery hosts the  "incubator" SML service on the domain: `edelivery.tech.ec.europa.eu` and
@@ -43,7 +42,6 @@ Where in the example above:
 - **scheme**: ‘iso6523-actorid-upis’
 - **top-level-domain**: is ‘edelivery.tech.ec.europa.eu’
 
-
 ## Use cases
 
 The PoC assumes flat "incubator" domain and the new federated domain with partitioned DNS domain usi. 
@@ -57,6 +55,15 @@ The domain is "flat", that is having all records on the same top DNS domain as e
 
 The incubator environment is added as new service to the Docker environment as described in the [README.md](../README.md).
 and the environment is extended to support various test scenarios.
+
+The purpose of the use cases is to demonstrate the transition from the current eDelivery “incubator” DNS domain to a new federated DNS service with a partitioned DNS domain.  The first step in the transition is to setup ecosystem DNS servers and configure for all federated subdomains redirects (DNAME) the resolution  to the incubator DNS records. This allows the ecosystem DNS servers to be already operational and the ecosystem can already migrate to the new domain. 
+
+![Extended PoC DNS Migration: 1. step](../images/generated-images/dynamic-discovery-infrastructure-transition-01.svg)
+
+
+In the second step the ecosystem owner can migrate domains to the new ecosystem DNS servers and drop the redirection to the incubator DNS for the migrated domains. The migration can be done in a controlled manner, one partition at a time.
+
+![Extended PoC DNS Migration: 2. step](../images/generated-images/dynamic-discovery-infrastructure-transition-02.svg)
 
 
 ### Use case 1: Extend environment with the incubator DNS service to the environment 

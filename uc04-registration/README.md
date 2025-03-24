@@ -366,6 +366,8 @@ extended with the following [docker services](docker-compose.yml)
 - **vat-num-at-sml** - The subdomain 9924 SML service, responsible for managing
   the DNS records for the subdomain 9924.
 
+![Extended PoC DNS Environment with SML service APIs](../images/generated-images/dynamic-discovery-infrastructure-SML-02.svg)
+
 All new docker services are using the same docker image [domisml:4.3.1](./docker-domisml/README.md).
 Because the docker image is not accessible from any public docker repository (e. g. dockerhub), the image must be built locally before executing the tests. The image is built using the following command:
 
