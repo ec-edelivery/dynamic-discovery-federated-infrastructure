@@ -42,7 +42,7 @@ The PoC environment is designed to showcase various methods of subdomain delegat
 within DNS infrastructure, as well as different strategies for organizing internal
 DNS server records (e.g using CNAME for easier maintenance of final DNS record data).
 The following tests cases are using exiting SML service implementation which supports 
-the SML service API as defined in the ![PEPPOL SML specification.](https://docs.peppol.eu/edelivery/sml/ICT-Transport-SML_Service_Specification-101.pdf)
+the SML service API as defined in the [PEPPOL SML specification.](https://docs.peppol.eu/edelivery/sml/ICT-Transport-SML_Service_Specification-101.pdf)
 
 ### Use case 1: Registration of SML service providers in the top-level domain "sml.ecosystem.org" DNS server
 
