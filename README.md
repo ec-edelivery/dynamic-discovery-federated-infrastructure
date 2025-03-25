@@ -77,6 +77,12 @@ The PoC assumes that participant identifiers are composed of the following eleme
 
 ### DNS Lookup Query
 
+The DNS lookup query is a DNS domain name constructed from the participant identifier. During the PoC stage two variations of the DNS lookup query will be used:
+The DNS lookup query type 1 and DNS lookup query type 2.
+
+#### DNS lookup query type 1
+
+The DNS lookup query follows the existing query format used in the current SML service where only the "top domain" is altered to include the domain code (e.g. ICD number).
 The DNS lookup query is constructed as follows:
 NOTE: For the presentation of the rules the  augmented Backus–Naur  (ABNF) for 
 Syntax is used (See the: [RFC 5234](https://www.ietf.org/rfc/rfc5234.txt).
@@ -91,7 +97,7 @@ Syntax is used (See the: [RFC 5234](https://www.ietf.org/rfc/rfc5234.txt).
 
 Example
 
-    ABCDE.iso6523-actorid-upis.0195.iso6523.participants.ecosystem.org
+    SWDXXVXUUTFABXJAAWCM4EUDZJUMNLUWJ3HZZY7QARWGRKA7Q4HQ.iso6523-actorid-upis.0195.iso6523.participants.ecosystem.org
 
 Where in the example above:
 
@@ -100,6 +106,28 @@ Where in the example above:
 - **scheme-in-catalog**: Scheme in Catalog is ‘0195’
 - **catalog-identifier**: Catalog Identifier is ‘iso6523’ (One variation of the tests will use the scheme part of identifier: e.g. ‘iso6523-actorid-upis’)
 - **top-level-domain**: Top-Level Domain is ‘participants.ecosystem.org’
+
+#### DNS lookup query type 2
+
+The DNS lookup query 2 is more compact it follows the following format: (Please note that participant-scheme-format identifier must be DNS name compatible)
+
+    <DNS-QUERY> ::= <hash-over-identifier-value> "." <scheme-in-catalog> "." <participant-scheme-format> "." <top-level-domain>
+    <hash-over-identifier-value> ::= 1*63(ALPHA / DIGIT ) 
+    <scheme-in-catalog> ::= 4DIGIT 
+    <participant-scheme-format> ::= 1*63(ALPHA / DIGIT / "-") 
+    <top-level-domain> ::= n * (63(ALPHA / DIGIT / "-") “.")
+
+Example:
+
+    SWDXXVXUUTFABXJAAWCM4EUDZJUMNLUWJ3HZZY7QARWGRKA7Q4HQ.0088.iso6523-actorid-upis.participants.ecosystem.org
+
+Where in the example above:
+- **Participant identifier**:  0088:test01 
+- **scheme-in-catalog**: Scheme in Catalog is ‘0088’
+- **participant-scheme-format**: Catalog Identifier is iso6523-actorid-upis
+- **stop-level-domain**: Top-Level Domain is ‘participants.ecosystem.org’
+
+For the tests in this README.md the DNS lookup query type 1 is used.
 
 
 ### DNS Domain Partitioning

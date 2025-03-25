@@ -5,13 +5,13 @@
 ;;
 
 $TTL 86400
-@   IN  SOA ns1.0195.iso6523-actorid-upis.participant.ecosystem.org. root.0195.iso6523.g2b.at. (
+@   IN  SOA ns1.0195.iso6523-actorid-upis.participants.ecosystem.org. root.0195.iso6523.g2b.at. (
             2023102801 ; Serial
             3600       ; Refresh
             1800       ; Retry
             1209600    ; Expire
             86400 )    ; Minimum TTL
-@   IN  NS  ns1.0195.iso6523-actorid-upis.participant.ecosystem.org.
+@   IN  NS  ns1.0195.iso6523-actorid-upis.participants.ecosystem.org.
 
 ns1 IN  A   172.20.0.102
 
@@ -22,6 +22,6 @@ ns1 IN  A   172.20.0.102
 test IN  A   127.0.0.1
 
 ;iso6523-actorid-upis::0195:test01
-ryatfmwwqqhey4t7vppcxy7z36t2fol6qyxrgyf3v7s5lgjuah2q IN CNAME smp-test-01.publisher.participant.ecosystem.org.
+ryatfmwwqqhey4t7vppcxy7z36t2fol6qyxrgyf3v7s5lgjuah2q IN CNAME smp-test-01.publisher.participants.ecosystem.org.
 ;iso6523-actorid-upis::0195:test02
-sqok3qixo5v26irvucvr2gjvznvr5afnb57abhelyai72ziq7itq IN CNAME smp-test-02.publisher.participant.ecosystem.org.
+sqok3qixo5v26irvucvr2gjvznvr5afnb57abhelyai72ziq7itq IN CNAME smp-test-02.publisher.participants.ecosystem.org.

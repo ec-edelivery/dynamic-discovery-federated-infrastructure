@@ -18,7 +18,9 @@ insert into bdmsl_configuration(property, value, description, created_on, last_u
 ('dataInconsistencyAnalyzer.cronJobExpression','0 0 3 ? * *','Cron expression for dataInconsistencyChecker job. Example: 0 0 3 ? * * (everyday at 3:00 am)', NOW(), NOW()),
 ('configurationDir','${CONFIGURATION_FOLDER}','The absolute path to the folder containing all the configuration files (keystore and sig0 key)', NOW(), NOW()),
 ('authorization.smp.certSubjectRegex','^.*(CN=SMP_|OU=PEPPOL TEST SMP).*$','User with ROOT-CA is granted SMP_ROLE only if its certificates Subject matches configured regexp', NOW(), NOW()),
-('sml.property.refresh.cronJobExpression','5 */1 * * * *','Properties update', NOW(), NOW());
+('sml.property.refresh.cronJobExpression','5 */1 * * * *','Properties update', NOW(), NOW()),
+('partyIdentifier.template','${IDENTIFIER_DNS_TEMPLATE}','Experimental participant dns formating', NOW(), NOW());
+
 
 
 insert into bdmsl_subdomain(subdomain_id, subdomain_name,dns_zone, description, participant_id_regexp, dns_record_types, smp_url_schemas, created_on, last_updated_on) values

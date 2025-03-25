@@ -1,0 +1,76 @@
+FROM ubuntu:24.04
+
+LABEL org.opencontainers.image.authors="Joze RIHTARSIC"
+LABEL org.opencontainers.image.source="https://github.com/ec-edelivery/dynamic-discovery-federated-infrastructure"
+LABEL org.opencontainers.image.version="1.0"
+LABEL org.opencontainers.image.title="DomiSMP"
+LABEL org.opencontainers.image.description="DomiSMP is a sample software component that provides a set of services for the management of Service Metadata Publisher (SMP) instances locations in the dns. "
+LABEL org.opencontainers.image.licenses="EUPL-1.2"
+
+ENV DATA_DIR=/data  \
+    DOMISML_VERSION=5.0-SNAPSHOT \
+# Can not check digest because artefacts are build on daily basis and the digest is changing
+#    DOMISML_SHA512= \
+#    DOMISML_SETUP_SHA512= \
+    JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64/ \
+    DOMISML_HOME=/opt/domisml \
+    DB_SCHEMA=domisml \
+    DB_USER=sml
+
+EXPOSE 3306 8080
+VOLUME ${DATA_DIR}
+
+RUN apt-get update && \
+# get utils, bind9, java, mysql
+    DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+        bind9utils  \
+        dnsutils \
+        mysql-server \
+        openjdk-21-jdk \
+	    unzip \
+        wget \
+        curl \
+        vim \
+        haveged && \
+   rm -rf /var/lib/apt/lists/* && \
+    # create bdmsl user
+    mkdir -p "${DOMISML_HOME}" && \
+    mkdir -p "${DOMISML_HOME}/config" && \
+    mkdir -p "${DOMISML_HOME}/logs" && \
+    mkdir -p "${DOMISML_HOME}/init" && \
+    mkdir -p "${DATA_DIR}" && \
+    groupadd -g 1001 sml && \
+    useradd -s /bin/bash -u 1001 -g sml -d ${DOMISML_HOME} sml && \
+    usermod -a -G mysql sml && \
+    chown -R sml:sml ${DOMISML_HOME} && \
+    chown -R sml:sml ${DATA_DIR}
+
+
+# deploy application
+COPY artefact/bdmsl-springboot-${DOMISML_VERSION}-exec.jar ${DOMISML_HOME}/domisml-springboot-exec.jar
+COPY artefact/bdmsl-webapp-${DOMISML_VERSION}-setup.zip /tmp/domisml-setup.zip
+
+RUN    cd /tmp && \
+    jar -xf /tmp/domisml-setup.zip && \
+    mv  bdmsl-webapp-*/*.* ${DOMISML_HOME}/init/ && \
+    mv  bdmsl-webapp-*/database-scripts ${DOMISML_HOME}/init && \
+    rm -rf bdmsl-webapp-*/ && \
+    # configure  mysql
+    echo "[mysqld]" >> /etc/mysql/my.cnf  && \
+    echo "lower_case_table_names=1" >> /etc/mysql/my.cnf  && \
+    echo "collation-server=utf8_unicode_ci" >> /etc/mysql/my.cnf  && \
+    echo "init-connect='SET NAMES utf8'" >> /etc/mysql/my.cnf  && \
+    echo "character-set-server=utf8" >> /etc/mysql/my.cnf && \
+    echo "default_authentication_plugin=mysql_native_password" >> /etc/mysql/my.cnf  && \
+    sed -i -e "s/127.0.0.1/0.0.0.0/g" /etc/mysql/mysql.conf.d/mysqld.cnf
+
+
+COPY resources/entrypoint.sh /sbin/entrypoint.sh
+COPY resources/template-data.sql ${DOMISML_HOME}/init/database-scripts/
+
+# set configuration
+RUN  chmod 755 /sbin/entrypoint.sh
+
+WORKDIR ${DOMISML_HOME}
+
+ENTRYPOINT ["/sbin/entrypoint.sh"]

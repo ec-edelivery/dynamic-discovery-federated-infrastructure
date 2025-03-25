@@ -19,7 +19,7 @@ multiple DNS servers.
 The primary advantage of this model is its superior backward compatibility with the 
 registration process using existing SML service API. The only change required is that 
 SMPs must register with each SML authoritative subzone service where they intend to
-offer for participant. Another significant benefit is that the SML service provider 
+offer for participants. Another significant benefit is that the SML service provider 
 is solely responsible for maintaining a clean SML DNS records, without "dangling"
 records spread across multiple DNS servers.
 
@@ -399,7 +399,7 @@ Before starting the PoC environment, make sure that log files in the `logs` dire
 WARNING: the tests will update the zone files: 
 - config/ecosystem-top-domain/db.ecosystem.org
 - config/invoice-sg/db.0195.iso6523.participants.ecosystem.org
-- config/invoice-sg/db.0195.iso6523-actorid-upis.participant.ecosystem.org
+- config/invoice-sg/db.0195.iso6523-actorid-upis.participants.ecosystem.org
 - config/vat-num-at/db.9914.iso6523.g2b.at
 - config/db.9914.iso6523-actorid-upis.g2b.at
 
@@ -871,3 +871,53 @@ Open and run step "DeleteSMP SMP-POC-03". The step removes the participant recor
 - The response includes an HTTP 200 status code accompanied by a valid SOAP message
 - The http://localhost:19914/edelivery-sml/listDNS does not contain participant naptr records:
   `SMP-POC-03.publisher.9914.iso6523.g2b.at.	60	IN	CNAME	smp-service-03-updated.local.`
+
+
+## Test variant with type **DNS lookup query type 1**
+
+All the tests above are executed with the dns (lookup) query as defined in chapter: **DNS lookup query type 1** in the [Dynamic discovery infrastructure with "federated DNS service"](../README.md) documentation.
+
+Example:
+
+    SQOK3QIXO5V26IRVUCVR2GJVZNVR5AFNB57ABHELYAI72ZIQ7ITQ.iso6523-actorid-upis.0195.iso6523.participants.ecosystem.org
+
+The test variant with query type 2 as example:
+
+    AEY47QMI5YC46ORUMD54WGE6NYT42B57TXXSF3H63OP7FL7ANR3A.0195.iso6523-actorid-upis.participants.ecosystem.org
+
+The experimental SML service docker image domisml:5.0-SNAPSHOT must be used. The domisml image has an TemplateFormatter which can be configured to use custom format of the DNS entries.
+
+### Building the domisml:5.0-SNAPSHOT image
+
+To build the domisml:5.0-SNAPSHOT image, the latest DomiMSL snapshot artefact and setup bundle must be downloaded:
+
+1. Download latest DomiMSL springboot 5.0 artefact and name it to: 
+   uc04-registration/docker-domisml/artefact/bdmsl-springboot-5.0-SNAPSHOT-exec.jar 
+   from the URL:
+   https://ec.europa.eu/digital-building-blocks/artifact/#browse/browse:eDelivery-snapshots:eu%2Feuropa%2Fec%2Fbdmsl%2Fbdmsl-springboot%2F5.0-SNAPSHOT
+
+2. Download latest setup bundle it to:
+   uc04-registration/docker-domisml/artefact/bdmsl-webapp-5.0-SNAPSHOT.setup.zip
+   The URL of the DomiSML snapshot setup bundle:
+   https://ec.europa.eu/digital-building-blocks/artifact/#browse/browse:eDelivery-snapshots:eu%2Feuropa%2Fec%2Fbdmsl%2Fbdmsl-webapp%2F5.0-SNAPSHOT
+
+Then execute the following command from the root folder of the repository:
+
+```shell
+docker build -t domisml:5.0-SNAPSHOT -f uc04-registration/docker-domisml/Dockerfile-5.0-SNAPSHOT uc04-registration/docker-domisml/
+```
+
+### Running the PoC with the domisml:5.0-SNAPSHOT image
+
+To run the PoC with the domisml:5.0-SNAPSHOT image, execute the following command from the root folder of the repository:
+
+```shell
+# Start the PoC environment 
+ docker compose -f uc04-registration/docker-compose-dns-query-type-2.yml up -d
+
+# to clean startup of the PoC environment 
+docker compose -f uc04-registration/docker-compose-dns-query-type-2.yml down -v && docker compose -f uc04-registration/docker-compose-dns-query-type-2.yml up -d
+```
+Please note that the environment is using  `uc04-registration/docker-compose-dns-query-type-2.yml` compose file  with the domisml:5.0-SNAPSHOT image and different DNS domains and DNX zones which matches `iso6523-actorid-upis.participants.ecosystem.org` format.
+
+Running the tests is the same as in the previous section.

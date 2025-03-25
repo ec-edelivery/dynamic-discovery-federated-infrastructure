@@ -22,6 +22,15 @@ or with the filepath to the Dockerfile if is build from any other directory:
     # the docker build variant
     docker build -t domisml:4.3.1 -f uc04-registration/docker-domisml/Dockerfile uc04-registration/docker-domisml/
 
+To build latest 5.0-SNAPSHOT image use command. Please note that the 5.0-SNAPSHOT image is not yet released and is not recommended for production use. Note: some features may change during the development process. The 5.0-SNAPSHOT image is used to test  query-type-2.
+Before building the 5.0-SNAPSHOT image download the latest DomiMSL springboot 5.0 artefact and name it to: bdmsl-springboot-5.0-SNAPSHOT-exec.jar
+and download the latest setup bundle for DomiMSL 5.0-SNAPSHOT bdmsl-webapp-setup.zip and save it to bdmsl-webapp-5.0-SNAPSHOT.setup.zip
+See the [README.md](artefact/README.md) for more information.
+
+Then build image with command:
+
+    docker build -t domisml:5.0-SNAPSHOT -f uc04-registration/docker-domisml/Dockerfile-5.0-SNAPSHOT uc04-registration/docker-domisml/
+
 
 # How to run
 

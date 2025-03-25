@@ -22,6 +22,6 @@ ns1 IN  A   172.20.0.102
 test IN  A   127.0.0.1
 
 ;iso6523-actorid-upis::9914:test01
-gbdll6qceldm5jlqcwgp5conivxdp6bv2nzwwwi6by5sfmnuyn7a IN CNAME smp-test-01.publisher.participant.ecosystem.org.
+gbdll6qceldm5jlqcwgp5conivxdp6bv2nzwwwi6by5sfmnuyn7a IN CNAME smp-test-01.publisher.participants.ecosystem.org.
 ;iso6523-actorid-upis::9914:test02
-57psjisuoe7gr4uxe2m7ibknlqv5czs55qoihah3g67jvdokty3a IN CNAME smp-test-02.publisher.participant.ecosystem.org.
+57psjisuoe7gr4uxe2m7ibknlqv5czs55qoihah3g67jvdokty3a IN CNAME smp-test-02.publisher.participants.ecosystem.org.

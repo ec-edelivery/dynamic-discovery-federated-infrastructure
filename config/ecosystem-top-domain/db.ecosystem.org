@@ -54,7 +54,7 @@ PUTEUP6A7HSJKCCIAOPTTGURPR5JO253IYZGAMRE2MZNUZMIA7JA.iso6523-actorid-upis.0088.i
 ;; Delegation as per
 ;; "Option D - Federated Domain SML with partitioning by Stage and Participant Identification Scheme:
 ;; (draft version 2024-11-26)
-;; with the exception that the top-level SML domain is 'participants.ecosystem.org' instead of '[prod|test].participant.peppol.org'
+;; with the exception that the top-level SML domain is 'participants.ecosystem.org' instead of '[prod|test].participants.peppol.org'
 ;; --------------------------------------
 
 ;; Some SMP entries, directly in this zone

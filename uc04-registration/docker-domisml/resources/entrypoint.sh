@@ -47,6 +47,7 @@ prepareIniDatabaseData() {
   DNS_ENABLED=${DNS_ENABLED:-"false"}
   DNS_DOMAIN=${DNS_DOMAIN:-"ecosystem"}
   DNS_ZONE=${DNS_ZONE:-"ecosystem.local"}
+  IDENTIFIER_DNS_TEMPLATE=${IDENTIFIER_DNS_TEMPLATE:-""}
   PARTICIPANT_ID_REGEXP=${PARTICIPANT_ID_REGEXP:-"^.*$"}
   mkdir -p ${DOMISML_INIT_DB_DIR}
   echo "[INFO] Create data script from template"
@@ -125,8 +126,8 @@ initialize;
 # start DomiSML
 echo  "[INFO]  Start DomiSML"
 cd ${DOMISML_HOME}
-
 ls -ltr
-su -s /bin/sh sml -c "${JAVA_HOME}/bin/java -cp ${DOMISML_HOME}/classes:domisml-springboot-exec.jar org.springframework.boot.loader.JarLauncher"
+#su -s /bin/sh sml -c "${JAVA_HOME}/bin/java -cp ${DOMISML_HOME}/classes:domisml-springboot-exec.jar org.springframework.boot.loader.JarLauncher"
+su - -s /bin/sh sml -c "${JAVA_HOME}/bin/java -jar domisml-springboot-exec.jar"
 
 
