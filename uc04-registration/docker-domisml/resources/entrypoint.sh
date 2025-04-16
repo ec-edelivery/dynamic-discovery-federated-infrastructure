@@ -80,7 +80,7 @@ init_mysql() {
     echo  "[INFO] Initialize: [$DB_SCHEMA] for [$DB_USER]."
     # create database
     mysql -h localhost -u root --password=${MYSQL_ROOT_PASSWORD} -e "drop schema if exists $DB_SCHEMA;DROP USER IF EXISTS $DB_USER;  create schema $DB_SCHEMA;alter database     $DB_SCHEMA charset=utf8; create user $DB_USER identified by '$DB_USER_PASSWORD';grant all on $DB_SCHEMA.* to $DB_USER;"
-    mysql -h localhost -u root --password=${MYSQL_ROOT_PASSWORD} $DB_SCHEMA  < ${DOMISML_HOME}/init/database-scripts/mysql5innodb.ddl
+    mysql -h localhost -u root --password=${MYSQL_ROOT_PASSWORD} $DB_SCHEMA  < ${DOMISML_HOME}/init/database-scripts/mysql.ddl
     prepareIniDatabaseData
 
     for filepath in ${DOMISML_INIT_DB_DIR}/*; do

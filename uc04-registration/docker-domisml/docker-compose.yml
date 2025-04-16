@@ -1,9 +1,9 @@
 #
-# Docker compose project used to build the IMAGE_DOMISML_SPRINGBOOT_MYSQL soapui docker image.
+# Docker compose project used to build the domisml  docker image.
 #
 services:
   domisml-springboot-mysql:
-    image: domisml:4.3.1
+    image: domisml:5.0.RC1
     build:
       context: .
 

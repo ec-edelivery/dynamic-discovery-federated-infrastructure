@@ -8,10 +8,10 @@ LABEL org.opencontainers.image.description="DomiSMP is a sample software compone
 LABEL org.opencontainers.image.licenses="EUPL-1.2"
 
 ENV DATA_DIR=/data  \
-    DOMISML_VERSION=4.3.1 \
-    DOMISML_SHA512=5e73b4b1f825fd75c7d60a7f7e648b9c0ed0037e1f8ec5686ca0bd65f032e54f5a5ed1da5ae86256ddbf2ca063def3e9225175718d575bf93a53737a65fd513f \
-    DOMISML_SETUP_SHA512=464f5fb2b033105d7d6c4eec01d09f3aaeb660eb506874cb7f6a4bf87ab50e143609d60a5021c58be6e5336fe63bf8f9ba0429939aa898f3ff0187c7f9822bb6 \
-    JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64/ \
+    DOMISML_VERSION=5.0.RC1 \
+    DOMISML_SHA512=c2c088c2a21aa9c0e04a142552c6e00fb9fe57b1b966242db09a9b142031900d10eea0b920634661ed674f7a7ad371ca0e7d695a868482cde8726f2ab8748fc4 \
+    DOMISML_SETUP_SHA512=1abc63aa4b224bb018282025463a5085a7e1164daaf6766c3695d21573bfe8ae625b3811bb1bdf18fd7a11c9f603314510ed669098bf8a1fef8cf1d16e59e120 \
+    JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64/ \
     DOMISML_HOME=/opt/domisml \
     DB_SCHEMA=domisml \
     DB_USER=sml
@@ -25,15 +25,15 @@ RUN apt-get update && \
         bind9utils  \
         dnsutils \
         mysql-server \
-        openjdk-11-jdk \
+        openjdk-21-jdk \
 	    unzip \
         wget \
         curl \
         vim \
         haveged && \
-   rm -rf /var/lib/apt/lists/* && \
+   rm -rf /var/lib/apt/lists/*
     # create bdmsl user
-    mkdir -p "${DOMISML_HOME}" && \
+RUN    mkdir -p "${DOMISML_HOME}" && \
     mkdir -p "${DOMISML_HOME}/config" && \
     mkdir -p "${DOMISML_HOME}/logs" && \
     mkdir -p "${DOMISML_HOME}/init" && \

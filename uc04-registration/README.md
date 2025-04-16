@@ -367,7 +367,7 @@ extended with the following [docker services](docker-compose.yml)
 - **vat-num-at-sml** - The subdomain 9924 SML service, responsible for managing
   the DNS records for the subdomain 9924.
 
-All new docker services are using the same docker image [domisml:4.3.1](./docker-domisml/README.md).
+All new docker services are using the same docker image [domisml:5.0.RC1](./docker-domisml/README.md).
 Because the docker image is not accessible from any public docker repository (e. g. dockerhub), the image must be built locally before executing the tests. The image is built using the following command:
 
 ```shell
@@ -381,7 +381,7 @@ Tests 2, 3, and 4 require the SoapUI application, which can be downloaded from t
 ## Running the PoC
 
 
-    # Start the PoC environment (ommite the folder uc04-registration if you are already in uc04-registration folder )
+    # Start the PoC environment (skip the folder uc04-registration if you are already in uc04-registration folder )
     docker compose -f uc04-registration/docker-compose.yml  up -d
 
     # Stop the PoC environment
@@ -873,7 +873,7 @@ Open and run step "DeleteSMP SMP-POC-03". The step removes the participant recor
   `SMP-POC-03.publisher.9914.iso6523.g2b.at.	60	IN	CNAME	smp-service-03-updated.local.`
 
 
-## Test variant with type **DNS lookup query type 1**
+## Test variant with type **DNS lookup query type 2**
 
 All the tests above are executed with the dns (lookup) query as defined in chapter: **DNS lookup query type 1** in the [Dynamic discovery infrastructure with "federated DNS service"](../README.md) documentation.
 
@@ -887,29 +887,26 @@ The test variant with query type 2 as example:
 
 The experimental SML service docker image domisml:5.0-SNAPSHOT must be used. The domisml image has an TemplateFormatter which can be configured to use custom format of the DNS entries.
 
-### Building the domisml:5.0-SNAPSHOT image
 
-To build the domisml:5.0-SNAPSHOT image, the latest DomiMSL snapshot artefact and setup bundle must be downloaded:
+### Running the PoC with query type 2
 
-1. Download latest DomiMSL springboot 5.0 artefact and name it to: 
-   uc04-registration/docker-domisml/artefact/bdmsl-springboot-5.0-SNAPSHOT-exec.jar 
-   from the URL:
-   https://ec.europa.eu/digital-building-blocks/artifact/#browse/browse:eDelivery-snapshots:eu%2Feuropa%2Fec%2Fbdmsl%2Fbdmsl-springboot%2F5.0-SNAPSHOT
+For the Proof of Concept (PoC), the new experimental feature of the custom DNS template formatter has been implemented in DomiSML 5.0.RC1 This feature enables configuration of the DNS hash suffix in a custom format using the parameters DNS_SUFFIX_TMPL and DNS_SUFFIX_SPLIT_REGEXP.
 
-2. Download latest setup bundle it to:
-   uc04-registration/docker-domisml/artefact/bdmsl-webapp-5.0-SNAPSHOT.setup.zip
-   The URL of the DomiSML snapshot setup bundle:
-   https://ec.europa.eu/digital-building-blocks/artifact/#browse/browse:eDelivery-snapshots:eu%2Feuropa%2Fec%2Fbdmsl%2Fbdmsl-webapp%2F5.0-SNAPSHOT
-
-Then execute the following command from the root folder of the repository:
-
-```shell
-docker build -t domisml:5.0-SNAPSHOT -f uc04-registration/docker-domisml/Dockerfile-5.0-SNAPSHOT uc04-registration/docker-domisml/
+```yaml
+IDENTIFIER_DNS_TEMPLATE: >
+  MATCH_SCHEME_REGEXP:^(?i)(iso6523-actorid-upis);
+  ID_TMPL:$${scheme}\:\:$${identifier};
+  ID_SPLIT_REGEXP:^(?i)\\s*(\:\:)?(?<scheme>(iso6523-actorid-upis))\:\:?(?<identifier>.+)?\\s*$;
+  DNS_SUFFIX_TMPL:$${icd}.$${scheme};
+  DNS_SUFFIX_SPLIT_REGEXP:^(?i)\\s*(\:\:)?(?<scheme>(iso6523-actorid-upis))\:\:?(?<icd>[0-9]{4})?\:(?<identifier>.+)?\\s*$;
+  DNS_HASH_MODE:IDENTIFIER_IN_HASH
 ```
 
-### Running the PoC with the domisml:5.0-SNAPSHOT image
+The `DNS_SUFFIX_SPLIT_REGEXP` parameter is responsible for parsing identifiers and extracting template values from them. The `DNS_SUFFIX_TMPL` parameter defines DNS identifier suffix which follows the hashed value. The suffix is based on the previously parsed values, such as `icd` and `scheme`. The `DNS_HASH_MODE` is set to `IDENTIFIER_IN_HASH`, meaning only the identifier is used in the hash value for the DNS entry.
 
-To run the PoC with the domisml:5.0-SNAPSHOT image, execute the following command from the root folder of the repository:
+The DNS template formatter is configured within the Docker Compose file `duc04-registration/docker-compose-dns-query-type-2.yml`!
+
+To run the PoC with the ith query type 2, execute the following command from the root folder of the repository:
 
 ```shell
 # Start the PoC environment 
@@ -918,6 +915,11 @@ To run the PoC with the domisml:5.0-SNAPSHOT image, execute the following comman
 # to clean startup of the PoC environment 
 docker compose -f uc04-registration/docker-compose-dns-query-type-2.yml down -v && docker compose -f uc04-registration/docker-compose-dns-query-type-2.yml up -d
 ```
-Please note that the environment is using  `uc04-registration/docker-compose-dns-query-type-2.yml` compose file  with the domisml:5.0-SNAPSHOT image and different DNS domains and DNX zones which matches `iso6523-actorid-upis.participants.ecosystem.org` format.
 
-Running the tests is the same as in the previous section.
+Please note that the environment is using  `uc04-registration/docker-compose-dns-query-type-2.yml` compose file  with different DNS domains and DNS zones which matches `iso6523-actorid-upis.participants.ecosystem.org` format.
+
+The process for running the tests is identical to the previous section, except for the following cases where the "participant identifier regular expression validation" is not yet supported for the experimental DNS template formatter feature:
+
+- **TestCases 2.x**: RegisterInvalidParticipant 9914:1234567890
+- **TestCases 3.x**: RegisterInvalidParticipant 9914:1234567890
+- **TestCases 4.x**: RegisterInvalidParticipant 0088:1234567890

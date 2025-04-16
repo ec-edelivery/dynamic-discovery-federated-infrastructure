@@ -1,7 +1,7 @@
 The DomiSML spring-boot docker image and mysql database.
 ================================
 
-This DomiSML (Spring-Boot) Docker image includes DomiSML v4.3.1, built as the Spring Boot artifact, with a MySQL database integrated within the container. This image is strictly designed for testing and demonstration purposes only. It does not support secure deployment features such as TSIG or SIG(0) DNSSEC for DNS integration, or HTTPS endpoints for SMP authentication.
+This DomiSML (Spring-Boot) Docker image includes DomiSML v5.0.RC1, built as the Spring Boot artifact, with a MySQL database integrated within the container. This image is strictly designed for testing and demonstration purposes only. It does not support secure deployment features such as TSIG or SIG(0) DNSSEC for DNS integration, or HTTPS endpoints for SMP authentication.
 
 To simplify testing, the image is preconfigured with an SSLClientCert header, which MUST always be utilized behind a reverse proxy.
 
@@ -13,30 +13,20 @@ To build an image with docker compose command:
 
 Then build image with command:
 
-    docker build -t domisml:4.3.1 .
+    docker build -t domisml:5.0.RC1 .
 
 or with the filepath to the Dockerfile if is build from any other directory:
 
     # build with docker compose
     docker compose -f uc04-registration/docker-domisml/docker-compose.yml build
     # the docker build variant
-    docker build -t domisml:4.3.1 -f uc04-registration/docker-domisml/Dockerfile uc04-registration/docker-domisml/
-
-To build latest 5.0-SNAPSHOT image use command. Please note that the 5.0-SNAPSHOT image is not yet released and is not recommended for production use. Note: some features may change during the development process. The 5.0-SNAPSHOT image is used to test  query-type-2.
-Before building the 5.0-SNAPSHOT image download the latest DomiMSL springboot 5.0 artefact and name it to: bdmsl-springboot-5.0-SNAPSHOT-exec.jar
-and download the latest setup bundle for DomiMSL 5.0-SNAPSHOT bdmsl-webapp-setup.zip and save it to bdmsl-webapp-5.0-SNAPSHOT.setup.zip
-See the [README.md](artefact/README.md) for more information.
-
-Then build image with command:
-
-    docker build -t domisml:5.0-SNAPSHOT -f uc04-registration/docker-domisml/Dockerfile-5.0-SNAPSHOT uc04-registration/docker-domisml/
-
+    docker build -t domisml:5.0.RC1 -f uc04-registration/docker-domisml/Dockerfile uc04-registration/docker-domisml/
 
 # How to run
 
 Tu run image execute command:
 
-    docker run --name domisml -p 8084:8080 -p 3304:3306 domisml:4.3.1
+    docker run --name domisml -p 8084:8080 -p 3304:3306 domisml:5.0.RC1
 
 In your browser, enter `http://localhost:8084/edelivery-sml` .
 
