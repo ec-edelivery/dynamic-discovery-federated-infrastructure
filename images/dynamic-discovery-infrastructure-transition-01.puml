@@ -6,7 +6,7 @@ System_Boundary(c1, "eDelivery DNS") {
         SystemDb(eDeliveryDNS, ".edelivery.tech.ec.europa.eu", "*.iso6523-actorid-upis.edelivery.tech.ec.europa.eu\n\n")
 }
 System_Boundary(c2, "Peppol DNS") {
-    SystemDb(PeppolDNS, "is6523.participants.peppol.org", "DNAME\n0088.is6523.participants.peppol.org->eDelivery\n0195.is6523.participants.peppol.org->eDelivery\n9925.is6523.participants.peppol.org->eDelivery\nxxxx.is6523.participants.peppol.org->eDelivery\n...")
+    SystemDb(PeppolDNS, "iso6523.participants.peppol.org", "DNAME\n0088.iso6523.participants.peppol.org->eDelivery\n0195.iso6523.participants.peppol.org->eDelivery\n9925.iso6523.participants.peppol.org->eDelivery\nxxxx.iso6523.participants.peppol.org->eDelivery\n...")
 }
 
 

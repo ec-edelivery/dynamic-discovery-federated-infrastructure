@@ -10,11 +10,11 @@ System_Boundary(c1, "eDelivery DNS") {
 Boundary(ecosystemSMLService, "Peppol Dynamic discovery infrastructure", "Federated DNS") {
 
  System_Boundary(c2, "TopDomain DNS") {
-        SystemDb(PeppolDNS, "is6523.participants.peppol.org", "DNAME\n0088.is6523.participants.peppol.org->subzone\n0195.is6523.participants.peppol.org->delegate-SG\n9925.is6523.participants.peppol.org->redirect-AT\nxxxx.is6523.participants.peppol.org->eDelivery\n...")
-        SystemDb(ecosystemDNSSubzone, "DNS subzone", "0088.is6523.participants.ecosystem.org\n0088.iso6523-actorid-upis.participants.ecosystem.org\n")
+        SystemDb(PeppolDNS, "iso6523.participants.peppol.org", "DNAME\n0088.iso6523.participants.peppol.org->subzone\n0195.iso6523.participants.peppol.org->delegate-SG\n9925.iso6523.participants.peppol.org->redirect-AT\nxxxx.iso6523.participants.peppol.org->eDelivery\n...")
+        SystemDb(ecosystemDNSSubzone, "DNS subzone", "0088.iso6523.participants.ecosystem.org\n0088.iso6523-actorid-upis.participants.ecosystem.org\n")
     }
-    SystemDb(delegatedDNS, "Delegated DNS\n(NS)", "0195.is6523.participants.ecosystem.org\n0195.iso6523-actorid-upis.participants.ecosystem.org\n")
-    SystemDb(redirectedDNS, "Redirected DNS\n(DNAME)", "9914.is6523.g2b.at,\n9914.iso6523-actorid-upis.g2b.at")
+    SystemDb(delegatedDNS, "Delegated DNS\n(NS)", "0195.iso6523.participants.ecosystem.org\n0195.iso6523-actorid-upis.participants.ecosystem.org\n")
+    SystemDb(redirectedDNS, "Redirected DNS\n(DNAME)", "9914.iso6523.g2b.at,\n9914.iso6523-actorid-upis.g2b.at")
 
     Rel(PeppolDNS, ecosystemDNSSubzone, "Subzone", "Subzone 0088")
     Rel(PeppolDNS, delegatedDNS, "Delegate", "Subzone 0195")

@@ -13,10 +13,10 @@ Boundary(ecosystemSMLService, "Dynamic discovery infrastructure", "Federated DNS
 
 System_Boundary(c1, "TopDomain DNS") {
         SystemDb(ecosystemDNS, "TopDomain DNS", "ecosystem.org")
-        SystemDb(ecosystemDNSSubzone, "DNS subzone", "0088.is6523.participants.ecosystem.org\n0088.iso6523-actorid-upis.participants.ecosystem.org\n")
+        SystemDb(ecosystemDNSSubzone, "DNS subzone", "0088.iso6523.participants.ecosystem.org\n0088.iso6523-actorid-upis.participants.ecosystem.org\n")
     }
-    SystemDb(delegatedDNS, "Delegated DNS\n(NS)", "0195.is6523.participants.ecosystem.org\n0195.iso6523-actorid-upis.participants.ecosystem.org\n")
-    SystemDb(redirectedDNS, "Redirected DNS\n(DNAME)", "9914.is6523.g2b.at,\n9914.iso6523-actorid-upis.g2b.at")
+    SystemDb(delegatedDNS, "Delegated DNS\n(NS)", "0195.iso6523.participants.ecosystem.org\n0195.iso6523-actorid-upis.participants.ecosystem.org\n")
+    SystemDb(redirectedDNS, "Redirected DNS\n(DNAME)", "9914.iso6523.g2b.at,\n9914.iso6523-actorid-upis.g2b.at")
 }
 }
 
